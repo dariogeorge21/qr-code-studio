@@ -126,12 +126,13 @@ export default function QRPreviewCanvas() {
 
     if (!qrInstance.current) {
       qrInstance.current = new QRCodeStylingClass.current(options);
-      if (qrContainerRef.current) {
-        qrContainerRef.current.innerHTML = '';
-        qrInstance.current.append(qrContainerRef.current);
-      }
     } else {
       qrInstance.current.update(options);
+    }
+
+    if (qrContainerRef.current) {
+      qrContainerRef.current.innerHTML = '';
+      qrInstance.current.append(qrContainerRef.current);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
