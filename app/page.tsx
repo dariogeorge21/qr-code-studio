@@ -27,17 +27,21 @@ export default function Home() {
           </button>
         </header>
 
-        <div className="flex flex-col lg:flex-row gap-5">
-          <div className="lg:w-100 xl:w-105 shrink-0 space-y-4">
+        <div className="flex flex-col lg:flex-row gap-6 lg:gap-8">
+          {/* Left Column: Inputs & Design */}
+          <div className="lg:w-[450px] xl:w-[500px] shrink-0 space-y-6 order-2 lg:order-1">
             <InputPanel />
             <DesignPanel />
           </div>
 
-          <div className="flex-1 min-w-0 space-y-4 lg:sticky lg:top-6 lg:self-start">
-            <QRPreviewCanvas />
-            <ExportToolbar />
-            <div className="text-center text-[11px] text-gray-400 dark:text-gray-500 px-4 space-y-1">
-              <p>QR codes generated instantly in your browser</p>
+          {/* Right Column: Preview & Export */}
+          <div className="flex-1 min-w-0 order-1 lg:order-2">
+            <div className="lg:sticky lg:top-6 space-y-6">
+              <QRPreviewCanvas />
+              <ExportToolbar />
+              <div className="text-center text-xs text-gray-400 dark:text-gray-500 px-4 hidden lg:block">
+                <p>QR codes generated instantly in your browser</p>
+              </div>
             </div>
           </div>
         </div>

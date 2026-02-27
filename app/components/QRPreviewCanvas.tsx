@@ -177,15 +177,15 @@ export default function QRPreviewCanvas() {
 
   if (!hasContent) {
     return (
-      <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg border border-gray-100 dark:border-gray-700/60 p-8">
-        <div className="flex flex-col items-center justify-center text-center py-8">
-          <div className="w-20 h-20 rounded-2xl bg-gray-100 dark:bg-gray-700 flex items-center justify-center mb-4">
-            <span className="text-3xl opacity-40">📱</span>
+      <div className="bg-white dark:bg-gray-800 rounded-3xl shadow-sm border border-gray-100 dark:border-gray-700/60 p-8">
+        <div className="flex flex-col items-center justify-center text-center py-12">
+          <div className="w-24 h-24 rounded-3xl bg-gray-50 dark:bg-gray-700/50 flex items-center justify-center mb-6 shadow-inner">
+            <span className="text-4xl opacity-40">📱</span>
           </div>
-          <p className="text-sm text-gray-400 dark:text-gray-500 font-medium">
+          <p className="text-base text-gray-500 dark:text-gray-400 font-medium">
             Enter content to generate your QR code
           </p>
-          <p className="text-xs text-gray-300 dark:text-gray-600 mt-1">
+          <p className="text-sm text-gray-400 dark:text-gray-500 mt-2">
             Text, URL, phone number, email, UPI...
           </p>
         </div>
@@ -194,12 +194,12 @@ export default function QRPreviewCanvas() {
   }
 
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg border border-gray-100 dark:border-gray-700/60 p-6">
-      <h2 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-4 flex items-center gap-2">
-        <span className="w-6 h-6 rounded-lg bg-green-100 dark:bg-green-900/40 flex items-center justify-center text-xs">
+    <div className="bg-white dark:bg-gray-800 rounded-3xl shadow-sm border border-gray-100 dark:border-gray-700/60 p-6 sm:p-8 flex flex-col items-center">
+      <h2 className="text-base font-bold text-gray-800 dark:text-gray-200 mb-6 flex items-center gap-2.5 self-start w-full">
+        <span className="w-8 h-8 rounded-xl bg-green-50 dark:bg-green-900/40 flex items-center justify-center text-sm">
           👁
         </span>
-        Preview
+        Live Preview
       </h2>
 
       <div className="flex flex-col items-center">

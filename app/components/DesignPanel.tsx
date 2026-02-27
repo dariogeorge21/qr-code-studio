@@ -37,36 +37,36 @@ export default function DesignPanel() {
   };
 
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg border border-gray-100 dark:border-gray-700/60 overflow-hidden">
-      <div className="p-4 pb-0">
-        <h2 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
-          <span className="w-6 h-6 rounded-lg bg-purple-100 dark:bg-purple-900/40 flex items-center justify-center text-xs">
+    <div className="bg-white dark:bg-gray-800 rounded-3xl shadow-sm border border-gray-100 dark:border-gray-700/60 overflow-hidden flex flex-col">
+      <div className="p-5 pb-0">
+        <h2 className="text-base font-bold text-gray-800 dark:text-gray-200 mb-4 flex items-center gap-2.5">
+          <span className="w-8 h-8 rounded-xl bg-purple-50 dark:bg-purple-900/40 flex items-center justify-center text-sm">
             🎨
           </span>
           Customize Design
         </h2>
 
         {/* Tab Navigation */}
-        <div className="flex gap-1 overflow-x-auto pb-0 scrollbar-none -mx-1 px-1">
+        <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-none -mx-2 px-2">
           {TABS.map((tab) => (
             <button
               key={tab.id}
               onClick={() => set({ activeTab: tab.id })}
-              className={`shrink-0 flex items-center gap-1.5 px-3 py-2 rounded-t-xl text-xs font-semibold transition-all duration-200 border-b-2 ${
+              className={`shrink-0 flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 ${
                 activeTab === tab.id
-                  ? 'bg-gray-50 dark:bg-gray-700/50 text-blue-600 dark:text-blue-400 border-blue-500'
-                  : 'text-gray-500 dark:text-gray-400 border-transparent hover:text-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700/30'
+                  ? 'bg-gray-100 dark:bg-gray-700 text-blue-600 dark:text-blue-400 shadow-sm'
+                  : 'text-gray-500 dark:text-gray-400 hover:text-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700/50'
               }`}
             >
-              <span className="text-sm">{tab.icon}</span>
-              <span className="hidden sm:inline">{tab.label}</span>
+              <span className="text-base">{tab.icon}</span>
+              <span>{tab.label}</span>
             </button>
           ))}
         </div>
       </div>
 
       {/* Tab Content */}
-      <div className="p-4 pt-4 border-t border-gray-100 dark:border-gray-700/60 max-h-125 overflow-y-auto scrollbar-thin">
+      <div className="p-5 pt-4 border-t border-gray-100 dark:border-gray-700/60 max-h-[500px] overflow-y-auto scrollbar-thin">
         {renderTab()}
       </div>
     </div>

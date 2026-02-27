@@ -15,23 +15,23 @@ export default function StyleTab() {
   const set = useQRStore((s) => s.set);
 
   const btnClass = (active: boolean) =>
-    `px-2.5 py-2.5 rounded-xl border-2 text-xs font-semibold transition-all duration-200 flex flex-col items-center gap-1 ${
+    `px-3 py-3 rounded-xl border-2 text-xs font-semibold transition-all duration-200 flex flex-col items-center gap-1.5 ${
       active
-        ? 'border-blue-500 bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 shadow-sm'
-        : 'border-gray-200 dark:border-gray-600 text-gray-500 dark:text-gray-400 hover:border-gray-400'
+        ? 'border-blue-500 bg-blue-50/50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 shadow-sm'
+        : 'border-gray-100 dark:border-gray-700 text-gray-500 dark:text-gray-400 hover:border-gray-300 dark:hover:border-gray-500'
     }`;
 
   return (
-    <div className="space-y-5">
+    <div className="space-y-6">
       {/* Dot Style */}
       <div>
-        <h4 className="text-[11px] font-bold text-gray-400 dark:text-gray-500 uppercase tracking-widest mb-3">
+        <h4 className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-3">
           Dot Style
         </h4>
-        <div className="grid grid-cols-3 gap-2">
+        <div className="grid grid-cols-3 gap-2.5">
           {DOT_STYLES.map((s) => (
             <button key={s.key} onClick={() => set({ dotType: s.key })} className={btnClass(dotType === s.key)}>
-              <span className="text-base">{s.icon}</span>
+              <span className="text-lg">{s.icon}</span>
               <span>{s.label}</span>
             </button>
           ))}
@@ -40,17 +40,17 @@ export default function StyleTab() {
 
       {/* Corner Square Style */}
       <div>
-        <h4 className="text-[11px] font-bold text-gray-400 dark:text-gray-500 uppercase tracking-widest mb-3">
+        <h4 className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-3">
           Eye Frame Style
         </h4>
-        <div className="grid grid-cols-3 gap-2">
+        <div className="grid grid-cols-3 gap-2.5">
           {CORNER_SQUARE_STYLES.map((s) => (
             <button
               key={s.key}
               onClick={() => set({ cornerSquareType: s.key })}
               className={btnClass(cornerSquareType === s.key)}
             >
-              <span className="text-base">{s.icon}</span>
+              <span className="text-lg">{s.icon}</span>
               <span>{s.label}</span>
             </button>
           ))}
@@ -59,17 +59,17 @@ export default function StyleTab() {
 
       {/* Corner Dot Style */}
       <div>
-        <h4 className="text-[11px] font-bold text-gray-400 dark:text-gray-500 uppercase tracking-widest mb-3">
+        <h4 className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-3">
           Eye Dot Style
         </h4>
-        <div className="grid grid-cols-2 gap-2">
+        <div className="grid grid-cols-2 gap-2.5">
           {CORNER_DOT_STYLES.map((s) => (
             <button
               key={s.key}
               onClick={() => set({ cornerDotType: s.key })}
               className={btnClass(cornerDotType === s.key)}
             >
-              <span className="text-base">{s.icon}</span>
+              <span className="text-lg">{s.icon}</span>
               <span>{s.label}</span>
             </button>
           ))}
@@ -79,55 +79,55 @@ export default function StyleTab() {
       {/* Custom Eye Colors */}
       <div>
         <div className="flex items-center justify-between mb-3">
-          <h4 className="text-[11px] font-bold text-gray-400 dark:text-gray-500 uppercase tracking-widest">
+          <h4 className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">
             Custom Eye Colors
           </h4>
           <button
             onClick={() => set({ useCustomEyeColors: !useCustomEyeColors })}
-            className={`relative w-9 h-5 rounded-full transition-colors duration-200 ${
-              useCustomEyeColors ? 'bg-blue-500' : 'bg-gray-300 dark:bg-gray-600'
+            className={`relative w-12 h-6 rounded-full transition-colors duration-200 focus:outline-none focus:ring-4 focus:ring-blue-500/20 ${
+              useCustomEyeColors ? 'bg-blue-500' : 'bg-gray-200 dark:bg-gray-700'
             }`}
           >
             <span
-              className={`absolute top-0.5 left-0.5 w-4 h-4 bg-white rounded-full shadow transition-transform duration-200 ${
-                useCustomEyeColors ? 'translate-x-4' : ''
+              className={`absolute top-1 left-1 w-4 h-4 bg-white rounded-full shadow-sm transition-transform duration-200 ${
+                useCustomEyeColors ? 'translate-x-6' : 'translate-x-0'
               }`}
             />
           </button>
         </div>
         {useCustomEyeColors && (
-          <div className="space-y-3 p-3 bg-gray-50 dark:bg-gray-700/50 rounded-xl">
+          <div className="space-y-4 p-4 bg-gray-50/50 dark:bg-gray-700/30 rounded-2xl border border-gray-100 dark:border-gray-700/50">
             <div>
-              <label className="text-xs text-gray-500 mb-1.5 block font-medium">Eye Frame Color</label>
+              <label className="text-xs text-gray-500 dark:text-gray-400 mb-2 block font-medium">Eye Frame Color</label>
               <div className="flex items-center gap-2">
                 <input
                   type="color"
                   value={cornerSquareColor}
                   onChange={(e) => set({ cornerSquareColor: e.target.value })}
-                  className="w-8 h-8 rounded-lg border-2 border-gray-200 dark:border-gray-600 cursor-pointer bg-transparent"
+                  className="w-8 h-8 rounded-lg border-2 border-gray-200 dark:border-gray-600 cursor-pointer bg-transparent p-0.5"
                 />
                 <input
                   type="text"
                   value={cornerSquareColor}
                   onChange={(e) => set({ cornerSquareColor: e.target.value })}
-                  className="flex-1 px-2 py-1.5 text-xs border border-gray-200 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white font-mono"
+                  className="flex-1 px-3 py-2 text-sm border border-gray-200 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-800 text-gray-900 dark:text-white font-mono focus:ring-4 focus:ring-blue-500/20 outline-none transition-all"
                 />
               </div>
             </div>
             <div>
-              <label className="text-xs text-gray-500 mb-1.5 block font-medium">Eye Dot Color</label>
+              <label className="text-xs text-gray-500 dark:text-gray-400 mb-2 block font-medium">Eye Dot Color</label>
               <div className="flex items-center gap-2">
                 <input
                   type="color"
                   value={cornerDotColor}
                   onChange={(e) => set({ cornerDotColor: e.target.value })}
-                  className="w-8 h-8 rounded-lg border-2 border-gray-200 dark:border-gray-600 cursor-pointer bg-transparent"
+                  className="w-8 h-8 rounded-lg border-2 border-gray-200 dark:border-gray-600 cursor-pointer bg-transparent p-0.5"
                 />
                 <input
                   type="text"
                   value={cornerDotColor}
                   onChange={(e) => set({ cornerDotColor: e.target.value })}
-                  className="flex-1 px-2 py-1.5 text-xs border border-gray-200 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white font-mono"
+                  className="flex-1 px-3 py-2 text-sm border border-gray-200 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-800 text-gray-900 dark:text-white font-mono focus:ring-4 focus:ring-blue-500/20 outline-none transition-all"
                 />
               </div>
             </div>
@@ -137,9 +137,9 @@ export default function StyleTab() {
 
       {/* QR Size */}
       <div>
-        <h4 className="text-[11px] font-bold text-gray-400 dark:text-gray-500 uppercase tracking-widest mb-3">
-          Preview Size:{' '}
-          <span className="text-blue-600 dark:text-blue-400 normal-case">{qrSize}px</span>
+        <h4 className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-3 flex justify-between">
+          <span>Preview Size</span>
+          <span className="text-blue-600 dark:text-blue-400 normal-case font-bold">{qrSize}px</span>
         </h4>
         <input
           type="range"
@@ -148,9 +148,9 @@ export default function StyleTab() {
           step="10"
           value={qrSize}
           onChange={(e) => set({ qrSize: Number(e.target.value) })}
-          className="w-full accent-blue-500"
+          className="w-full accent-blue-500 h-1.5 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700"
         />
-        <div className="flex justify-between text-[10px] text-gray-400 mt-1">
+        <div className="flex justify-between text-xs text-gray-400 mt-2 font-medium">
           <span>150px</span>
           <span>400px</span>
         </div>
@@ -158,24 +158,24 @@ export default function StyleTab() {
 
       {/* Error Correction */}
       <div>
-        <h4 className="text-[11px] font-bold text-gray-400 dark:text-gray-500 uppercase tracking-widest mb-3">
+        <h4 className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-3">
           Error Correction
         </h4>
-        <div className="grid grid-cols-4 gap-2">
+        <div className="grid grid-cols-4 gap-2.5">
           {(['L', 'M', 'Q', 'H'] as const).map((level) => (
             <button
               key={level}
               onClick={() => set({ errorCorrectionLevel: level })}
               className={btnClass(errorCorrectionLevel === level)}
             >
-              <span className="text-sm font-bold">{level}</span>
-              <span className="text-[9px]">
+              <span className="text-base font-bold">{level}</span>
+              <span className="text-[10px]">
                 {level === 'L' ? '7%' : level === 'M' ? '15%' : level === 'Q' ? '25%' : '30%'}
               </span>
             </button>
           ))}
         </div>
-        <p className="text-[10px] text-gray-400 mt-2">
+        <p className="text-xs text-gray-500 dark:text-gray-400 mt-3 font-medium">
           Higher = more resilient but denser. Use H with logos.
         </p>
       </div>

@@ -31,20 +31,20 @@ export default function TextTab() {
   const set = useQRStore((s) => s.set);
 
   const inputClass =
-    'w-full px-2.5 py-2 text-xs border border-gray-200 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white transition-all focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500 outline-none';
+    'w-full px-3 py-2.5 text-sm border border-gray-200 dark:border-gray-600 rounded-xl bg-gray-50/50 dark:bg-gray-700/50 text-gray-900 dark:text-white transition-all focus:ring-4 focus:ring-blue-500/20 focus:border-blue-500 outline-none';
   const selectClass =
-    'w-full px-2 py-1.5 text-xs border border-gray-200 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white outline-none';
+    'w-full px-3 py-2 text-sm border border-gray-200 dark:border-gray-600 rounded-xl bg-gray-50/50 dark:bg-gray-700/50 text-gray-900 dark:text-white outline-none focus:ring-4 focus:ring-blue-500/20 focus:border-blue-500 transition-all';
 
   const alignButtons = (current: TextAlign, prefix: 'title' | 'caption') => (
-    <div className="flex gap-1">
+    <div className="flex gap-1.5">
       {(['left', 'center', 'right'] as const).map((a) => (
         <button
           key={a}
           onClick={() => set({ [`${prefix}Align`]: a } as Record<string, TextAlign>)}
-          className={`px-2.5 py-1 rounded-lg text-xs font-semibold transition-all ${
+          className={`px-3 py-1.5 rounded-lg text-sm font-semibold transition-all ${
             current === a
-              ? 'bg-blue-500 text-white'
-              : 'bg-gray-100 dark:bg-gray-700 text-gray-500 hover:bg-gray-200'
+              ? 'bg-blue-500 text-white shadow-sm'
+              : 'bg-gray-100 dark:bg-gray-800 text-gray-500 hover:bg-gray-200 dark:hover:bg-gray-700'
           }`}
         >
           {a === 'left' ? '◀' : a === 'center' ? '◆' : '▶'}
@@ -54,13 +54,13 @@ export default function TextTab() {
   );
 
   return (
-    <div className="space-y-5">
+    <div className="space-y-6">
       {/* ── Background Text ── */}
       <div>
-        <h4 className="text-[11px] font-bold text-gray-400 dark:text-gray-500 uppercase tracking-widest mb-3">
+        <h4 className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-3">
           Background Text
         </h4>
-        <div className="space-y-3">
+        <div className="space-y-4">
           <input
             type="text"
             value={bgText}
@@ -71,10 +71,10 @@ export default function TextTab() {
           />
 
           {bgText && (
-            <div className="space-y-3 p-3 bg-gray-50 dark:bg-gray-700/50 rounded-xl">
-              <div className="grid grid-cols-2 gap-3">
+            <div className="space-y-4 p-4 bg-gray-50/50 dark:bg-gray-700/30 rounded-2xl border border-gray-100 dark:border-gray-700/50">
+              <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="text-xs text-gray-500 mb-1 block">Font</label>
+                  <label className="text-xs text-gray-500 dark:text-gray-400 mb-2 block font-medium">Font</label>
                   <select
                     value={bgTextFontFamily}
                     onChange={(e) => set({ bgTextFontFamily: e.target.value })}
@@ -88,8 +88,9 @@ export default function TextTab() {
                   </select>
                 </div>
                 <div>
-                  <label className="text-xs text-gray-500 mb-1 block">
-                    Size: <span className="font-semibold">{bgTextFontSize}px</span>
+                  <label className="text-xs text-gray-500 dark:text-gray-400 mb-2 block font-medium flex justify-between">
+                    <span>Size</span>
+                    <span className="font-bold text-gray-700 dark:text-gray-300">{bgTextFontSize}px</span>
                   </label>
                   <input
                     type="range"
@@ -97,27 +98,28 @@ export default function TextTab() {
                     max="120"
                     value={bgTextFontSize}
                     onChange={(e) => set({ bgTextFontSize: Number(e.target.value) })}
-                    className="w-full accent-blue-500"
+                    className="w-full accent-blue-500 h-1.5 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700"
                   />
                 </div>
               </div>
 
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="text-xs text-gray-500 mb-1.5 block">Color</label>
-                  <div className="flex items-center gap-1.5">
+                  <label className="text-xs text-gray-500 dark:text-gray-400 mb-2 block font-medium">Color</label>
+                  <div className="flex items-center gap-2">
                     <input
                       type="color"
                       value={bgTextColor}
                       onChange={(e) => set({ bgTextColor: e.target.value })}
-                      className="w-7 h-7 rounded border-2 border-gray-200 dark:border-gray-600 cursor-pointer bg-transparent"
+                      className="w-8 h-8 rounded-lg border-2 border-gray-200 dark:border-gray-600 cursor-pointer bg-transparent p-0.5"
                     />
-                    <span className="text-[10px] font-mono text-gray-500">{bgTextColor}</span>
+                    <span className="text-xs font-mono text-gray-500 dark:text-gray-400">{bgTextColor}</span>
                   </div>
                 </div>
                 <div>
-                  <label className="text-xs text-gray-500 mb-1 block">
-                    Opacity: <span className="font-semibold">{Math.round(bgTextOpacity * 100)}%</span>
+                  <label className="text-xs text-gray-500 dark:text-gray-400 mb-2 block font-medium flex justify-between">
+                    <span>Opacity</span>
+                    <span className="font-bold text-gray-700 dark:text-gray-300">{Math.round(bgTextOpacity * 100)}%</span>
                   </label>
                   <input
                     type="range"
@@ -126,15 +128,16 @@ export default function TextTab() {
                     step="0.01"
                     value={bgTextOpacity}
                     onChange={(e) => set({ bgTextOpacity: Number(e.target.value) })}
-                    className="w-full accent-blue-500"
+                    className="w-full accent-blue-500 h-1.5 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700"
                   />
                 </div>
               </div>
 
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="text-xs text-gray-500 mb-1 block">
-                    X Position: <span className="font-semibold">{bgTextX}%</span>
+                  <label className="text-xs text-gray-500 dark:text-gray-400 mb-2 block font-medium flex justify-between">
+                    <span>X Position</span>
+                    <span className="font-bold text-gray-700 dark:text-gray-300">{bgTextX}%</span>
                   </label>
                   <input
                     type="range"
@@ -142,12 +145,13 @@ export default function TextTab() {
                     max="100"
                     value={bgTextX}
                     onChange={(e) => set({ bgTextX: Number(e.target.value) })}
-                    className="w-full accent-blue-500"
+                    className="w-full accent-blue-500 h-1.5 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700"
                   />
                 </div>
                 <div>
-                  <label className="text-xs text-gray-500 mb-1 block">
-                    Y Position: <span className="font-semibold">{bgTextY}%</span>
+                  <label className="text-xs text-gray-500 dark:text-gray-400 mb-2 block font-medium flex justify-between">
+                    <span>Y Position</span>
+                    <span className="font-bold text-gray-700 dark:text-gray-300">{bgTextY}%</span>
                   </label>
                   <input
                     type="range"
@@ -155,14 +159,15 @@ export default function TextTab() {
                     max="100"
                     value={bgTextY}
                     onChange={(e) => set({ bgTextY: Number(e.target.value) })}
-                    className="w-full accent-blue-500"
+                    className="w-full accent-blue-500 h-1.5 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="text-xs text-gray-500 mb-1 block">
-                  Rotation: <span className="font-semibold">{bgTextRotation}°</span>
+                <label className="text-xs text-gray-500 dark:text-gray-400 mb-2 block font-medium flex justify-between">
+                  <span>Rotation</span>
+                  <span className="font-bold text-gray-700 dark:text-gray-300">{bgTextRotation}°</span>
                 </label>
                 <input
                   type="range"
@@ -170,21 +175,21 @@ export default function TextTab() {
                   max="180"
                   value={bgTextRotation}
                   onChange={(e) => set({ bgTextRotation: Number(e.target.value) })}
-                  className="w-full accent-blue-500"
+                  className="w-full accent-blue-500 h-1.5 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700"
                 />
               </div>
 
-              <div className="flex items-center justify-between">
-                <label className="text-xs text-gray-500 font-medium">Repeat (Watermark)</label>
+              <div className="flex items-center justify-between pt-2">
+                <label className="text-xs text-gray-500 dark:text-gray-400 font-medium">Repeat (Watermark)</label>
                 <button
                   onClick={() => set({ bgTextRepeat: !bgTextRepeat })}
-                  className={`relative w-9 h-5 rounded-full transition-colors duration-200 ${
-                    bgTextRepeat ? 'bg-blue-500' : 'bg-gray-300 dark:bg-gray-600'
+                  className={`relative w-12 h-6 rounded-full transition-colors duration-200 focus:outline-none focus:ring-4 focus:ring-blue-500/20 ${
+                    bgTextRepeat ? 'bg-blue-500' : 'bg-gray-200 dark:bg-gray-700'
                   }`}
                 >
                   <span
-                    className={`absolute top-0.5 left-0.5 w-4 h-4 bg-white rounded-full shadow transition-transform duration-200 ${
-                      bgTextRepeat ? 'translate-x-4' : ''
+                    className={`absolute top-1 left-1 w-4 h-4 bg-white rounded-full shadow-sm transition-transform duration-200 ${
+                      bgTextRepeat ? 'translate-x-6' : 'translate-x-0'
                     }`}
                   />
                 </button>
@@ -196,7 +201,7 @@ export default function TextTab() {
 
       {/* ── Title ── */}
       <div>
-        <h4 className="text-[11px] font-bold text-gray-400 dark:text-gray-500 uppercase tracking-widest mb-3">
+        <h4 className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-3">
           Title (Above QR)
         </h4>
         <input
@@ -208,10 +213,10 @@ export default function TextTab() {
           className={inputClass}
         />
         {title && (
-          <div className="mt-3 space-y-3 p-3 bg-gray-50 dark:bg-gray-700/50 rounded-xl">
-            <div className="grid grid-cols-2 gap-3">
+          <div className="mt-4 space-y-4 p-4 bg-gray-50/50 dark:bg-gray-700/30 rounded-2xl border border-gray-100 dark:border-gray-700/50">
+            <div className="grid grid-cols-2 gap-4">
               <div>
-                <label className="text-xs text-gray-500 mb-1 block">Font</label>
+                <label className="text-xs text-gray-500 dark:text-gray-400 mb-2 block font-medium">Font</label>
                 <select
                   value={titleFontFamily}
                   onChange={(e) => set({ titleFontFamily: e.target.value })}
@@ -225,7 +230,7 @@ export default function TextTab() {
                 </select>
               </div>
               <div>
-                <label className="text-xs text-gray-500 mb-1 block">Weight</label>
+                <label className="text-xs text-gray-500 dark:text-gray-400 mb-2 block font-medium">Weight</label>
                 <select
                   value={titleFontWeight}
                   onChange={(e) => set({ titleFontWeight: e.target.value })}
@@ -239,10 +244,11 @@ export default function TextTab() {
                 </select>
               </div>
             </div>
-            <div className="grid grid-cols-2 gap-3">
+            <div className="grid grid-cols-2 gap-4">
               <div>
-                <label className="text-xs text-gray-500 mb-1 block">
-                  Size: <span className="font-semibold">{titleFontSize}px</span>
+                <label className="text-xs text-gray-500 dark:text-gray-400 mb-2 block font-medium flex justify-between">
+                  <span>Size</span>
+                  <span className="font-bold text-gray-700 dark:text-gray-300">{titleFontSize}px</span>
                 </label>
                 <input
                   type="range"
@@ -250,12 +256,13 @@ export default function TextTab() {
                   max="48"
                   value={titleFontSize}
                   onChange={(e) => set({ titleFontSize: Number(e.target.value) })}
-                  className="w-full accent-blue-500"
+                  className="w-full accent-blue-500 h-1.5 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700"
                 />
               </div>
               <div>
-                <label className="text-xs text-gray-500 mb-1 block">
-                  Spacing: <span className="font-semibold">{titleSpacing}px</span>
+                <label className="text-xs text-gray-500 dark:text-gray-400 mb-2 block font-medium flex justify-between">
+                  <span>Spacing</span>
+                  <span className="font-bold text-gray-700 dark:text-gray-300">{titleSpacing}px</span>
                 </label>
                 <input
                   type="range"
@@ -263,19 +270,19 @@ export default function TextTab() {
                   max="40"
                   value={titleSpacing}
                   onChange={(e) => set({ titleSpacing: Number(e.target.value) })}
-                  className="w-full accent-blue-500"
+                  className="w-full accent-blue-500 h-1.5 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700"
                 />
               </div>
             </div>
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between pt-2">
               <div className="flex items-center gap-2">
                 <input
                   type="color"
                   value={titleColor}
                   onChange={(e) => set({ titleColor: e.target.value })}
-                  className="w-7 h-7 rounded border-2 border-gray-200 dark:border-gray-600 cursor-pointer bg-transparent"
+                  className="w-8 h-8 rounded-lg border-2 border-gray-200 dark:border-gray-600 cursor-pointer bg-transparent p-0.5"
                 />
-                <span className="text-[10px] font-mono text-gray-500">{titleColor}</span>
+                <span className="text-xs font-mono text-gray-500 dark:text-gray-400">{titleColor}</span>
               </div>
               {alignButtons(titleAlign, 'title')}
             </div>
@@ -285,7 +292,7 @@ export default function TextTab() {
 
       {/* ── Caption ── */}
       <div>
-        <h4 className="text-[11px] font-bold text-gray-400 dark:text-gray-500 uppercase tracking-widest mb-3">
+        <h4 className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-3">
           Caption (Below QR)
         </h4>
         <input
@@ -297,10 +304,10 @@ export default function TextTab() {
           className={inputClass}
         />
         {caption && (
-          <div className="mt-3 space-y-3 p-3 bg-gray-50 dark:bg-gray-700/50 rounded-xl">
-            <div className="grid grid-cols-2 gap-3">
+          <div className="mt-4 space-y-4 p-4 bg-gray-50/50 dark:bg-gray-700/30 rounded-2xl border border-gray-100 dark:border-gray-700/50">
+            <div className="grid grid-cols-2 gap-4">
               <div>
-                <label className="text-xs text-gray-500 mb-1 block">Font</label>
+                <label className="text-xs text-gray-500 dark:text-gray-400 mb-2 block font-medium">Font</label>
                 <select
                   value={captionFontFamily}
                   onChange={(e) => set({ captionFontFamily: e.target.value })}
@@ -314,7 +321,7 @@ export default function TextTab() {
                 </select>
               </div>
               <div>
-                <label className="text-xs text-gray-500 mb-1 block">Weight</label>
+                <label className="text-xs text-gray-500 dark:text-gray-400 mb-2 block font-medium">Weight</label>
                 <select
                   value={captionFontWeight}
                   onChange={(e) => set({ captionFontWeight: e.target.value })}
@@ -328,10 +335,11 @@ export default function TextTab() {
                 </select>
               </div>
             </div>
-            <div className="grid grid-cols-2 gap-3">
+            <div className="grid grid-cols-2 gap-4">
               <div>
-                <label className="text-xs text-gray-500 mb-1 block">
-                  Size: <span className="font-semibold">{captionFontSize}px</span>
+                <label className="text-xs text-gray-500 dark:text-gray-400 mb-2 block font-medium flex justify-between">
+                  <span>Size</span>
+                  <span className="font-bold text-gray-700 dark:text-gray-300">{captionFontSize}px</span>
                 </label>
                 <input
                   type="range"
@@ -339,12 +347,13 @@ export default function TextTab() {
                   max="36"
                   value={captionFontSize}
                   onChange={(e) => set({ captionFontSize: Number(e.target.value) })}
-                  className="w-full accent-blue-500"
+                  className="w-full accent-blue-500 h-1.5 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700"
                 />
               </div>
               <div>
-                <label className="text-xs text-gray-500 mb-1 block">
-                  Spacing: <span className="font-semibold">{captionSpacing}px</span>
+                <label className="text-xs text-gray-500 dark:text-gray-400 mb-2 block font-medium flex justify-between">
+                  <span>Spacing</span>
+                  <span className="font-bold text-gray-700 dark:text-gray-300">{captionSpacing}px</span>
                 </label>
                 <input
                   type="range"
@@ -352,19 +361,19 @@ export default function TextTab() {
                   max="40"
                   value={captionSpacing}
                   onChange={(e) => set({ captionSpacing: Number(e.target.value) })}
-                  className="w-full accent-blue-500"
+                  className="w-full accent-blue-500 h-1.5 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700"
                 />
               </div>
             </div>
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between pt-2">
               <div className="flex items-center gap-2">
                 <input
                   type="color"
                   value={captionColor}
                   onChange={(e) => set({ captionColor: e.target.value })}
-                  className="w-7 h-7 rounded border-2 border-gray-200 dark:border-gray-600 cursor-pointer bg-transparent"
+                  className="w-8 h-8 rounded-lg border-2 border-gray-200 dark:border-gray-600 cursor-pointer bg-transparent p-0.5"
                 />
-                <span className="text-[10px] font-mono text-gray-500">{captionColor}</span>
+                <span className="text-xs font-mono text-gray-500 dark:text-gray-400">{captionColor}</span>
               </div>
               {alignButtons(captionAlign, 'caption')}
             </div>

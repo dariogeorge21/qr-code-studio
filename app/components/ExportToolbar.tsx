@@ -331,28 +331,28 @@ export default function ExportToolbar() {
   ];
 
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg border border-gray-100 dark:border-gray-700/60 p-5">
-      <h2 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-4 flex items-center gap-2">
-        <span className="w-6 h-6 rounded-lg bg-amber-100 dark:bg-amber-900/40 flex items-center justify-center text-xs">
-          💾
+    <div className="bg-white dark:bg-gray-800 rounded-3xl shadow-sm border border-gray-100 dark:border-gray-700/60 p-6 sm:p-8">
+      <h2 className="text-base font-bold text-gray-800 dark:text-gray-200 mb-6 flex items-center gap-2.5">
+        <span className="w-8 h-8 rounded-xl bg-orange-50 dark:bg-orange-900/40 flex items-center justify-center text-sm">
+          ⬇️
         </span>
-        Export
+        Export Settings
       </h2>
 
       {/* Format selector */}
-      <div className="mb-4">
-        <label className="text-[11px] font-bold text-gray-400 dark:text-gray-500 uppercase tracking-widest mb-2 block">
+      <div className="mb-6">
+        <label className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-3 block">
           Format
         </label>
-        <div className="grid grid-cols-4 gap-2">
+        <div className="grid grid-cols-4 gap-2.5">
           {formats.map((f) => (
             <button
               key={f.key}
               onClick={() => set({ exportFormat: f.key })}
-              className={`px-2 py-2 rounded-xl border-2 text-center transition-all duration-200 ${
+              className={`px-2 py-2.5 rounded-xl border-2 text-center transition-all duration-200 ${
                 exportFormat === f.key
-                  ? 'border-blue-500 bg-blue-50 dark:bg-blue-900/30'
-                  : 'border-gray-200 dark:border-gray-600 hover:border-gray-400'
+                  ? 'border-blue-500 bg-blue-50/50 dark:bg-blue-900/20'
+                  : 'border-gray-100 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-500'
               }`}
             >
               <div
@@ -362,27 +362,27 @@ export default function ExportToolbar() {
               >
                 {f.label}
               </div>
-              <div className="text-[9px] text-gray-400 mt-0.5">{f.desc}</div>
+              <div className="text-[10px] text-gray-400 mt-1">{f.desc}</div>
             </button>
           ))}
         </div>
       </div>
 
       {/* Scale & Transparent */}
-      <div className="flex items-center gap-3 mb-4">
+      <div className="flex items-center gap-4 mb-6">
         <div className="flex-1">
-          <label className="text-[11px] font-bold text-gray-400 dark:text-gray-500 uppercase tracking-widest mb-2 block">
+          <label className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-3 block">
             Resolution
           </label>
-          <div className="flex gap-1.5">
+          <div className="flex gap-2">
             {scales.map((sc) => (
               <button
                 key={sc.value}
                 onClick={() => set({ exportScale: sc.value })}
-                className={`flex-1 py-1.5 rounded-lg text-xs font-bold transition-all ${
+                className={`flex-1 py-2 rounded-xl text-sm font-bold transition-all duration-200 ${
                   exportScale === sc.value
-                    ? 'bg-blue-500 text-white shadow-sm'
-                    : 'bg-gray-100 dark:bg-gray-700 text-gray-500 hover:bg-gray-200'
+                    ? 'bg-blue-500 text-white shadow-md shadow-blue-500/20'
+                    : 'bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'
                 }`}
               >
                 {sc.label}
@@ -392,19 +392,18 @@ export default function ExportToolbar() {
         </div>
 
         <div>
-          <label className="text-[11px] font-bold text-gray-400 dark:text-gray-500 uppercase tracking-widest mb-2 block">
+          <label className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-3 block">
             Transparent
           </label>
           <button
             onClick={() => set({ transparentBg: !transparentBg })}
-            className={`relative w-10 h-5.5 rounded-full transition-colors duration-200 ${
-              transparentBg ? 'bg-blue-500' : 'bg-gray-300 dark:bg-gray-600'
+            className={`relative w-12 h-6 rounded-full transition-colors duration-200 focus:outline-none focus:ring-4 focus:ring-blue-500/20 ${
+              transparentBg ? 'bg-blue-500' : 'bg-gray-200 dark:bg-gray-700'
             }`}
-            style={{ height: '22px', width: '40px' }}
           >
             <span
-              className={`absolute top-0.5 left-0.5 w-4.5 h-4.5 bg-white rounded-full shadow transition-transform duration-200 ${
-                transparentBg ? 'translate-x-4.5' : ''
+              className={`absolute top-1 left-1 w-4 h-4 bg-white rounded-full shadow-sm transition-transform duration-200 ${
+                transparentBg ? 'translate-x-6' : 'translate-x-0'
               }`}
             />
           </button>
@@ -415,15 +414,15 @@ export default function ExportToolbar() {
       <button
         onClick={handleExport}
         disabled={!hasContent || exporting}
-        className={`w-full py-3 rounded-xl font-bold text-sm transition-all duration-200 flex items-center justify-center gap-2 ${
+        className={`w-full py-4 rounded-2xl font-bold text-base transition-all duration-300 flex items-center justify-center gap-3 ${
           hasContent && !exporting
-            ? 'bg-linear-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white shadow-lg shadow-blue-500/25 hover:shadow-blue-500/40 active:scale-[0.98]'
-            : 'bg-gray-200 dark:bg-gray-700 text-gray-400 cursor-not-allowed'
+            ? 'bg-blue-600 hover:bg-blue-700 text-white shadow-lg shadow-blue-500/30 hover:shadow-blue-500/50 hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98]'
+            : 'bg-gray-100 dark:bg-gray-800 text-gray-400 dark:text-gray-500 cursor-not-allowed'
         }`}
       >
         {exporting ? (
           <>
-            <svg className="animate-spin w-4 h-4" viewBox="0 0 24 24" fill="none">
+            <svg className="animate-spin w-5 h-5" viewBox="0 0 24 24" fill="none">
               <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
               <path
                 className="opacity-75"
@@ -435,7 +434,7 @@ export default function ExportToolbar() {
           </>
         ) : (
           <>
-            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
             </svg>
             Download {exportFormat.toUpperCase()}
@@ -444,11 +443,11 @@ export default function ExportToolbar() {
       </button>
 
       {error && (
-        <p className="mt-2 text-xs text-red-500 text-center">{error}</p>
+        <p className="mt-3 text-sm text-red-500 text-center font-medium">{error}</p>
       )}
 
       {exportFormat === 'svg' && (
-        <p className="mt-2 text-[10px] text-gray-400 text-center">
+        <p className="mt-3 text-xs text-gray-500 dark:text-gray-400 text-center">
           SVG exports QR code only (no text overlays or frame)
         </p>
       )}

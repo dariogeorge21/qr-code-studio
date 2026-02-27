@@ -25,43 +25,43 @@ export default function FrameTab() {
   ];
 
   return (
-    <div className="space-y-5">
+    <div className="space-y-6">
       {/* Frame Toggle */}
       <div className="flex items-center justify-between">
-        <h4 className="text-[11px] font-bold text-gray-400 dark:text-gray-500 uppercase tracking-widest">
+        <h4 className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">
           Border Frame
         </h4>
         <button
           onClick={() => set({ frameEnabled: !frameEnabled })}
-          className={`relative w-9 h-5 rounded-full transition-colors duration-200 ${
-            frameEnabled ? 'bg-blue-500' : 'bg-gray-300 dark:bg-gray-600'
+          className={`relative w-12 h-6 rounded-full transition-colors duration-200 focus:outline-none focus:ring-4 focus:ring-blue-500/20 ${
+            frameEnabled ? 'bg-blue-500' : 'bg-gray-200 dark:bg-gray-700'
           }`}
         >
           <span
-            className={`absolute top-0.5 left-0.5 w-4 h-4 bg-white rounded-full shadow transition-transform duration-200 ${
-              frameEnabled ? 'translate-x-4' : ''
+            className={`absolute top-1 left-1 w-4 h-4 bg-white rounded-full shadow-sm transition-transform duration-200 ${
+              frameEnabled ? 'translate-x-6' : 'translate-x-0'
             }`}
           />
         </button>
       </div>
 
       {frameEnabled && (
-        <div className="space-y-4 p-3 bg-gray-50 dark:bg-gray-700/50 rounded-xl">
+        <div className="space-y-5 p-4 bg-gray-50/50 dark:bg-gray-700/30 rounded-2xl border border-gray-100 dark:border-gray-700/50">
           {/* Border Type */}
           <div>
-            <label className="text-xs text-gray-500 mb-2 block font-medium">Border Type</label>
+            <label className="text-xs text-gray-500 dark:text-gray-400 mb-2 block font-medium">Border Type</label>
             <div className="grid grid-cols-4 gap-2">
               {borderTypes.map((bt) => (
                 <button
                   key={bt.key}
                   onClick={() => set({ borderType: bt.key })}
-                  className={`px-2 py-2 rounded-lg border-2 text-xs font-semibold transition-all flex flex-col items-center gap-0.5 ${
+                  className={`px-2 py-2.5 rounded-xl border-2 text-xs font-semibold transition-all flex flex-col items-center gap-1 ${
                     borderType === bt.key
-                      ? 'border-blue-500 bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400'
-                      : 'border-gray-200 dark:border-gray-600 text-gray-500 hover:border-gray-400'
+                      ? 'border-blue-500 bg-blue-50/50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 shadow-sm'
+                      : 'border-gray-100 dark:border-gray-700 text-gray-500 hover:border-gray-300 dark:hover:border-gray-500'
                   }`}
                 >
-                  <span className="text-xs leading-none">{bt.preview}</span>
+                  <span className="text-sm leading-none">{bt.preview}</span>
                   <span className="text-[10px]">{bt.label}</span>
                 </button>
               ))}
@@ -70,8 +70,9 @@ export default function FrameTab() {
 
           {/* Border Width */}
           <div>
-            <label className="text-xs text-gray-500 mb-1 block font-medium">
-              Width: <span className="font-semibold text-gray-700 dark:text-gray-300">{borderWidth}px</span>
+            <label className="text-xs text-gray-500 dark:text-gray-400 mb-2 block font-medium flex justify-between">
+              <span>Width</span>
+              <span className="font-bold text-gray-700 dark:text-gray-300">{borderWidth}px</span>
             </label>
             <input
               type="range"
@@ -80,30 +81,30 @@ export default function FrameTab() {
               step="1"
               value={borderWidth}
               onChange={(e) => set({ borderWidth: Number(e.target.value) })}
-              className="w-full accent-blue-500"
+              className="w-full accent-blue-500 h-1.5 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700"
             />
           </div>
 
-          {/* Border Color */}
-          <div>
-            <label className="text-xs text-gray-500 mb-1.5 block font-medium">Border Color</label>
-            <div className="flex items-center gap-2">
-              <input
-                type="color"
-                value={borderColor.substring(0, 7)}
-                onChange={(e) => set({ borderColor: e.target.value })}
-                className="w-8 h-8 rounded-lg border-2 border-gray-200 dark:border-gray-600 cursor-pointer bg-transparent"
-              />
-              <input
-                type="text"
-                value={borderColor}
-                onChange={(e) => set({ borderColor: e.target.value })}
-                className="flex-1 px-2 py-1.5 text-xs border border-gray-200 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white font-mono"
-              />
-            </div>
-          </div>
+      {/* Border Color */}
+      <div>
+        <label className="text-xs text-gray-500 dark:text-gray-400 mb-2 block font-medium">Border Color</label>
+        <div className="flex items-center gap-2">
+          <input
+            type="color"
+            value={borderColor.substring(0, 7)}
+            onChange={(e) => set({ borderColor: e.target.value })}
+            className="w-10 h-10 rounded-xl border-2 border-gray-200 dark:border-gray-600 cursor-pointer bg-transparent p-0.5"
+          />
+          <input
+            type="text"
+            value={borderColor}
+            onChange={(e) => set({ borderColor: e.target.value })}
+            className="flex-1 px-3 py-2 text-sm border border-gray-200 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-800 text-gray-900 dark:text-white font-mono focus:ring-4 focus:ring-blue-500/20 outline-none transition-all"
+          />
+        </div>
+      </div>
 
-          {/* Border Radius */}
+      {/* Border Radius */}
           <div>
             <label className="text-xs text-gray-500 mb-1 block font-medium">
               Corner Radius:{' '}
