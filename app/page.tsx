@@ -1,20 +1,69 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { QrCode, Eye, Download, Loader2 } from 'lucide-react';
+import { QrCode, Eye, Download, Loader2, TrendingUp } from 'lucide-react';
 import ThemeToggle from './components/shared/ThemeToggle';
 import Footer from './components/shared/Footer';
+
+interface QRCounterData {
+  total_generated: number;
+  total_downloaded: number;
+}
 
 export default function LandingPage() {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
+  const [counter, setCounter] = useState<QRCounterData | null>(null);
+  const [counterLoading, setCounterLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchCounter = async () => {
+      try {
+        const response = await fetch('/api/qr-counter');
+        if (response.ok) {
+          const data = await response.json();
+          setCounter(data);
+        }
+      } catch (error) {
+        console.error('Failed to fetch counter:', error);
+      } finally {
+        setCounterLoading(false);
+      }
+    };
+
+    fetchCounter();
+  }, []);
 
   const handleGetStarted = () => {
     setLoading(true);
     setTimeout(() => {
       router.push('/create');
     }, 600);
+  };
+
+    const AnimatedCounter = ({ value }: { value: number }) => {
+    const [count, setCount] = useState(0);
+
+    useEffect(() => {
+      let start = 0;
+      const end = value;
+      if (start === end) return;
+
+      // Adjust duration (2000ms = 2 seconds)
+      const duration = 2000;
+      const incrementTime = Math.abs(Math.floor(duration / end));
+
+      const timer = setInterval(() => {
+        start += 1;
+        setCount(start);
+        if (start === end) clearInterval(timer);
+      }, incrementTime);
+
+      return () => clearInterval(timer);
+    }, [value]);
+
+    return <span>{count.toLocaleString()}</span>;
   };
 
   return (
@@ -33,6 +82,45 @@ export default function LandingPage() {
           <p className="text-lg sm:text-xl text-gray-500 dark:text-gray-400 mb-10 leading-relaxed max-w-2xl mx-auto">
             A highly customisable QR Code Generator. Create QR codes for payments, websites, social media, contacts, WiFi, and more — instantly, for free.
           </p>
+          
+          {/* QR Counter Stats */}
+          {/* QR Counter Stats */}
+{!counterLoading && counter && (
+  <div className="mb-12 max-w-2xl mx-auto flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 w-full px-4 sm:px-0">
+    
+    {/* Stat Card 1: Generated */}
+    <div className="w-full sm:w-1/2 flex items-center gap-5 p-5 sm:p-6 rounded-3xl bg-[var(--color-background)] border border-[var(--color-border)] shadow-sm hover:shadow-md transition-all duration-300 group">
+      <div className="flex-shrink-0 w-14 h-14 rounded-2xl bg-orange-50 dark:bg-orange-900/30 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+        <TrendingUp className="w-7 h-7 text-orange-600 dark:text-orange-400" />
+      </div>
+      <div className="flex flex-col text-left">
+        <span className="text-3xl font-black text-[var(--color-text)] tracking-tight leading-none mb-1">
+          <AnimatedCounter value={counter.total_generated} />
+        </span>
+        <span className="text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-widest">
+          QR Codes Generated
+        </span>
+      </div>
+    </div>
+
+    {/* Stat Card 2: Downloaded */}
+    <div className="w-full sm:w-1/2 flex items-center gap-5 p-5 sm:p-6 rounded-3xl bg-[var(--color-background)] border border-[var(--color-border)] shadow-sm hover:shadow-md transition-all duration-300 group">
+      <div className="flex-shrink-0 w-14 h-14 rounded-2xl bg-blue-50 dark:bg-blue-900/30 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+        <Download className="w-7 h-7 text-blue-600 dark:text-blue-400" />
+      </div>
+      <div className="flex flex-col text-left">
+        <span className="text-3xl font-black text-[var(--color-text)] tracking-tight leading-none mb-1">
+          <AnimatedCounter value={counter.total_downloaded} />
+        </span>
+        <span className="text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-widest">
+          Total Downloads
+        </span>
+      </div>
+    </div>
+
+  </div>
+)}
+          
           <button
             onClick={handleGetStarted}
             disabled={loading}
