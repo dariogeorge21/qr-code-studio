@@ -1,17 +1,31 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Dosis } from "next/font/google";
 import "./globals.css";
+import { ThemeProvider } from "./components/shared/ThemeProvider";
 
-const inter = Inter({
+const dosis = Dosis({
   subsets: ["latin"],
-  variable: "--font-inter",
+  variable: "--font-dosis",
   display: "swap",
+  weight: ["300", "400", "500", "600", "700", "800"],
 });
 
 export const metadata: Metadata = {
-  title: "QR Code Studio — Multi-Level Customizable QR Generator",
+  title: "Free QR Code Generator – Create Custom QR Codes Instantly",
   description:
-    "Generate fully customizable QR codes with dot styles, eye patterns, gradients, logos, background text, titles, captions, and more. Export as PNG, SVG, JPEG, or WebP.",
+    "Generate custom QR codes for URLs, WiFi, UPI payments, and more instantly. Free, fast, no sign-up required.",
+  openGraph: {
+    title: "Free QR Code Generator – QR Code Studio",
+    description: "Create custom QR codes for free. Supports WiFi, UPI, URLs, contacts, and more.",
+    images: ["/og-banner.png"],
+    url: "https://yourdomain.com",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Free QR Code Generator – QR Code Studio",
+    description: "Create custom QR codes instantly. Free, no sign-up.",
+    images: ["/og-banner.png"],
+  },
 };
 
 export default function RootLayout({
@@ -20,11 +34,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${inter.variable} font-sans antialiased`}
-      >
-        {children}
+    <html lang="en" suppressHydrationWarning>
+      <body className={`${dosis.variable} font-sans antialiased min-h-screen flex flex-col`}>
+        <ThemeProvider>
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );
