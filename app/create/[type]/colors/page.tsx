@@ -16,18 +16,18 @@ export default function ColorsPage({ params }: { params: Promise<{ type: string 
       <StepIndicator current={1} total={5} label="Colors" />
 
       <div className="flex flex-col lg:flex-row gap-8">
-        {/* Left: Color Options */}
-        <div className="lg:w-[45%] shrink-0">
-          <div className="p-6 rounded-2xl border border-[var(--color-border)] bg-[var(--color-background)] shadow-sm">
-            <h2 className="text-lg font-bold text-[var(--color-text)] mb-5">Customise Colors</h2>
-            <ColorsTab />
+        {/* Right: Live Preview (shown first on mobile) */}
+        <div className="flex-1 min-w-0 order-first lg:order-last">
+          <div className="lg:sticky lg:top-24">
+            <QRPreviewCanvas />
           </div>
         </div>
 
-        {/* Right: Live Preview */}
-        <div className="flex-1 min-w-0">
-          <div className="lg:sticky lg:top-24">
-            <QRPreviewCanvas />
+        {/* Left: Color Options */}
+        <div className="lg:w-[45%] shrink-0 order-last lg:order-first">
+          <div className="p-6 rounded-2xl border border-(--color-border) bg-(--color-background) shadow-sm">
+            <h2 className="text-lg font-bold text-(--color-text) mb-5">Customise Colors</h2>
+            <ColorsTab />
           </div>
         </div>
       </div>
