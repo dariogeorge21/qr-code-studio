@@ -21,6 +21,17 @@ export default function QRPreviewCanvas() {
   const logoImage = useQRStore((s) => s.logoImage);
   const logoSize = useQRStore((s) => s.logoSize);
   const logoMargin = useQRStore((s) => s.logoMargin);
+  const logoPadding = useQRStore((s) => s.logoPadding);
+  const logoRadius = useQRStore((s) => s.logoRadius);
+  const logoOpacity = useQRStore((s) => s.logoOpacity);
+  const logoRotation = useQRStore((s) => s.logoRotation);
+  const logoBgColor = useQRStore((s) => s.logoBgColor);
+  const logoBgEnabled = useQRStore((s) => s.logoBgEnabled);
+  const logoBorderWidth = useQRStore((s) => s.logoBorderWidth);
+  const logoBorderColor = useQRStore((s) => s.logoBorderColor);
+  const logoBorderEnabled = useQRStore((s) => s.logoBorderEnabled);
+  const logoShape = useQRStore((s) => s.logoShape);
+  const logoGrayscale = useQRStore((s) => s.logoGrayscale);
   const frameEnabled = useQRStore((s) => s.frameEnabled);
   const borderWidth = useQRStore((s) => s.borderWidth);
   const borderColor = useQRStore((s) => s.borderColor);
@@ -88,6 +99,115 @@ export default function QRPreviewCanvas() {
   const qrInstance = useRef<any>(null);
   const qrContainerRef = useRef<HTMLDivElement>(null);
   const [loaded, setLoaded] = useState(false);
+  const [processedLogo, setProcessedLogo] = useState<string | null>(null);
+
+  // Process logo image with shape, effects, border
+  useEffect(() => {
+    if (!logoImage) { setProcessedLogo(null); return; }
+
+    const needsProcessing =
+      logoShape !== 'square' || logoBgEnabled || logoBorderEnabled ||
+      logoGrayscale || logoRotation !== 0 || logoOpacity < 1 ||
+      (logoPadding > 0 && logoBgEnabled) || logoRadius > 0;
+
+    if (!needsProcessing) { setProcessedLogo(null); return; }
+
+    const img = new Image();
+    img.crossOrigin = 'anonymous';
+    img.onload = () => {
+      const size = 512;
+      const canvas = document.createElement('canvas');
+      canvas.width = size;
+      canvas.height = size;
+      const ctx = canvas.getContext('2d');
+      if (!ctx) return;
+
+      const bw = logoBorderEnabled ? logoBorderWidth : 0;
+      const half = bw / 2;
+
+      const shapePath = (shrink: number) => {
+        const x = shrink, y = shrink, w = size - shrink * 2, h = size - shrink * 2;
+        ctx.beginPath();
+        switch (logoShape) {
+          case 'circle':
+            ctx.arc(size / 2, size / 2, w / 2, 0, Math.PI * 2);
+            break;
+          case 'rounded': {
+            const r = Math.min(w / 2, Math.max(logoRadius, 20));
+            ctx.roundRect(x, y, w, h, r);
+            break;
+          }
+          case 'diamond':
+            ctx.moveTo(size / 2, y);
+            ctx.lineTo(x + w, size / 2);
+            ctx.lineTo(size / 2, y + h);
+            ctx.lineTo(x, size / 2);
+            ctx.closePath();
+            break;
+          case 'hexagon': {
+            const cx = size / 2, cy = size / 2, rad = w / 2;
+            for (let i = 0; i < 6; i++) {
+              const a = (Math.PI / 3) * i - Math.PI / 2;
+              const px = cx + rad * Math.cos(a);
+              const py = cy + rad * Math.sin(a);
+              i === 0 ? ctx.moveTo(px, py) : ctx.lineTo(px, py);
+            }
+            ctx.closePath();
+            break;
+          }
+          case 'shield':
+            ctx.moveTo(size / 2, y);
+            ctx.quadraticCurveTo(x + w, y, x + w, y + h * 0.4);
+            ctx.quadraticCurveTo(x + w, y + h * 0.85, size / 2, y + h);
+            ctx.quadraticCurveTo(x, y + h * 0.85, x, y + h * 0.4);
+            ctx.quadraticCurveTo(x, y, size / 2, y);
+            ctx.closePath();
+            break;
+          default:
+            logoRadius > 0 ? ctx.roundRect(x, y, w, h, logoRadius) : ctx.rect(x, y, w, h);
+        }
+      };
+
+      // Background fill
+      if (logoBgEnabled) {
+        shapePath(half);
+        ctx.fillStyle = logoBgColor;
+        ctx.fill();
+      }
+
+      // Clip & draw image
+      ctx.save();
+      const imgInset = half + (logoBgEnabled ? logoPadding : 0);
+      shapePath(imgInset);
+      ctx.clip();
+
+      if (logoRotation !== 0) {
+        ctx.translate(size / 2, size / 2);
+        ctx.rotate((logoRotation * Math.PI) / 180);
+        ctx.translate(-size / 2, -size / 2);
+      }
+
+      if (logoGrayscale) ctx.filter = 'grayscale(100%)';
+      ctx.globalAlpha = logoOpacity;
+      ctx.drawImage(img, imgInset, imgInset, size - imgInset * 2, size - imgInset * 2);
+      ctx.restore();
+
+      // Border stroke
+      if (logoBorderEnabled && logoBorderWidth > 0) {
+        shapePath(half);
+        ctx.strokeStyle = logoBorderColor;
+        ctx.lineWidth = logoBorderWidth;
+        ctx.stroke();
+      }
+
+      setProcessedLogo(canvas.toDataURL('image/png'));
+    };
+    img.src = logoImage;
+  }, [
+    logoImage, logoShape, logoBgEnabled, logoBgColor, logoOpacity,
+    logoRotation, logoBorderEnabled, logoBorderWidth, logoBorderColor,
+    logoGrayscale, logoPadding, logoRadius,
+  ]);
 
   // Build QR options
   const buildOptions = () => {
@@ -122,9 +242,9 @@ export default function QRPreviewCanvas() {
       backgroundOptions: {
         color: 'transparent',
       },
-      ...(logoImage
+      ...((processedLogo || logoImage)
         ? {
-            image: logoImage,
+            image: processedLogo || logoImage,
             imageOptions: {
               hideBackgroundDots: true,
               imageSize: logoSize,
@@ -165,7 +285,7 @@ export default function QRPreviewCanvas() {
     loaded, inputValue, qrSize, fgColor, bgColor, dotType, useFgGradient,
     fgGradient, cornerSquareType, cornerDotType, useCustomEyeColors,
     cornerSquareColor, cornerDotColor, errorCorrectionLevel,
-    logoImage, logoSize, logoMargin,
+    logoImage, logoSize, logoMargin, processedLogo,
   ]);
 
   const hasContent = inputValue.trim().length > 0;

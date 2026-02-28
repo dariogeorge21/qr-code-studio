@@ -398,3 +398,129 @@ export const STYLE_PRESETS: StylePreset[] = [
     cornerDotColor: '#22C55E',
   },
 ];
+
+/* ────────── Logo Customisation ────────── */
+
+export type LogoShape = 'square' | 'circle' | 'rounded' | 'diamond' | 'hexagon' | 'shield';
+
+export const LOGO_SHAPES: { key: LogoShape; label: string; icon: string }[] = [
+  { key: 'square', label: 'Square', icon: '⬜' },
+  { key: 'circle', label: 'Circle', icon: '⭕' },
+  { key: 'rounded', label: 'Rounded', icon: '🔲' },
+  { key: 'diamond', label: 'Diamond', icon: '◇' },
+  { key: 'hexagon', label: 'Hexagon', icon: '⬡' },
+  { key: 'shield', label: 'Shield', icon: '🛡' },
+];
+
+export interface LogoPreset {
+  name: string;
+  emoji: string;
+  description: string;
+  logoSize: number;
+  logoMargin: number;
+  logoPadding: number;
+  logoRadius: number;
+  logoOpacity: number;
+  logoRotation: number;
+  logoBgEnabled: boolean;
+  logoBgColor: string;
+  logoBorderEnabled: boolean;
+  logoBorderWidth: number;
+  logoBorderColor: string;
+  logoShape: LogoShape;
+  logoGrayscale: boolean;
+  logoShadowEnabled: boolean;
+  logoShadowBlur: number;
+  logoShadowColor: string;
+}
+
+export const LOGO_PRESETS: LogoPreset[] = [
+  {
+    name: 'Clean',
+    emoji: '✨',
+    description: 'Minimal & crisp',
+    logoSize: 0.25, logoMargin: 5, logoPadding: 4, logoRadius: 4,
+    logoOpacity: 1, logoRotation: 0,
+    logoBgEnabled: false, logoBgColor: '#FFFFFF',
+    logoBorderEnabled: false, logoBorderWidth: 2, logoBorderColor: '#000000',
+    logoShape: 'square', logoGrayscale: false,
+    logoShadowEnabled: false, logoShadowBlur: 8, logoShadowColor: '#00000040',
+  },
+  {
+    name: 'Badge',
+    emoji: '🏷️',
+    description: 'Circle with accent ring',
+    logoSize: 0.3, logoMargin: 6, logoPadding: 8, logoRadius: 50,
+    logoOpacity: 1, logoRotation: 0,
+    logoBgEnabled: true, logoBgColor: '#FFFFFF',
+    logoBorderEnabled: true, logoBorderWidth: 3, logoBorderColor: '#3B82F6',
+    logoShape: 'circle', logoGrayscale: false,
+    logoShadowEnabled: true, logoShadowBlur: 12, logoShadowColor: '#3B82F640',
+  },
+  {
+    name: 'Stamp',
+    emoji: '📮',
+    description: 'Vintage stamp feel',
+    logoSize: 0.28, logoMargin: 8, logoPadding: 6, logoRadius: 8,
+    logoOpacity: 0.9, logoRotation: -5,
+    logoBgEnabled: true, logoBgColor: '#FEF3C7',
+    logoBorderEnabled: true, logoBorderWidth: 3, logoBorderColor: '#92400E',
+    logoShape: 'rounded', logoGrayscale: false,
+    logoShadowEnabled: true, logoShadowBlur: 10, logoShadowColor: '#92400E30',
+  },
+  {
+    name: 'Floating',
+    emoji: '🫧',
+    description: 'Soft shadow lift',
+    logoSize: 0.25, logoMargin: 8, logoPadding: 6, logoRadius: 16,
+    logoOpacity: 1, logoRotation: 0,
+    logoBgEnabled: true, logoBgColor: '#FFFFFF',
+    logoBorderEnabled: false, logoBorderWidth: 0, logoBorderColor: '#000000',
+    logoShape: 'rounded', logoGrayscale: false,
+    logoShadowEnabled: true, logoShadowBlur: 20, logoShadowColor: '#00000030',
+  },
+  {
+    name: 'Diamond',
+    emoji: '💎',
+    description: 'Rotated gem cut',
+    logoSize: 0.25, logoMargin: 10, logoPadding: 6, logoRadius: 4,
+    logoOpacity: 1, logoRotation: 0,
+    logoBgEnabled: true, logoBgColor: '#EDE9FE',
+    logoBorderEnabled: true, logoBorderWidth: 2, logoBorderColor: '#7C3AED',
+    logoShape: 'diamond', logoGrayscale: false,
+    logoShadowEnabled: true, logoShadowBlur: 14, logoShadowColor: '#7C3AED40',
+  },
+  {
+    name: 'Neon',
+    emoji: '💡',
+    description: 'Glowing accent ring',
+    logoSize: 0.28, logoMargin: 6, logoPadding: 6, logoRadius: 50,
+    logoOpacity: 1, logoRotation: 0,
+    logoBgEnabled: true, logoBgColor: '#0F172A',
+    logoBorderEnabled: true, logoBorderWidth: 3, logoBorderColor: '#22D3EE',
+    logoShape: 'circle', logoGrayscale: false,
+    logoShadowEnabled: true, logoShadowBlur: 20, logoShadowColor: '#22D3EE60',
+  },
+  {
+    name: 'Mono',
+    emoji: '🌑',
+    description: 'Grayscale elegance',
+    logoSize: 0.25, logoMargin: 5, logoPadding: 6, logoRadius: 12,
+    logoOpacity: 0.85, logoRotation: 0,
+    logoBgEnabled: true, logoBgColor: '#F9FAFB',
+    logoBorderEnabled: true, logoBorderWidth: 2, logoBorderColor: '#6B7280',
+    logoShape: 'rounded', logoGrayscale: true,
+    logoShadowEnabled: false, logoShadowBlur: 8, logoShadowColor: '#00000040',
+  },
+  {
+    name: 'Shield',
+    emoji: '🛡️',
+    description: 'Protected emblem',
+    logoSize: 0.3, logoMargin: 8, logoPadding: 8, logoRadius: 0,
+    logoOpacity: 1, logoRotation: 0,
+    logoBgEnabled: true, logoBgColor: '#ECFDF5',
+    logoBorderEnabled: true, logoBorderWidth: 3, logoBorderColor: '#059669',
+    logoShape: 'shield', logoGrayscale: false,
+    logoShadowEnabled: true, logoShadowBlur: 16, logoShadowColor: '#05966940',
+  },
+];

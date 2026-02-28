@@ -11,6 +11,7 @@ import type {
   TextDecoration,
   BlendMode,
   GradientConfig,
+  LogoShape,
 } from '../types/qr';
 
 export interface QRState {
@@ -111,6 +112,18 @@ export interface QRState {
   logoMargin: number;
   logoPadding: number;
   logoRadius: number;
+  logoOpacity: number;
+  logoRotation: number;
+  logoBgColor: string;
+  logoBgEnabled: boolean;
+  logoBorderWidth: number;
+  logoBorderColor: string;
+  logoBorderEnabled: boolean;
+  logoShape: LogoShape;
+  logoGrayscale: boolean;
+  logoShadowEnabled: boolean;
+  logoShadowBlur: number;
+  logoShadowColor: string;
 
   // ── Size & Quality ──
   qrSize: number;
@@ -230,6 +243,18 @@ const initialState: QRState = {
   logoMargin: 5,
   logoPadding: 5,
   logoRadius: 4,
+  logoOpacity: 1,
+  logoRotation: 0,
+  logoBgColor: '#FFFFFF',
+  logoBgEnabled: false,
+  logoBorderWidth: 2,
+  logoBorderColor: '#000000',
+  logoBorderEnabled: false,
+  logoShape: 'square',
+  logoGrayscale: false,
+  logoShadowEnabled: false,
+  logoShadowBlur: 8,
+  logoShadowColor: '#00000040',
 
   qrSize: 280,
   errorCorrectionLevel: 'M',
