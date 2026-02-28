@@ -17,7 +17,7 @@ export default function ActionBar({ downloadHref, continueHref, continueLabel = 
       <div className="flex gap-3 max-w-7xl mx-auto">
         <button
           onClick={() => router.push(downloadHref)}
-          className="flex-1 md:flex-none inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-bold text-white bg-[var(--color-secondary)] dark:bg-[var(--color-primary)] dark:text-black hover:opacity-90 transition-all active:scale-[0.98] shadow-lg cursor-pointer"
+          className="flex-1 md:flex-none inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-bold text-white bg-orange-600 dark:bg-yellow-400 dark:text-black hover:opacity-90 transition-all active:scale-[0.98] shadow-lg cursor-pointer"
         >
           <Download className="w-4 h-4" />
           Download Now
@@ -25,7 +25,7 @@ export default function ActionBar({ downloadHref, continueHref, continueLabel = 
         {continueHref && (
           <button
             onClick={() => router.push(continueHref)}
-            className="flex-1 md:flex-none inline-flex items-center justify-center px-6 py-3 rounded-xl font-bold border-2 border-[var(--color-secondary)] text-[var(--color-secondary)] dark:border-[var(--color-tertiary)] dark:text-[var(--color-tertiary)] hover:bg-[var(--color-secondary)]/10 transition-all active:scale-[0.98] cursor-pointer"
+            className="flex-1 md:flex-none inline-flex items-center justify-center px-6 py-3 rounded-xl font-bold border-2 border-orange-600 text-orange-600 dark:border-yellow-400 dark:text-yellow-400 hover:bg-orange-600/10 transition-all active:scale-[0.98] cursor-pointer"
           >
             {continueLabel}
           </button>

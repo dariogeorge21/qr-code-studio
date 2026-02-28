@@ -36,10 +36,10 @@ export default function LandingPage() {
           <button
             onClick={handleGetStarted}
             disabled={loading}
-            className={`inline-flex items-center justify-center gap-2 px-8 py-4 rounded-2xl text-lg font-bold transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] focus:outline-none focus:ring-4 focus:ring-[var(--color-secondary)]/30 cursor-pointer ${
+            className={`inline-flex items-center justify-center gap-2 px-8 py-4 rounded-2xl text-lg font-bold transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] focus:outline-none focus:ring-4 focus:ring-orange-500/30 cursor-pointer ${
               loading
-                ? 'bg-[var(--color-secondary)] dark:bg-[var(--color-primary)] text-white dark:text-black w-48'
-                : 'bg-[var(--color-secondary)] text-white dark:bg-[var(--color-primary)] dark:text-black w-48'
+                ? 'bg-orange-600 dark:bg-yellow-400 text-white dark:text-black w-48'
+                : 'bg-orange-600 text-white dark:bg-yellow-400 dark:text-black w-48'
             }`}
           >
             {loading ? (

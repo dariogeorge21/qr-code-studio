@@ -403,9 +403,9 @@ export default function ExportPage({ params }: { params: Promise<{ type: string 
         <button
           onClick={handleExport}
           disabled={!hasContent || exporting}
-          className={`inline-flex items-center justify-center gap-2 px-10 py-4 rounded-2xl text-lg font-bold transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] cursor-pointer focus:outline-none focus:ring-4 focus:ring-[var(--color-secondary)]/30 ${
+          className={`inline-flex items-center justify-center gap-2 px-10 py-4 rounded-2xl text-lg font-bold transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] cursor-pointer focus:outline-none focus:ring-4 focus:ring-orange-500/30 ${
             hasContent && !exporting
-              ? 'bg-[var(--color-secondary)] text-white dark:bg-[var(--color-primary)] dark:text-black'
+              ? 'bg-orange-600 text-white dark:bg-yellow-400 dark:text-black'
               : 'bg-gray-200 dark:bg-gray-800 text-gray-400 cursor-not-allowed'
           }`}
         >

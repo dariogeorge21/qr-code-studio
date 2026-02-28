@@ -60,7 +60,7 @@ export default function CreatePage() {
           <button
             key={item.type}
             onClick={() => handleSelect(item.type)}
-            className="group flex flex-col items-center gap-3 p-6 sm:p-8 rounded-2xl border border-[var(--color-border)] bg-[var(--color-background)] shadow-sm hover:shadow-lg hover:-translate-y-1 hover:border-[var(--color-secondary)] active:scale-95 transition-all duration-200 cursor-pointer focus:outline-none focus:ring-2 focus:ring-[var(--color-secondary)]"
+            className="group flex flex-col items-center gap-3 p-6 sm:p-8 rounded-2xl border border-[var(--color-border)] bg-[var(--color-background)] shadow-sm hover:shadow-lg hover:-translate-y-1 hover:border-orange-600 dark:hover:border-yellow-400 active:scale-95 transition-all duration-200 cursor-pointer focus:outline-none focus:ring-2 focus:ring-orange-600 dark:focus:ring-yellow-400"
           >
             <item.icon className="w-8 h-8 sm:w-10 sm:h-10 text-[var(--color-secondary)] dark:text-[var(--color-tertiary)] group-hover:scale-110 transition-transform" />
             <span className="text-sm sm:text-base font-semibold text-[var(--color-text)] text-center">
