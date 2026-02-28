@@ -1,7 +1,7 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { CheckCircle, MessageCircle, Twitter, Link2, Mail, Coffee, QrCode } from 'lucide-react';
+import { CheckCircle, MessageCircle, Twitter, Link2, Mail, QrCode, BanknoteX } from 'lucide-react';
 
 export default function ThankYouPage() {
   const router = useRouter();
@@ -85,13 +85,11 @@ export default function ThankYouPage() {
           Love this tool? Support the project
         </p>
         <a
-          href="https://buymeacoffee.com"
-          target="_blank"
-          rel="noopener noreferrer"
+          href="/support"
           className="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-bold bg-[var(--color-tertiary)] text-black hover:opacity-90 transition-all shadow-sm"
         >
-          <Coffee className="w-4 h-4" />
-          Buy Me a Coffee
+          <BanknoteX className="w-4 h-4" />
+          Support Us
         </a>
       </div>
 
