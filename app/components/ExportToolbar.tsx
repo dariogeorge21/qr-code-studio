@@ -72,7 +72,9 @@ async function compositeExport(): Promise<{ blob: Blob; filename: string }> {
       color: s.useCustomEyeColors ? s.cornerDotColor : s.fgColor,
     },
     backgroundOptions: {
-      color: s.transparentBg ? 'transparent' : s.bgColor,
+      // Always transparent — the composite canvas handles background & watermark drawing.
+      // Using the actual bgColor here would paint over the bgText watermark.
+      color: 'transparent',
     },
     ...(s.logoImage
       ? {
@@ -99,42 +101,13 @@ async function compositeExport(): Promise<{ blob: Blob; filename: string }> {
 
   // Background
   if (!s.transparentBg) {
-    ctx.fillStyle = s.bgColor;
+    ctx.fillStyle = s.frameBgEnabled ? s.frameBgColor : s.bgColor;
     if (s.borderRadius > 0) {
       roundRect(ctx, 0, 0, totalW, totalH, s.borderRadius * scale);
       ctx.fill();
     } else {
       ctx.fillRect(0, 0, totalW, totalH);
     }
-  }
-
-  // Background text
-  if (s.bgText) {
-    ctx.save();
-    ctx.globalAlpha = s.bgTextOpacity;
-    ctx.font = `${s.bgTextFontSize * scale}px ${s.bgTextFontFamily}`;
-    ctx.fillStyle = s.bgTextColor;
-
-    if (s.bgTextRepeat) {
-      const tw = ctx.measureText(s.bgText).width + 30 * scale;
-      const th = s.bgTextFontSize * scale * 1.8;
-      ctx.translate(totalW / 2, totalH / 2);
-      ctx.rotate((s.bgTextRotation * Math.PI) / 180);
-      for (let y = -totalH * 1.5; y < totalH * 1.5; y += th) {
-        for (let x = -totalW * 1.5; x < totalW * 1.5; x += tw) {
-          ctx.fillText(s.bgText, x, y);
-        }
-      }
-    } else {
-      const tx = (s.bgTextX / 100) * totalW;
-      const ty = (s.bgTextY / 100) * totalH;
-      ctx.translate(tx, ty);
-      ctx.rotate((s.bgTextRotation * Math.PI) / 180);
-      ctx.textAlign = 'center';
-      ctx.textBaseline = 'middle';
-      ctx.fillText(s.bgText, 0, 0);
-    }
-    ctx.restore();
   }
 
   // Title
@@ -164,6 +137,65 @@ async function compositeExport(): Promise<{ blob: Blob; filename: string }> {
     const x = s.captionAlign === 'center' ? totalW / 2 : s.captionAlign === 'right' ? totalW - bw - pad : bw + pad;
     const y = bw + titleH + titleGap + innerH + captionGap;
     ctx.fillText(s.caption, x, y);
+    ctx.restore();
+  }
+
+  // Watermark overlay — drawn after QR so it appears ON TOP.
+  // CRITICAL: coordinates must be relative to the QR frame area (innerW × innerH),
+  // offset by (wmX, wmY), to match the preview canvas coordinate system exactly.
+  if (s.bgText) {
+    // QR frame area boundaries (same box the preview watermark canvas covers)
+    const wmX = bw;
+    const wmY = bw + titleH + titleGap;
+    const wmW = innerW;   // qrPx + pad*2  (matches preview: qrSize + padding*2 scaled)
+    const wmH = innerH;   // same
+
+    ctx.save();
+
+    // Clip to the QR frame area — watermark must not bleed into title/caption
+    ctx.beginPath();
+    if (s.borderRadius > 0) {
+      roundRect(ctx, wmX, wmY, wmW, wmH, s.borderRadius * scale);
+    } else {
+      ctx.rect(wmX, wmY, wmW, wmH);
+    }
+    ctx.clip();
+
+    ctx.globalAlpha = s.bgTextOpacity;
+    ctx.globalCompositeOperation = (s.bgTextBlendMode === 'normal' ? 'source-over' : s.bgTextBlendMode) as GlobalCompositeOperation;
+    // Include font weight (was missing — caused font metric mismatch with preview)
+    ctx.font = `${s.bgTextFontWeight} ${s.bgTextFontSize * scale}px ${s.bgTextFontFamily}`;
+    // Include letter spacing scaled up to match preview
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    if ('letterSpacing' in ctx) (ctx as any).letterSpacing = `${s.bgTextLetterSpacing * scale}px`;
+    ctx.fillStyle = s.bgTextColor;
+
+    let displayText = s.bgText;
+    if (s.bgTextTextTransform === 'uppercase') displayText = s.bgText.toUpperCase();
+    else if (s.bgTextTextTransform === 'lowercase') displayText = s.bgText.toLowerCase();
+    else if (s.bgTextTextTransform === 'capitalize') displayText = s.bgText.replace(/\b\w/g, (c) => c.toUpperCase());
+
+    if (s.bgTextRepeat) {
+      const tw = ctx.measureText(displayText).width + 30 * scale;
+      const th = s.bgTextFontSize * scale * 1.8;
+      // Anchor repeat pattern to CENTER of QR frame area (matches preview)
+      ctx.translate(wmX + wmW / 2, wmY + wmH / 2);
+      ctx.rotate((s.bgTextRotation * Math.PI) / 180);
+      for (let y = -wmH * 1.5; y < wmH * 1.5; y += th) {
+        for (let x = -wmW * 1.5; x < wmW * 1.5; x += tw) {
+          ctx.fillText(displayText, x, y);
+        }
+      }
+    } else {
+      // bgTextX/Y are percentages of the QR frame area — offset by wmX/wmY
+      const tx = wmX + (s.bgTextX / 100) * wmW;
+      const ty = wmY + (s.bgTextY / 100) * wmH;
+      ctx.translate(tx, ty);
+      ctx.rotate((s.bgTextRotation * Math.PI) / 180);
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(displayText, 0, 0);
+    }
     ctx.restore();
   }
 

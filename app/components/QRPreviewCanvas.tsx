@@ -98,6 +98,7 @@ export default function QRPreviewCanvas() {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const qrInstance = useRef<any>(null);
   const qrContainerRef = useRef<HTMLDivElement>(null);
+  const watermarkCanvasRef = useRef<HTMLCanvasElement>(null);
   const [loaded, setLoaded] = useState(false);
   const [processedLogo, setProcessedLogo] = useState<string | null>(null);
 
@@ -288,6 +289,60 @@ export default function QRPreviewCanvas() {
     logoImage, logoSize, logoMargin, processedLogo,
   ]);
 
+  // Draw watermark on canvas overlay — canvas 2D rendering is guaranteed to
+  // appear above the qr-code-styling canvas regardless of stacking context.
+  useEffect(() => {
+    const canvas = watermarkCanvasRef.current;
+    if (!canvas) return;
+    // Cover the padding-box of the frame div (content + padding, inside border)
+    const wmW = qrSize + padding * 2;
+    const wmH = wmW;
+    canvas.width = wmW;
+    canvas.height = wmH;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+    ctx.clearRect(0, 0, wmW, wmH);
+    if (!bgText) return;
+
+    ctx.save();
+    ctx.globalAlpha = bgTextOpacity;
+    ctx.globalCompositeOperation = (bgTextBlendMode === 'normal' ? 'source-over' : bgTextBlendMode) as GlobalCompositeOperation;
+    ctx.font = `${bgTextFontWeight} ${bgTextFontSize}px ${bgTextFontFamily}`;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    if ('letterSpacing' in ctx) (ctx as any).letterSpacing = `${bgTextLetterSpacing}px`;
+    ctx.fillStyle = bgTextColor;
+
+    let displayText = bgText;
+    if (bgTextTextTransform === 'uppercase') displayText = bgText.toUpperCase();
+    else if (bgTextTextTransform === 'lowercase') displayText = bgText.toLowerCase();
+    else if (bgTextTextTransform === 'capitalize') displayText = bgText.replace(/\b\w/g, (c) => c.toUpperCase());
+
+    if (bgTextRepeat) {
+      const tw = ctx.measureText(displayText).width + 30;
+      const th = bgTextFontSize * 1.8;
+      ctx.translate(wmW / 2, wmH / 2);
+      ctx.rotate((bgTextRotation * Math.PI) / 180);
+      for (let y = -wmH * 1.5; y < wmH * 1.5; y += th) {
+        for (let x = -wmW * 1.5; x < wmW * 1.5; x += tw) {
+          ctx.fillText(displayText, x, y);
+        }
+      }
+    } else {
+      const tx = (bgTextX / 100) * wmW;
+      const ty = (bgTextY / 100) * wmH;
+      ctx.translate(tx, ty);
+      ctx.rotate((bgTextRotation * Math.PI) / 180);
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(displayText, 0, 0);
+    }
+    ctx.restore();
+  }, [
+    bgText, bgTextOpacity, bgTextBlendMode, bgTextFontWeight, bgTextFontSize,
+    bgTextFontFamily, bgTextColor, bgTextRepeat, bgTextRotation, bgTextX, bgTextY,
+    bgTextLetterSpacing, bgTextTextTransform, qrSize, padding,
+  ]);
+
   const hasContent = inputValue.trim().length > 0;
 
   // Frame container style
@@ -380,60 +435,8 @@ export default function QRPreviewCanvas() {
 
         {/* QR Frame */}
         <div className="relative inline-block overflow-hidden" style={{ ...frameStyle, ...checkerStyle }}>
-          {/* Background text - single */}
-          {bgText && !bgTextRepeat && (
-            <div
-              className="absolute pointer-events-none select-none"
-              style={{
-                left: `${bgTextX}%`,
-                top: `${bgTextY}%`,
-                transform: `translate(-50%, -50%) rotate(${bgTextRotation}deg)`,
-                fontFamily: bgTextFontFamily,
-                fontSize: `${bgTextFontSize}px`,
-                fontWeight: bgTextFontWeight,
-                color: bgTextColor,
-                opacity: bgTextOpacity,
-                letterSpacing: `${bgTextLetterSpacing}px`,
-                textTransform: bgTextTextTransform === 'none' ? undefined : bgTextTextTransform,
-                mixBlendMode: bgTextBlendMode as React.CSSProperties['mixBlendMode'],
-                whiteSpace: 'nowrap',
-                zIndex: 1,
-              }}
-            >
-              {bgText}
-            </div>
-          )}
-
-          {/* Background text - repeat watermark */}
-          {bgText && bgTextRepeat && (
-            <div className="absolute inset-0 overflow-hidden pointer-events-none select-none" style={{ zIndex: 1, mixBlendMode: bgTextBlendMode as React.CSSProperties['mixBlendMode'] }}>
-              {Array.from({ length: 7 }).map((_, row) =>
-                Array.from({ length: 5 }).map((_, col) => (
-                  <div
-                    key={`wm-${row}-${col}`}
-                    className="absolute whitespace-nowrap"
-                    style={{
-                      left: `${col * 28 - 10}%`,
-                      top: `${row * 20 - 10}%`,
-                      transform: `rotate(${bgTextRotation}deg)`,
-                      fontFamily: bgTextFontFamily,
-                      fontSize: `${bgTextFontSize * 0.5}px`,
-                      fontWeight: bgTextFontWeight,
-                      color: bgTextColor,
-                      opacity: bgTextOpacity,
-                      letterSpacing: `${bgTextLetterSpacing}px`,
-                      textTransform: bgTextTextTransform === 'none' ? undefined : bgTextTextTransform,
-                    }}
-                  >
-                    {bgText}
-                  </div>
-                ))
-              )}
-            </div>
-          )}
-
           {/* QR Code */}
-          <div ref={qrContainerRef} className="relative" style={{ zIndex: 2 }}>
+          <div ref={qrContainerRef} className="relative">
             {!loaded && (
               <div
                 className="flex items-center justify-center bg-gray-100 dark:bg-gray-700 animate-pulse rounded-lg"
@@ -443,6 +446,20 @@ export default function QRPreviewCanvas() {
               </div>
             )}
           </div>
+
+          {/* Watermark canvas overlay — z-index:999 + canvas 2D drawing guarantees
+              this renders on top of the qr-code-styling <canvas> element.
+              CSS div z-index is unreliable against library-managed canvases. */}
+          <canvas
+            ref={watermarkCanvasRef}
+            style={{
+              position: 'absolute',
+              inset: 0,
+              zIndex: 999,
+              pointerEvents: 'none',
+              userSelect: 'none',
+            }}
+          />
         </div>
 
         {/* Caption */}
