@@ -99,7 +99,7 @@ export default function ThankYouPage() {
       <div className="text-center">
         <button
           onClick={() => router.push('/create')}
-          className="inline-flex items-center gap-2 px-8 py-4 rounded-2xl text-lg font-bold bg-[var(--color-secondary)] text-white dark:bg-[var(--color-primary)] dark:text-black hover:opacity-90 transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] cursor-pointer"
+          className="inline-flex items-center gap-2 px-8 py-4 rounded-2xl text-lg font-bold bg-orange-600 text-white dark:bg-yellow-400 dark:text-black hover:opacity-90 transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] cursor-pointer"
         >
           <QrCode className="w-5 h-5" />
           Create Another QR Code
