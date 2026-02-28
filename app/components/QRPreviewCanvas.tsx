@@ -138,7 +138,7 @@ export default function QRPreviewCanvas() {
   }, [
     loaded, inputValue, qrSize, fgColor, bgColor, dotType, useFgGradient,
     fgGradient, cornerSquareType, cornerDotType, useCustomEyeColors,
-    cornerSquareColor, cornerDotColor, errorCorrectionLevel, transparentBg,
+    cornerSquareColor, cornerDotColor, errorCorrectionLevel,
     logoImage, logoSize, logoMargin,
   ]);
 

@@ -57,18 +57,42 @@ export default function TextTab() {
     <div className="space-y-6">
       {/* ── Background Text ── */}
       <div>
-        <h4 className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-3">
-          Background Text
-        </h4>
+        <div className="flex items-center justify-between mb-3">
+          <h4 className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+            Background Text
+          </h4>
+          {bgText && (
+            <span className="flex items-center gap-1.5 text-xs font-semibold text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-900/30 px-2.5 py-1 rounded-full">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+              Active
+            </span>
+          )}
+        </div>
         <div className="space-y-4">
-          <input
-            type="text"
-            value={bgText}
-            onChange={(e) => set({ bgText: e.target.value })}
-            placeholder="Watermark / background text..."
-            maxLength={60}
-            className={inputClass}
-          />
+          <div className="relative">
+            <input
+              type="text"
+              value={bgText}
+              onChange={(e) => set({ bgText: e.target.value })}
+              placeholder="Watermark / background text…"
+              maxLength={60}
+              className={inputClass + ' pr-10'}
+            />
+            {bgText && (
+              <button
+                onClick={() => set({ bgText: '' })}
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 transition-colors text-lg leading-none"
+                title="Clear"
+              >
+                ×
+              </button>
+            )}
+          </div>
+          {bgText && (
+            <p className="text-xs text-blue-600 dark:text-blue-400 flex items-center gap-1.5 bg-blue-50 dark:bg-blue-900/20 px-3 py-2 rounded-xl">
+              <span>💡</span> Text renders behind the QR dots. Use low opacity for best scan results.
+            </p>
+          )}
 
           {bgText && (
             <div className="space-y-4 p-4 bg-gray-50/50 dark:bg-gray-700/30 rounded-2xl border border-gray-100 dark:border-gray-700/50">
