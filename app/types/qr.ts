@@ -83,3 +83,117 @@ export const CORNER_DOT_STYLES: { key: CornerDotType; label: string; icon: strin
   { key: 'square', label: 'Square', icon: '◼' },
   { key: 'dot', label: 'Dot', icon: '●' },
 ];
+
+/* ────────── Style Presets ────────── */
+
+export interface StylePreset {
+  name: string;
+  emoji: string;
+  description: string;
+  dotType: DotType;
+  cornerSquareType: CornerSquareType;
+  cornerDotType: CornerDotType;
+  errorCorrectionLevel: ErrorCorrectionLevel;
+  useCustomEyeColors: boolean;
+  cornerSquareColor: string;
+  cornerDotColor: string;
+}
+
+export const STYLE_PRESETS: StylePreset[] = [
+  {
+    name: 'Classic',
+    emoji: '🏛',
+    description: 'Clean & traditional',
+    dotType: 'square',
+    cornerSquareType: 'square',
+    cornerDotType: 'square',
+    errorCorrectionLevel: 'M',
+    useCustomEyeColors: false,
+    cornerSquareColor: '#000000',
+    cornerDotColor: '#000000',
+  },
+  {
+    name: 'Bubbly',
+    emoji: '🫧',
+    description: 'Soft & playful dots',
+    dotType: 'dots',
+    cornerSquareType: 'dot',
+    cornerDotType: 'dot',
+    errorCorrectionLevel: 'Q',
+    useCustomEyeColors: true,
+    cornerSquareColor: '#6366F1',
+    cornerDotColor: '#A78BFA',
+  },
+  {
+    name: 'Elegant',
+    emoji: '✨',
+    description: 'Rounded sophistication',
+    dotType: 'extra-rounded',
+    cornerSquareType: 'extra-rounded',
+    cornerDotType: 'dot',
+    errorCorrectionLevel: 'M',
+    useCustomEyeColors: true,
+    cornerSquareColor: '#78350F',
+    cornerDotColor: '#D97706',
+  },
+  {
+    name: 'Sharp',
+    emoji: '⚡',
+    description: 'Bold classy edges',
+    dotType: 'classy',
+    cornerSquareType: 'square',
+    cornerDotType: 'square',
+    errorCorrectionLevel: 'H',
+    useCustomEyeColors: false,
+    cornerSquareColor: '#000000',
+    cornerDotColor: '#000000',
+  },
+  {
+    name: 'Modern',
+    emoji: '🔮',
+    description: 'Classy-rounded blend',
+    dotType: 'classy-rounded',
+    cornerSquareType: 'extra-rounded',
+    cornerDotType: 'dot',
+    errorCorrectionLevel: 'Q',
+    useCustomEyeColors: true,
+    cornerSquareColor: '#0891B2',
+    cornerDotColor: '#06B6D4',
+  },
+  {
+    name: 'Minimal',
+    emoji: '◻',
+    description: 'Less is more',
+    dotType: 'rounded',
+    cornerSquareType: 'dot',
+    cornerDotType: 'dot',
+    errorCorrectionLevel: 'L',
+    useCustomEyeColors: false,
+    cornerSquareColor: '#000000',
+    cornerDotColor: '#000000',
+  },
+  {
+    name: 'Neon',
+    emoji: '💎',
+    description: 'Vibrant eye accents',
+    dotType: 'dots',
+    cornerSquareType: 'extra-rounded',
+    cornerDotType: 'dot',
+    errorCorrectionLevel: 'H',
+    useCustomEyeColors: true,
+    cornerSquareColor: '#EC4899',
+    cornerDotColor: '#F472B6',
+  },
+  {
+    name: 'Retro',
+    emoji: '📟',
+    description: 'Pixel-perfect square',
+    dotType: 'square',
+    cornerSquareType: 'square',
+    cornerDotType: 'square',
+    errorCorrectionLevel: 'H',
+    useCustomEyeColors: true,
+    cornerSquareColor: '#15803D',
+    cornerDotColor: '#22C55E',
+  },
+];

@@ -16,18 +16,18 @@ export default function StylePage({ params }: { params: Promise<{ type: string }
       <StepIndicator current={2} total={5} label="Style" />
 
       <div className="flex flex-col lg:flex-row gap-8">
-        {/* Left: Style Options */}
-        <div className="lg:w-[45%] shrink-0">
-          <div className="p-6 rounded-2xl border border-[var(--color-border)] bg-[var(--color-background)] shadow-sm">
-            <h2 className="text-lg font-bold text-[var(--color-text)] mb-5">Customise Style</h2>
-            <StyleTab />
+        {/* Preview: shown first on mobile, second on desktop */}
+        <div className="flex-1 min-w-0 order-first lg:order-last">
+          <div className="lg:sticky lg:top-24">
+            <QRPreviewCanvas />
           </div>
         </div>
 
-        {/* Right: Live Preview */}
-        <div className="flex-1 min-w-0">
-          <div className="lg:sticky lg:top-24">
-            <QRPreviewCanvas />
+        {/* Style Options: shown second on mobile, first on desktop */}
+        <div className="lg:w-[45%] shrink-0 order-last lg:order-first">
+          <div className="p-6 rounded-2xl border border-[var(--color-border)] bg-[var(--color-background)] shadow-sm">
+            <h2 className="text-lg font-bold text-[var(--color-text)] mb-5">Customise Style</h2>
+            <StyleTab />
           </div>
         </div>
       </div>
