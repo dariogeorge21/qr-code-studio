@@ -44,6 +44,37 @@ export const PALETTES: Palette[] = [
   { name: 'Ice', fg: '#155E75', bg: '#ECFEFF' },
 ];
 
+export type TextTransform = 'none' | 'uppercase' | 'lowercase' | 'capitalize';
+export type TextDecoration = 'none' | 'underline' | 'line-through' | 'overline';
+export type BlendMode = 'normal' | 'multiply' | 'screen' | 'overlay' | 'darken' | 'lighten' | 'color-dodge' | 'color-burn' | 'soft-light' | 'difference';
+
+export const TEXT_TRANSFORMS: { value: TextTransform; label: string; icon: string }[] = [
+  { value: 'none', label: 'None', icon: 'Aa' },
+  { value: 'uppercase', label: 'Upper', icon: 'AA' },
+  { value: 'lowercase', label: 'Lower', icon: 'aa' },
+  { value: 'capitalize', label: 'Title', icon: 'Ab' },
+];
+
+export const TEXT_DECORATIONS: { value: TextDecoration; label: string; icon: string }[] = [
+  { value: 'none', label: 'None', icon: 'T' },
+  { value: 'underline', label: 'Under', icon: 'T̲' },
+  { value: 'line-through', label: 'Strike', icon: 'T̶' },
+  { value: 'overline', label: 'Over', icon: 'T̅' },
+];
+
+export const BLEND_MODES: { value: BlendMode; label: string }[] = [
+  { value: 'normal', label: 'Normal' },
+  { value: 'multiply', label: 'Multiply' },
+  { value: 'screen', label: 'Screen' },
+  { value: 'overlay', label: 'Overlay' },
+  { value: 'darken', label: 'Darken' },
+  { value: 'lighten', label: 'Lighten' },
+  { value: 'color-dodge', label: 'Dodge' },
+  { value: 'color-burn', label: 'Burn' },
+  { value: 'soft-light', label: 'Soft Light' },
+  { value: 'difference', label: 'Difference' },
+];
+
 export const FONT_FAMILIES = [
   'Inter',
   'Arial',
@@ -53,6 +84,176 @@ export const FONT_FAMILIES = [
   'Verdana',
   'Trebuchet MS',
   'Impact',
+  'Comic Sans MS',
+  'Palatino Linotype',
+  'Lucida Console',
+  'Tahoma',
+];
+
+export interface TextPreset {
+  name: string;
+  emoji: string;
+  description: string;
+  titleFontFamily: string;
+  titleFontSize: number;
+  titleFontWeight: string;
+  titleColor: string;
+  titleTextTransform: TextTransform;
+  titleLetterSpacing: number;
+  titleTextDecoration: TextDecoration;
+  captionFontFamily: string;
+  captionFontSize: number;
+  captionFontWeight: string;
+  captionColor: string;
+  captionTextTransform: TextTransform;
+  captionLetterSpacing: number;
+}
+
+export const TEXT_PRESETS: TextPreset[] = [
+  {
+    name: 'Corporate',
+    emoji: '🏢',
+    description: 'Clean professional look',
+    titleFontFamily: 'Inter',
+    titleFontSize: 22,
+    titleFontWeight: '700',
+    titleColor: '#1a1a1a',
+    titleTextTransform: 'uppercase',
+    titleLetterSpacing: 3,
+    titleTextDecoration: 'none',
+    captionFontFamily: 'Inter',
+    captionFontSize: 12,
+    captionFontWeight: '400',
+    captionColor: '#888888',
+    captionTextTransform: 'none',
+    captionLetterSpacing: 0.5,
+  },
+  {
+    name: 'Playful',
+    emoji: '🎨',
+    description: 'Fun & vibrant style',
+    titleFontFamily: 'Comic Sans MS',
+    titleFontSize: 26,
+    titleFontWeight: '700',
+    titleColor: '#E040FB',
+    titleTextTransform: 'none',
+    titleLetterSpacing: 1,
+    titleTextDecoration: 'none',
+    captionFontFamily: 'Trebuchet MS',
+    captionFontSize: 14,
+    captionFontWeight: '500',
+    captionColor: '#FF6D00',
+    captionTextTransform: 'capitalize',
+    captionLetterSpacing: 0,
+  },
+  {
+    name: 'Elegant',
+    emoji: '✨',
+    description: 'Sophisticated serif',
+    titleFontFamily: 'Georgia',
+    titleFontSize: 24,
+    titleFontWeight: '400',
+    titleColor: '#2C1810',
+    titleTextTransform: 'capitalize',
+    titleLetterSpacing: 2,
+    titleTextDecoration: 'none',
+    captionFontFamily: 'Palatino Linotype',
+    captionFontSize: 13,
+    captionFontWeight: '400',
+    captionColor: '#6B4226',
+    captionTextTransform: 'none',
+    captionLetterSpacing: 0.5,
+  },
+  {
+    name: 'Neon',
+    emoji: '💫',
+    description: 'Bold glowing vibe',
+    titleFontFamily: 'Impact',
+    titleFontSize: 28,
+    titleFontWeight: '700',
+    titleColor: '#00FF88',
+    titleTextTransform: 'uppercase',
+    titleLetterSpacing: 5,
+    titleTextDecoration: 'none',
+    captionFontFamily: 'Lucida Console',
+    captionFontSize: 11,
+    captionFontWeight: '400',
+    captionColor: '#00CCFF',
+    captionTextTransform: 'uppercase',
+    captionLetterSpacing: 3,
+  },
+  {
+    name: 'Retro',
+    emoji: '📟',
+    description: 'Vintage typewriter feel',
+    titleFontFamily: 'Courier New',
+    titleFontSize: 20,
+    titleFontWeight: '700',
+    titleColor: '#5D4037',
+    titleTextTransform: 'uppercase',
+    titleLetterSpacing: 4,
+    titleTextDecoration: 'underline',
+    captionFontFamily: 'Courier New',
+    captionFontSize: 12,
+    captionFontWeight: '400',
+    captionColor: '#795548',
+    captionTextTransform: 'none',
+    captionLetterSpacing: 2,
+  },
+  {
+    name: 'Minimal',
+    emoji: '◻',
+    description: 'Whisper quiet design',
+    titleFontFamily: 'Inter',
+    titleFontSize: 16,
+    titleFontWeight: '300',
+    titleColor: '#9E9E9E',
+    titleTextTransform: 'lowercase',
+    titleLetterSpacing: 6,
+    titleTextDecoration: 'none',
+    captionFontFamily: 'Inter',
+    captionFontSize: 10,
+    captionFontWeight: '300',
+    captionColor: '#BDBDBD',
+    captionTextTransform: 'lowercase',
+    captionLetterSpacing: 4,
+  },
+  {
+    name: 'Bold',
+    emoji: '🔥',
+    description: 'Heavy impact statement',
+    titleFontFamily: 'Impact',
+    titleFontSize: 32,
+    titleFontWeight: '800',
+    titleColor: '#D32F2F',
+    titleTextTransform: 'uppercase',
+    titleLetterSpacing: 0,
+    titleTextDecoration: 'none',
+    captionFontFamily: 'Arial',
+    captionFontSize: 14,
+    captionFontWeight: '700',
+    captionColor: '#333333',
+    captionTextTransform: 'uppercase',
+    captionLetterSpacing: 1,
+  },
+  {
+    name: 'Monospace',
+    emoji: '💻',
+    description: 'Dev / hacker aesthetic',
+    titleFontFamily: 'Lucida Console',
+    titleFontSize: 18,
+    titleFontWeight: '400',
+    titleColor: '#4CAF50',
+    titleTextTransform: 'none',
+    titleLetterSpacing: 2,
+    titleTextDecoration: 'none',
+    captionFontFamily: 'Courier New',
+    captionFontSize: 11,
+    captionFontWeight: '400',
+    captionColor: '#81C784',
+    captionTextTransform: 'lowercase',
+    captionLetterSpacing: 1,
+  },
 ];
 
 export const FONT_WEIGHTS = [

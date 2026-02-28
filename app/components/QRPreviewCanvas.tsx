@@ -45,12 +45,16 @@ export default function QRPreviewCanvas() {
   const bgText = useQRStore((s) => s.bgText);
   const bgTextFontFamily = useQRStore((s) => s.bgTextFontFamily);
   const bgTextFontSize = useQRStore((s) => s.bgTextFontSize);
+  const bgTextFontWeight = useQRStore((s) => s.bgTextFontWeight);
   const bgTextColor = useQRStore((s) => s.bgTextColor);
   const bgTextOpacity = useQRStore((s) => s.bgTextOpacity);
   const bgTextX = useQRStore((s) => s.bgTextX);
   const bgTextY = useQRStore((s) => s.bgTextY);
   const bgTextRotation = useQRStore((s) => s.bgTextRotation);
   const bgTextRepeat = useQRStore((s) => s.bgTextRepeat);
+  const bgTextLetterSpacing = useQRStore((s) => s.bgTextLetterSpacing);
+  const bgTextTextTransform = useQRStore((s) => s.bgTextTextTransform);
+  const bgTextBlendMode = useQRStore((s) => s.bgTextBlendMode);
   const title = useQRStore((s) => s.title);
   const titleFontFamily = useQRStore((s) => s.titleFontFamily);
   const titleFontSize = useQRStore((s) => s.titleFontSize);
@@ -58,6 +62,12 @@ export default function QRPreviewCanvas() {
   const titleColor = useQRStore((s) => s.titleColor);
   const titleAlign = useQRStore((s) => s.titleAlign);
   const titleSpacing = useQRStore((s) => s.titleSpacing);
+  const titleLetterSpacing = useQRStore((s) => s.titleLetterSpacing);
+  const titleTextTransform = useQRStore((s) => s.titleTextTransform);
+  const titleTextDecoration = useQRStore((s) => s.titleTextDecoration);
+  const titleTextShadow = useQRStore((s) => s.titleTextShadow);
+  const titleTextShadowColor = useQRStore((s) => s.titleTextShadowColor);
+  const titleTextShadowBlur = useQRStore((s) => s.titleTextShadowBlur);
   const caption = useQRStore((s) => s.caption);
   const captionFontFamily = useQRStore((s) => s.captionFontFamily);
   const captionFontSize = useQRStore((s) => s.captionFontSize);
@@ -65,6 +75,12 @@ export default function QRPreviewCanvas() {
   const captionColor = useQRStore((s) => s.captionColor);
   const captionAlign = useQRStore((s) => s.captionAlign);
   const captionSpacing = useQRStore((s) => s.captionSpacing);
+  const captionLetterSpacing = useQRStore((s) => s.captionLetterSpacing);
+  const captionTextTransform = useQRStore((s) => s.captionTextTransform);
+  const captionTextDecoration = useQRStore((s) => s.captionTextDecoration);
+  const captionTextShadow = useQRStore((s) => s.captionTextShadow);
+  const captionTextShadowColor = useQRStore((s) => s.captionTextShadowColor);
+  const captionTextShadowBlur = useQRStore((s) => s.captionTextShadowBlur);
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const QRCodeStylingClass = useRef<any>(null);
@@ -232,6 +248,10 @@ export default function QRPreviewCanvas() {
               color: titleColor,
               textAlign: titleAlign,
               marginBottom: `${titleSpacing}px`,
+              letterSpacing: `${titleLetterSpacing}px`,
+              textTransform: titleTextTransform === 'none' ? undefined : titleTextTransform,
+              textDecoration: titleTextDecoration === 'none' ? undefined : titleTextDecoration,
+              textShadow: titleTextShadow ? `0 2px ${titleTextShadowBlur}px ${titleTextShadowColor}` : undefined,
             }}
           >
             {title}
@@ -250,8 +270,12 @@ export default function QRPreviewCanvas() {
                 transform: `translate(-50%, -50%) rotate(${bgTextRotation}deg)`,
                 fontFamily: bgTextFontFamily,
                 fontSize: `${bgTextFontSize}px`,
+                fontWeight: bgTextFontWeight,
                 color: bgTextColor,
                 opacity: bgTextOpacity,
+                letterSpacing: `${bgTextLetterSpacing}px`,
+                textTransform: bgTextTextTransform === 'none' ? undefined : bgTextTextTransform,
+                mixBlendMode: bgTextBlendMode as React.CSSProperties['mixBlendMode'],
                 whiteSpace: 'nowrap',
                 zIndex: 1,
               }}
@@ -262,7 +286,7 @@ export default function QRPreviewCanvas() {
 
           {/* Background text - repeat watermark */}
           {bgText && bgTextRepeat && (
-            <div className="absolute inset-0 overflow-hidden pointer-events-none select-none" style={{ zIndex: 1 }}>
+            <div className="absolute inset-0 overflow-hidden pointer-events-none select-none" style={{ zIndex: 1, mixBlendMode: bgTextBlendMode as React.CSSProperties['mixBlendMode'] }}>
               {Array.from({ length: 7 }).map((_, row) =>
                 Array.from({ length: 5 }).map((_, col) => (
                   <div
@@ -274,8 +298,11 @@ export default function QRPreviewCanvas() {
                       transform: `rotate(${bgTextRotation}deg)`,
                       fontFamily: bgTextFontFamily,
                       fontSize: `${bgTextFontSize * 0.5}px`,
+                      fontWeight: bgTextFontWeight,
                       color: bgTextColor,
                       opacity: bgTextOpacity,
+                      letterSpacing: `${bgTextLetterSpacing}px`,
+                      textTransform: bgTextTextTransform === 'none' ? undefined : bgTextTextTransform,
                     }}
                   >
                     {bgText}
@@ -309,6 +336,10 @@ export default function QRPreviewCanvas() {
               color: captionColor,
               textAlign: captionAlign,
               marginTop: `${captionSpacing}px`,
+              letterSpacing: `${captionLetterSpacing}px`,
+              textTransform: captionTextTransform === 'none' ? undefined : captionTextTransform,
+              textDecoration: captionTextDecoration === 'none' ? undefined : captionTextDecoration,
+              textShadow: captionTextShadow ? `0 2px ${captionTextShadowBlur}px ${captionTextShadowColor}` : undefined,
             }}
           >
             {caption}

@@ -7,6 +7,9 @@ import type {
   ExportFormat,
   ErrorCorrectionLevel,
   TextAlign,
+  TextTransform,
+  TextDecoration,
+  BlendMode,
   GradientConfig,
 } from '../types/qr';
 
@@ -63,12 +66,16 @@ export interface QRState {
   bgText: string;
   bgTextFontFamily: string;
   bgTextFontSize: number;
+  bgTextFontWeight: string;
   bgTextColor: string;
   bgTextOpacity: number;
   bgTextX: number;
   bgTextY: number;
   bgTextRotation: number;
   bgTextRepeat: boolean;
+  bgTextLetterSpacing: number;
+  bgTextTextTransform: TextTransform;
+  bgTextBlendMode: BlendMode;
 
   // ── Title & Caption ──
   title: string;
@@ -78,6 +85,12 @@ export interface QRState {
   titleColor: string;
   titleAlign: TextAlign;
   titleSpacing: number;
+  titleLetterSpacing: number;
+  titleTextTransform: TextTransform;
+  titleTextDecoration: TextDecoration;
+  titleTextShadow: boolean;
+  titleTextShadowColor: string;
+  titleTextShadowBlur: number;
   caption: string;
   captionFontFamily: string;
   captionFontSize: number;
@@ -85,6 +98,12 @@ export interface QRState {
   captionColor: string;
   captionAlign: TextAlign;
   captionSpacing: number;
+  captionLetterSpacing: number;
+  captionTextTransform: TextTransform;
+  captionTextDecoration: TextDecoration;
+  captionTextShadow: boolean;
+  captionTextShadowColor: string;
+  captionTextShadowBlur: number;
 
   // ── Logo ──
   logoImage: string | null;
@@ -168,12 +187,16 @@ const initialState: QRState = {
   bgText: '',
   bgTextFontFamily: 'Inter',
   bgTextFontSize: 48,
+  bgTextFontWeight: '400',
   bgTextColor: '#000000',
   bgTextOpacity: 0.06,
   bgTextX: 50,
   bgTextY: 50,
   bgTextRotation: -30,
   bgTextRepeat: false,
+  bgTextLetterSpacing: 0,
+  bgTextTextTransform: 'none',
+  bgTextBlendMode: 'normal',
 
   title: '',
   titleFontFamily: 'Inter',
@@ -182,6 +205,12 @@ const initialState: QRState = {
   titleColor: '#1a1a1a',
   titleAlign: 'center',
   titleSpacing: 12,
+  titleLetterSpacing: 0,
+  titleTextTransform: 'none',
+  titleTextDecoration: 'none',
+  titleTextShadow: false,
+  titleTextShadowColor: '#00000040',
+  titleTextShadowBlur: 4,
   caption: '',
   captionFontFamily: 'Inter',
   captionFontSize: 14,
@@ -189,6 +218,12 @@ const initialState: QRState = {
   captionColor: '#666666',
   captionAlign: 'center',
   captionSpacing: 12,
+  captionLetterSpacing: 0,
+  captionTextTransform: 'none',
+  captionTextDecoration: 'none',
+  captionTextShadow: false,
+  captionTextShadowColor: '#00000040',
+  captionTextShadowBlur: 4,
 
   logoImage: null,
   logoSize: 0.25,

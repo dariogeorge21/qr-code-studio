@@ -16,18 +16,18 @@ export default function TextPage({ params }: { params: Promise<{ type: string }>
       <StepIndicator current={4} total={5} label="Text" />
 
       <div className="flex flex-col lg:flex-row gap-8">
-        {/* Left: Text Options */}
-        <div className="lg:w-[45%] shrink-0">
-          <div className="p-6 rounded-2xl border border-[var(--color-border)] bg-[var(--color-background)] shadow-sm">
-            <h2 className="text-lg font-bold text-[var(--color-text)] mb-5">Customise Text</h2>
-            <TextTab />
+        {/* Right: Live Preview — shown first on mobile */}
+        <div className="flex-1 min-w-0 order-first lg:order-last">
+          <div className="lg:sticky lg:top-24">
+            <QRPreviewCanvas />
           </div>
         </div>
 
-        {/* Right: Live Preview */}
-        <div className="flex-1 min-w-0">
-          <div className="lg:sticky lg:top-24">
-            <QRPreviewCanvas />
+        {/* Left: Text Options */}
+        <div className="lg:w-[45%] shrink-0 order-last lg:order-first">
+          <div className="p-6 rounded-2xl border border-[var(--color-border)] bg-[var(--color-background)] shadow-sm">
+            <h2 className="text-lg font-bold text-[var(--color-text)] mb-5">Customise Text</h2>
+            <TextTab />
           </div>
         </div>
       </div>
