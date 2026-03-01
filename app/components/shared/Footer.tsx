@@ -51,6 +51,8 @@ export default function Footer() {
                 { label: 'Contact', href: '/contact' },
                 { label: 'About', href: '/about' },
                 { label: 'Support This Project', href: '/support' },
+                { label: 'Terms of Service', href: '/terms' },
+                { label: 'Privacy Policy', href: '/privacy' },
               ].map((link) => (
                 <li key={link.label}>
                   <Link
@@ -70,7 +72,13 @@ export default function Footer() {
           <p className="text-xs text-gray-400 dark:text-gray-500">
             © 2026 QR Code Studio. Built with love by Dario George
           </p>
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-4 flex-wrap justify-center">
+            <Link href="/terms" className="text-xs text-gray-400 hover:text-[var(--color-secondary)] transition-colors">
+              Terms of Service
+            </Link>
+            <Link href="/privacy" className="text-xs text-gray-400 hover:text-[var(--color-secondary)] transition-colors">
+              Privacy Policy
+            </Link>
             <a
               href="https://github.com/dariogeorge21"
               target="_blank"
