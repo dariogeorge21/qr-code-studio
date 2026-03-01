@@ -1,10 +1,12 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { CheckCircle, MessageCircle, Twitter, Link2, Mail, QrCode, BanknoteX } from 'lucide-react';
+import { useState } from 'react';
+import { CheckCircle, MessageCircle, Twitter, Link2, Mail, QrCode, BanknoteX, Loader2 } from 'lucide-react';
 
 export default function ThankYouPage() {
   const router = useRouter();
+  const [navigating, setNavigating] = useState(false);
   const appUrl = typeof window !== 'undefined' ? window.location.origin : 'https://yourdomain.com';
   const shareMessage = `I just created a free QR code using QR Code Studio. Try it here: ${appUrl}`;
 
@@ -96,11 +98,12 @@ export default function ThankYouPage() {
       {/* Create Another */}
       <div className="text-center">
         <button
-          onClick={() => router.push('/create')}
-          className="inline-flex items-center gap-2 px-8 py-4 rounded-2xl text-lg font-bold bg-orange-600 text-white dark:bg-yellow-400 dark:text-black hover:opacity-90 transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] cursor-pointer"
+          onClick={() => { setNavigating(true); router.push('/create'); }}
+          disabled={navigating}
+          className="inline-flex items-center gap-2 px-8 py-4 rounded-2xl text-lg font-bold bg-orange-600 text-white dark:bg-yellow-400 dark:text-black hover:opacity-90 transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] cursor-pointer disabled:opacity-70"
         >
-          <QrCode className="w-5 h-5" />
-          Create Another QR Code
+          {navigating ? <Loader2 className="w-5 h-5 animate-spin" /> : <QrCode className="w-5 h-5" />}
+          {navigating ? 'Loading…' : 'Create Another QR Code'}
         </button>
         <p className="mt-6 text-sm text-gray-400 dark:text-gray-500">
           If this helped you, share it with a friend.

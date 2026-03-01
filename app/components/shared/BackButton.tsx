@@ -1,6 +1,7 @@
 'use client';
 
-import { ArrowLeft } from 'lucide-react';
+import { useState } from 'react';
+import { ArrowLeft, Loader2 } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 
 interface BackButtonProps {
@@ -10,8 +11,10 @@ interface BackButtonProps {
 
 export default function BackButton({ href, label }: BackButtonProps) {
   const router = useRouter();
+  const [loading, setLoading] = useState(false);
 
   const handleClick = () => {
+    setLoading(true);
     if (href) {
       router.push(href);
     } else {
@@ -22,10 +25,15 @@ export default function BackButton({ href, label }: BackButtonProps) {
   return (
     <button
       onClick={handleClick}
-      className="inline-flex items-center gap-2 text-[var(--color-secondary)] dark:text-[var(--color-tertiary)] hover:opacity-70 transition-opacity mb-4 focus:outline-none focus:ring-2 focus:ring-[var(--color-secondary)] rounded-lg px-2 py-1 -ml-2 cursor-pointer"
+      disabled={loading}
+      className="inline-flex items-center gap-2 text-[var(--color-secondary)] dark:text-[var(--color-tertiary)] hover:opacity-70 transition-opacity mb-4 focus:outline-none focus:ring-2 focus:ring-[var(--color-secondary)] rounded-lg px-2 py-1 -ml-2 cursor-pointer disabled:opacity-50"
       aria-label={label || 'Go back'}
     >
-      <ArrowLeft className="w-5 h-5" />
+      {loading ? (
+        <Loader2 className="w-5 h-5 animate-spin" />
+      ) : (
+        <ArrowLeft className="w-5 h-5" />
+      )}
       {label && <span className="text-sm font-medium">{label}</span>}
     </button>
   );
