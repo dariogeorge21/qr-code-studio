@@ -72,8 +72,21 @@ export default function InputFormByType({ type }: InputFormByTypeProps) {
     set({ inputValue: vcard });
   };
 
+  const escapeWifiString = (str: string): string => {
+    return str
+      .replace(/\\/g, '\\\\')
+      .replace(/;/g, '\\;')
+      .replace(/"/g, '\\"')
+      .replace(/,/g, '\\,')
+      .replace(/:/g, '\\:');
+  };
+
   const updateWifi = (ssid: string, password: string, security: string, hidden: boolean) => {
-    set({ inputValue: `WIFI:T:${security};S:${ssid};P:${password};H:${hidden ? 'true' : 'false'};;` });
+    const escapedSSID = escapeWifiString(ssid);
+    const escapedPassword = escapeWifiString(password);
+    const securityType = security === 'nopass' ? 'nopass' : security;
+    const hiddenValue = hidden ? 'true' : 'false';
+    set({ inputValue: `WIFI:T:${securityType};S:${escapedSSID};P:${escapedPassword};H:${hiddenValue};` });
   };
 
   const updateEmail = (to: string, subject: string, body: string) => {
