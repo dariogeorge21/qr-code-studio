@@ -7,20 +7,20 @@ const SOCIAL = [
   {
     icon: Github,
     label: 'GitHub',
-    handle: '@dariogeorge21',
+    handle: 'dariogeorge21',
     href: 'https://github.com/dariogeorge21',
   },
   {
     icon: Linkedin,
     label: 'LinkedIn',
-    handle: 'Dario George',
+    handle: 'dariogeorge21',
     href: 'https://linkedin.com/in/dariogeorge21',
   },
   {
     icon: Mail,
     label: 'Email',
-    handle: 'hello@qrcodestudio.app',
-    href: 'mailto:hello@qrcodestudio.app',
+    handle: 'edu.dariogeorge21@gmail.com',
+    href: 'mailto:edu.dariogeorge21@gmail.com',
   },
 ];
 
@@ -37,7 +37,7 @@ export default function ContactPage() {
 const handleSubmit = async (e: React.FormEvent) => {
   e.preventDefault();
   if (!form.name || !form.email || !form.message) return;
-  
+
   setLoading(true);
   setError('');
 
