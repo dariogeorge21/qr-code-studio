@@ -62,7 +62,8 @@ export default function InputFormByType({ type }: InputFormByTypeProps) {
       }
     }
     if (s.transactionNote.trim()) params.set('tn', s.transactionNote.trim());
-    useQRStore.setState({ inputValue: `upi://pay?${params.toString()}` });
+    const queryString = params.toString().replace(/\+/g, '%20');
+    useQRStore.setState({ inputValue: `upi://pay?${queryString}` });
   };
 
   const updateContact = (name: string, phone: string, email: string, org: string, address: string) => {
