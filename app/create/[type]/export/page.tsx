@@ -298,6 +298,32 @@ export default function ExportPage({ params }: { params: Promise<{ type: string 
     try {
       const result = exportFormat === 'svg' ? await svgExport() : await compositeExport();
       downloadBlob(result.blob, result.filename);
+
+      // Log detailed download event — fire and forget (no QR content stored)
+      const s = useQRStore.getState();
+      fetch('/api/qr-events', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          event_type: 'downloaded',
+          qr_type: type,
+          export_format: exportFormat,
+          color_modified:
+            s.fgColor !== '#000000' ||
+            s.bgColor !== '#FFFFFF' ||
+            s.useFgGradient ||
+            s.useCustomEyeColors ||
+            s.activePalette !== 'Classic',
+          style_modified:
+            s.dotType !== 'square' ||
+            s.cornerSquareType !== 'square' ||
+            s.cornerDotType !== 'square',
+          frame_modified: s.frameEnabled,
+          logo_added: s.logoImage !== null,
+          text_added: !!(s.title?.trim() || s.caption?.trim() || s.bgText?.trim()),
+        }),
+      }).catch((err) => console.error('Failed to log download event:', err));
+
       setTimeout(() => router.push('/thank-you'), 500);
     } catch (err) {
       console.error('Export failed:', err);

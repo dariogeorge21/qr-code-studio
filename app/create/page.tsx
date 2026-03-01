@@ -35,18 +35,18 @@ export default function CreatePage() {
   const handleSelect = (type: string) => {
     reset();
     if (type === 'payment') {
-      set({ mode: 'upi' });
+      set({ mode: 'upi', qrType: type });
     } else {
-      set({ mode: 'general' });
+      set({ mode: 'general', qrType: type });
     }
-    
-    // Increment generated counter
-    fetch('/api/qr-counter/increment', {
+
+    // Log a 'generated' event with the chosen QR type (fire-and-forget)
+    fetch('/api/qr-events', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ type: 'generated' }),
-    }).catch((err) => console.error('Failed to increment counter:', err));
-    
+      body: JSON.stringify({ event_type: 'generated', qr_type: type }),
+    }).catch((err) => console.error('Failed to log QR event:', err));
+
     router.push(`/create/${type}`);
   };
 
