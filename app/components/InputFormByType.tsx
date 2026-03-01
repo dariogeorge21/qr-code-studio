@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { useQRStore } from '../store/useQRStore';
+import Dropdown from './shared/Dropdown';
 
 interface InputFormByTypeProps {
   type: string;
@@ -34,7 +35,7 @@ export default function InputFormByType({ type }: InputFormByTypeProps) {
   const [smsPhone, setSmsPhone] = useState('');
   const [smsMessage, setSmsMessage] = useState('');
 
-  const [socialPlatform, setSocialPlatform] = useState('instagram');
+  const [socialPlatform, setSocialPlatform] = useState('');
   const [socialUrl, setSocialUrl] = useState('');
 
   const inputClass =
@@ -83,6 +84,17 @@ export default function InputFormByType({ type }: InputFormByTypeProps) {
     set({ inputValue: `sms:${phone}?body=${encodeURIComponent(message)}` });
   };
 
+  const socialUrlMap: Record<string, string> = {
+    'instagram': 'https://instagram.com/',
+    'twitter / x': 'https://x.com/',
+    'facebook': 'https://facebook.com/',
+    'linkedin': 'https://linkedin.com/',
+    'tiktok': 'https://tiktok.com/',
+    'youtube': 'https://youtube.com/',
+    'github': 'https://github.com/',
+    'other': '',
+  };
+
   switch (type) {
     case 'payment':
       return (
@@ -117,20 +129,48 @@ export default function InputFormByType({ type }: InputFormByTypeProps) {
       );
 
     case 'social':
+      const platformOptions = [
+        { value: 'instagram', label: 'Instagram' },
+        { value: 'twitter / x', label: 'Twitter / X' },
+        { value: 'facebook', label: 'Facebook' },
+        { value: 'linkedin', label: 'LinkedIn' },
+        { value: 'tiktok', label: 'TikTok' },
+        { value: 'youtube', label: 'YouTube' },
+        { value: 'github', label: 'GitHub' },
+        { value: 'other', label: 'Other' },
+      ];
+
       return (
         <div className="space-y-4">
-          <div>
-            <label className={labelClass}>Platform</label>
-            <select value={socialPlatform} onChange={(e) => setSocialPlatform(e.target.value)} className={selectClass}>
-              {['Instagram', 'Twitter / X', 'Facebook', 'LinkedIn', 'TikTok', 'YouTube', 'GitHub', 'Other'].map((p) => (
-                <option key={p} value={p.toLowerCase()}>{p}</option>
-              ))}
-            </select>
-          </div>
-          <div>
-            <label className={labelClass}>Profile URL</label>
-            <input type="url" value={socialUrl} onChange={(e) => { setSocialUrl(e.target.value); set({ inputValue: e.target.value }); }} placeholder="https://instagram.com/yourprofile" className={inputClass} />
-          </div>
+          <Dropdown
+            label="Platform"
+            value={socialPlatform}
+            onChange={(value) => setSocialPlatform(value)}
+            options={platformOptions}
+            placeholder="Select a platform..."
+          />
+          {socialPlatform && (
+            <div>
+              <label className={labelClass}>Profile URL</label>
+              <input
+                type="url"
+                value={socialUrl}
+                onChange={(e) => {
+                  setSocialUrl(e.target.value);
+                  set({ inputValue: e.target.value });
+                }}
+                onFocus={() => {
+                  if (!socialUrl && socialPlatform) {
+                    const baseUrl = socialUrlMap[socialPlatform] || '';
+                    setSocialUrl(baseUrl);
+                    set({ inputValue: baseUrl });
+                  }
+                }}
+                placeholder="https://instagram.com/yourprofile"
+                className={inputClass}
+              />
+            </div>
+          )}
         </div>
       );
 
