@@ -22,7 +22,7 @@ const WHY_ITEMS = [
 	},
 ];
 
-const UPI_ID = 'dario.george@federal'; // 🔁 replace with your real UPI ID
+const UPI_ID = '7838403506@ybl'; // 🔁 replace with your real UPI ID
 
 export default function SupportPage() {
 	const [copied, setCopied] = useState(false);
