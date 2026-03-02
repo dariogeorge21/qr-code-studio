@@ -82,21 +82,23 @@ export default function SupportPage() {
 					<IndianRupee className="w-6 h-6 text-orange-600 dark:text-yellow-400" />
 				</div>
 				<h2 className="text-2xl font-extrabold text-[var(--color-text)] mb-1">
-					Pay via UPI
+					Pay via UPI / Razorpay
 				</h2>
 				<p className="text-sm text-gray-500 dark:text-gray-400 mb-6 max-w-sm mx-auto">
-					Works with GPay, PhonePe, Paytm, BHIM, or any bank app. No international transaction needed.
+					Use this link to enter the amount and pay securely via Razorpay. Works with GPay, PhonePe, Paytm, BHIM, or any bank app. No international transaction needed.
 				</p>
 				<a
-					href="upi://pay?pa=dario.george@federal&pn=DARIO%20GEORGE&tn=QR%20STUDIO%20CONTRIBUTION&cu=INR"
+					href="https://razorpay.me/@dariogeorge"
+					target="_blank"
+					rel="noopener noreferrer"
 					className="inline-flex items-center gap-2 px-8 py-3 rounded-xl font-bold text-white bg-orange-600 hover:opacity-90 transition-all active:scale-[0.98] shadow-md text-base"
 				>
 					<IndianRupee className="w-5 h-5" />
-					Pay via UPI
+					Pay Securely
 					<ExternalLink className="w-3.5 h-3.5 opacity-60" />
 				</a>
 				<p className="mt-4 text-xs text-gray-400 dark:text-gray-500">
-					Opens your preferred UPI app · Amount editable inside the app · Any amount welcome 🙏
+					Any amount welcome 🙏
 				</p>
 			</div>
 
