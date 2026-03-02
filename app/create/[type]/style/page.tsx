@@ -1,6 +1,6 @@
 'use client';
 
-import { use } from 'react';
+import { use, useEffect } from 'react';
 import BackButton from '../../../components/shared/BackButton';
 import StepIndicator from '../../../components/shared/StepIndicator';
 import ActionBar from '../../../components/shared/ActionBar';
@@ -9,6 +9,12 @@ import StyleTab from '../../../components/tabs/StyleTab';
 
 export default function StylePage({ params }: { params: Promise<{ type: string }> }) {
   const { type } = use(params);
+
+  useEffect(() => {
+    if (window.innerWidth < 1024) {
+      document.getElementById('customisation-options')?.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, []);
 
   return (
     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8 pb-28 md:pb-8">
@@ -25,7 +31,7 @@ export default function StylePage({ params }: { params: Promise<{ type: string }
 
         {/* Style Options: shown second on mobile, first on desktop */}
         <div className="lg:w-[45%] shrink-0 order-last lg:order-first">
-          <div className="p-6 rounded-2xl border border-[var(--color-border)] bg-[var(--color-background)] shadow-sm">
+          <div id="customisation-options" className="p-6 rounded-2xl border border-[var(--color-border)] bg-[var(--color-background)] shadow-sm">
             <h2 className="text-lg font-bold text-[var(--color-text)] mb-5">Customise Style</h2>
             <StyleTab />
           </div>
