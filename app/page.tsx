@@ -40,7 +40,6 @@ export default function LandingPage() {
   const [loading, setLoading] = useState(false);
   const [counter, setCounter] = useState<QRCounterData | null>(null);
   const [counterLoading, setCounterLoading] = useState(true);
-  const [isMobile, setIsMobile] = useState(false);
   const [showMobileModal, setShowMobileModal] = useState(false);
 
   useEffect(() => {
@@ -61,22 +60,24 @@ export default function LandingPage() {
     fetchCounter();
   }, []);
 
-  useEffect(() => {
-    const checkIsMobile = () => {
-      const mobile = window.innerWidth < 1024;
-      setIsMobile(mobile);
-      if (mobile) {
-        setShowMobileModal(true);
-      }
-    };
-
-    checkIsMobile();
-    window.addEventListener('resize', checkIsMobile);
-    return () => window.removeEventListener('resize', checkIsMobile);
-  }, []);
+  const checkIsMobile = () => {
+    return window.innerWidth < 1024;
+  };
 
 
   const handleGetStarted = () => {
+    if (checkIsMobile()) {
+      setShowMobileModal(true);
+      return;
+    }
+    setLoading(true);
+    setTimeout(() => {
+      router.push('/create');
+    }, 600);
+  };
+
+  const handleContinueAnyway = () => {
+    setShowMobileModal(false);
     setLoading(true);
     setTimeout(() => {
       router.push('/create');
@@ -88,7 +89,7 @@ export default function LandingPage() {
     <div className="min-h-screen flex flex-col">
       {/* Mobile Modal */}
       {showMobileModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 dark:bg-black/60 backdrop-blur-sm p-4">
           <div className="bg-white dark:bg-gray-900 rounded-3xl shadow-2xl max-w-md w-full p-8 animate-in fade-in scale-in">
             <div className="flex justify-center mb-6">
               <div className="w-16 h-16 rounded-2xl bg-orange-100 dark:bg-orange-900/30 flex items-center justify-center">
@@ -96,7 +97,7 @@ export default function LandingPage() {
               </div>
             </div>
             
-            <h2 className="text-2xl font-bold text-[var(--color-text)] text-center mb-3">
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-white text-center mb-3">
               Optimize Your Experience
             </h2>
             
@@ -105,8 +106,8 @@ export default function LandingPage() {
             </p>
             
             <button
-              onClick={() => setShowMobileModal(false)}
-              className="w-full py-3 px-6 bg-orange-600 hover:bg-orange-700 dark:bg-yellow-400 dark:hover:bg-yellow-500 text-white dark:text-black font-bold rounded-xl transition-all duration-300 hover:shadow-lg active:scale-[0.98]"
+              onClick={handleContinueAnyway}
+              className="w-full py-3 px-6 bg-orange-600 hover:bg-orange-700 text-white dark:bg-yellow-400 dark:hover:bg-yellow-500 dark:text-black font-bold rounded-xl transition-all duration-300 hover:shadow-lg active:scale-[0.98]"
             >
               Continue Anyway
             </button>
