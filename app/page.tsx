@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { QrCode, Eye, Download, Loader2, TrendingUp } from 'lucide-react';
+import { QrCode, Eye, Download, Loader2, TrendingUp, Monitor } from 'lucide-react';
 import ThemeToggle from './components/shared/ThemeToggle';
 import Footer from './components/shared/Footer';
 
@@ -40,6 +40,8 @@ export default function LandingPage() {
   const [loading, setLoading] = useState(false);
   const [counter, setCounter] = useState<QRCounterData | null>(null);
   const [counterLoading, setCounterLoading] = useState(true);
+  const [isMobile, setIsMobile] = useState(false);
+  const [showMobileModal, setShowMobileModal] = useState(false);
 
   useEffect(() => {
     const fetchCounter = async () => {
@@ -59,6 +61,20 @@ export default function LandingPage() {
     fetchCounter();
   }, []);
 
+  useEffect(() => {
+    const checkIsMobile = () => {
+      const mobile = window.innerWidth < 1024;
+      setIsMobile(mobile);
+      if (mobile) {
+        setShowMobileModal(true);
+      }
+    };
+
+    checkIsMobile();
+    window.addEventListener('resize', checkIsMobile);
+    return () => window.removeEventListener('resize', checkIsMobile);
+  }, []);
+
 
   const handleGetStarted = () => {
     setLoading(true);
@@ -70,6 +86,33 @@ export default function LandingPage() {
     
   return (
     <div className="min-h-screen flex flex-col">
+      {/* Mobile Modal */}
+      {showMobileModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4">
+          <div className="bg-white dark:bg-gray-900 rounded-3xl shadow-2xl max-w-md w-full p-8 animate-in fade-in scale-in">
+            <div className="flex justify-center mb-6">
+              <div className="w-16 h-16 rounded-2xl bg-orange-100 dark:bg-orange-900/30 flex items-center justify-center">
+                <Monitor className="w-8 h-8 text-orange-600 dark:text-orange-400" />
+              </div>
+            </div>
+            
+            <h2 className="text-2xl font-bold text-[var(--color-text)] text-center mb-3">
+              Optimize Your Experience
+            </h2>
+            
+            <p className="text-gray-600 dark:text-gray-300 text-center mb-8 leading-relaxed">
+              This application is best usable on large screen devices like <span className="font-semibold">laptop, desktop, or tablet</span>. For the smoothest experience and full functionality, we recommend using a larger screen.
+            </p>
+            
+            <button
+              onClick={() => setShowMobileModal(false)}
+              className="w-full py-3 px-6 bg-orange-600 hover:bg-orange-700 dark:bg-yellow-400 dark:hover:bg-yellow-500 text-white dark:text-black font-bold rounded-xl transition-all duration-300 hover:shadow-lg active:scale-[0.98]"
+            >
+              Continue Anyway
+            </button>
+          </div>
+        </div>
+      )}
       {/* Theme toggle */}
       <div className="absolute top-4 right-4 z-50">
         <ThemeToggle />
