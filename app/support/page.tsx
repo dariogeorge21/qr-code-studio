@@ -22,7 +22,7 @@ const WHY_ITEMS = [
 	},
 ];
 
-const UPI_ID = '7838403506@sbi'; // 🔁 replace with your real UPI ID
+const UPI_ID = 'dario.george@federal'; // 🔁 replace with your real UPI ID
 
 export default function SupportPage() {
 	const [copied, setCopied] = useState(false);
@@ -88,7 +88,7 @@ export default function SupportPage() {
 					Works with GPay, PhonePe, Paytm, BHIM, or any bank app. No international transaction needed.
 				</p>
 				<a
-					href={`upi://pay?pa=${UPI_ID}&pn=Dario+George&cu=INR&tn=QR+Studio+Contributions`}
+					href={`upi://pay?pa=${UPI_ID}&pn=Dario%20George&cu=INR&tn=QR%20Studio%20Contributions`}
 					className="inline-flex items-center gap-2 px-8 py-3 rounded-xl font-bold text-white bg-orange-600 hover:opacity-90 transition-all active:scale-[0.98] shadow-md text-base"
 				>
 					<IndianRupee className="w-5 h-5" />
