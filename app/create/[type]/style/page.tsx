@@ -6,6 +6,7 @@ import StepIndicator from '../../../components/shared/StepIndicator';
 import ActionBar from '../../../components/shared/ActionBar';
 import QRPreviewCanvas from '../../../components/QRPreviewCanvas';
 import StyleTab from '../../../components/tabs/StyleTab';
+import MobilePreviewToggle from '../../../components/shared/MobilePreviewToggle';
 
 export default function StylePage({ params }: { params: Promise<{ type: string }> }) {
   const { type } = use(params);
@@ -19,11 +20,12 @@ export default function StylePage({ params }: { params: Promise<{ type: string }
   return (
     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8 pb-28 md:pb-8">
       <BackButton href={`/create/${type}/colors`} label="Back" />
+      <MobilePreviewToggle />
       <StepIndicator current={2} total={5} label="Style" />
 
       <div className="flex flex-col lg:flex-row gap-8">
         {/* Preview: shown first on mobile, second on desktop */}
-        <div className="flex-1 min-w-0 order-first lg:order-last">
+        <div id="preview-container" className="flex-1 min-w-0 order-first lg:order-last">
           <div className="lg:sticky lg:top-24">
             <QRPreviewCanvas />
           </div>

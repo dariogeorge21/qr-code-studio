@@ -6,6 +6,7 @@ import StepIndicator from '../../../components/shared/StepIndicator';
 import ActionBar from '../../../components/shared/ActionBar';
 import QRPreviewCanvas from '../../../components/QRPreviewCanvas';
 import FrameTab from '../../../components/tabs/FrameTab';
+import MobilePreviewToggle from '../../../components/shared/MobilePreviewToggle';
 
 export default function FramePage({ params }: { params: Promise<{ type: string }> }) {
     const { type } = use(params);
@@ -19,11 +20,12 @@ export default function FramePage({ params }: { params: Promise<{ type: string }
     return (
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8 pb-28 md:pb-8">
             <BackButton href={`/create/${type}/style`} label="Back" />
+            <MobilePreviewToggle />
             <StepIndicator current={3} total={5} label="Frame" />
 
             <div className="flex flex-col lg:flex-row gap-8">
                 {/* Preview: shows first on mobile, second on desktop */}
-                <div className="flex-1 min-w-0 order-1 lg:order-2">
+                <div id="preview-container" className="flex-1 min-w-0 order-1 lg:order-2">
                     <div className="lg:sticky lg:top-24">
                         <QRPreviewCanvas />
                     </div>
