@@ -42,7 +42,30 @@ yarn install
 pnpm install
 ```
 
-3. Run the development server:
+3. Configure the database (Neon)
+
+This app uses a shared Postgres connection module named `sharedDB` and expects a Neon Postgres URL.
+
+Create a `.env.local` file with:
+
+```bash
+DATABASE_URL="postgresql://..."
+ADMIN_MASTER_PASSWORD_HASH="$2b$10$..."
+```
+
+Apply the schema to Neon:
+
+```bash
+psql "$DATABASE_URL" -f db/schema.sql
+```
+
+Generate `ADMIN_MASTER_PASSWORD_HASH` (bcrypt) with:
+
+```bash
+node -e "const bcrypt=require('bcrypt'); bcrypt.hash(process.argv[1], 10).then(console.log)" "your-admin-password"
+```
+
+4. Run the development server:
 ```bash
 npm run dev
 # or
