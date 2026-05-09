@@ -1,6 +1,6 @@
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
-import { supabaseAdmin } from '@/lib/supabase-server';
+import { sharedDB } from '@/lib/sharedDB';
 import AdminLogout from './AdminLogout';
 
 // ─── Types ────────────────────────────────────────────────────────────────────
@@ -97,23 +97,47 @@ export default async function AdminPage() {
   }
 
   // ── Fetch data ─────────────────────────────────────────────────────────────
-  const [{ data: counterRaw }, { data: eventsRaw }, { data: contactsRaw }] = await Promise.all([
-    supabaseAdmin.from('qr_counter').select('total_generated, total_downloaded').single(),
-    supabaseAdmin
-      .from('qr_events')
-      .select('id, event_type, qr_type, export_format, color_modified, style_modified, frame_modified, logo_added, text_added, created_at')
-      .order('created_at', { ascending: false })
-      .limit(5000),
-    supabaseAdmin
-      .from('contacts')
-      .select('id, name, email, subject, message, created_at')
-      .order('created_at', { ascending: false })
-      .limit(100),
+  const [counterRes, eventsRes, contactsRes] = await Promise.all([
+    sharedDB.query(
+      'SELECT total_generated, total_downloaded FROM qr_counter WHERE id = 1 LIMIT 1',
+    ),
+    sharedDB.query(
+      `SELECT
+         id,
+         event_type,
+         qr_type,
+         export_format,
+         color_modified,
+         style_modified,
+         frame_modified,
+         logo_added,
+         text_added,
+         created_at::text as created_at
+       FROM qr_events
+       ORDER BY created_at DESC
+       LIMIT 5000`,
+    ),
+    sharedDB.query(
+      `SELECT
+         id,
+         name,
+         email,
+         subject,
+         message,
+         created_at::text as created_at
+       FROM contacts
+       ORDER BY created_at DESC
+       LIMIT 100`,
+    ),
   ]);
 
-  const counter: QRCounter = counterRaw ?? { total_generated: 0, total_downloaded: 0 };
-  const events: QREvent[] = (eventsRaw as QREvent[]) ?? [];
-  const contacts: Contact[] = (contactsRaw as Contact[]) ?? [];
+  const counter: QRCounter = (counterRes.rows[0] as QRCounter | undefined) ?? {
+    total_generated: 0,
+    total_downloaded: 0,
+  };
+
+  const events: QREvent[] = (eventsRes.rows as QREvent[]) ?? [];
+  const contacts: Contact[] = (contactsRes.rows as Contact[]) ?? [];
 
   // ── Aggregate events ───────────────────────────────────────────────────────
   const downloads = events.filter((e) => e.event_type === 'downloaded');
