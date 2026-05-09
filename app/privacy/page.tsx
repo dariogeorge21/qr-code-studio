@@ -116,13 +116,13 @@ export default function PrivacyPage() {
         <Section title="6. Data Storage & Security">
           <p>
             Anonymous usage metadata and contact form submissions are stored on{' '}
-            <strong>Supabase</strong>, a PostgreSQL-based cloud database. Data is stored securely
+            <strong>Neon</strong>, a PostgreSQL-based cloud database. Data is stored securely
             and access is protected by Row Level Security (RLS) policies.
           </p>
           <p>
-            Supabase&apos;s own{' '}
+            Neon&apos;s own{' '}
             <a
-              href="https://supabase.com/privacy"
+              href="https://neon.tech/privacy-policy"
               target="_blank"
               rel="noopener noreferrer"
               className="text-[var(--color-secondary)] underline underline-offset-2 hover:opacity-80"
@@ -135,7 +135,7 @@ export default function PrivacyPage() {
 
         <Section title="7. Third-Party Services">
           <p>
-            Other than Supabase, the Service uses no third-party analytics platforms (e.g., Google
+            Other than Neon, the Service uses no third-party analytics platforms (e.g., Google
             Analytics, Mixpanel, Amplitude), no advertising networks, and no social media tracking
             pixels.
           </p>

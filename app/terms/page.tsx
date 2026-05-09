@@ -91,11 +91,11 @@ export default function TermsPage() {
 
         <Section title="7. Third-Party Services">
           <p>
-            The Service uses <strong>Supabase</strong> for database storage (anonymous usage counters and
+            The Service uses <strong>Neon</strong> for database storage (anonymous usage counters and
             contact form submissions). By using the Service, you acknowledge that data may be stored on
-            Supabase&apos;s infrastructure. Supabase&apos;s own{' '}
+            Neon&apos;s infrastructure. Neon&apos;s own{' '}
             <a
-              href="https://supabase.com/privacy"
+              href="https://neon.tech/privacy-policy"
               target="_blank"
               rel="noopener noreferrer"
               className="text-[var(--color-secondary)] underline underline-offset-2 hover:opacity-80"
