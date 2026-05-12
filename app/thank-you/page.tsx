@@ -8,7 +8,7 @@ export default function ThankYouPage() {
   const router = useRouter();
   const [navigating, setNavigating] = useState(false);
   const appUrl = typeof window !== 'undefined' ? window.location.origin : 'https://qr.dariogeorge.in';
-  const shareMessage = `I just created a free QR code using QR Code Studio. Try it here: ${appUrl}`;
+  const shareMessage = `I just created a QR code using QR Code Studio. Try it here: ${appUrl}`;
 
   const shareLinks = [
     {
