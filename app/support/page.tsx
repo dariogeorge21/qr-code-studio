@@ -97,9 +97,6 @@ export default function SupportPage() {
 					Pay Securely
 					<ExternalLink className="w-3.5 h-3.5 opacity-60" />
 				</a>
-				<p className="mt-4 text-xs text-gray-400 dark:text-gray-500">
-					Any amount welcome 🙏
-				</p>
 			</div>
 
 			{/* Divider with label */}
