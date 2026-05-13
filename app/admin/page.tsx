@@ -125,7 +125,7 @@ export default async function AdminPage() {
          subject,
          message,
          created_at::text as created_at
-       FROM contacts
+       FROM qr_contacts
        ORDER BY created_at DESC
        LIMIT 100`,
     ),
