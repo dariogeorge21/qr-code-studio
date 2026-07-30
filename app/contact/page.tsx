@@ -19,8 +19,8 @@ const SOCIAL = [
   {
     icon: Mail,
     label: 'Email',
-    handle: 'edu.dariogeorge21@gmail.com',
-    href: 'mailto:edu.dariogeorge21@gmail.com',
+    handle: 'mail.dariogeorge@gmail.com',
+    href: 'mailto:mail.dariogeorge@gmail.com',
   },
 ];
 

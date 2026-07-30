@@ -1,6 +1,6 @@
 export default function PrivacyPage() {
   const EFFECTIVE = 'March 1, 2026';
-  const CONTACT_EMAIL = 'edu.dariogeorge21@gmail.com';
+  const CONTACT_EMAIL = 'mail.dariogeorge@gmail.com';
 
   return (
     <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 py-12 pb-20">
