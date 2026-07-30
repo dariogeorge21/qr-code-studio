@@ -2,6 +2,8 @@
 
 import { useState } from 'react';
 import { Mail, Github, Linkedin, Send, CheckCircle, AlertCircle } from 'lucide-react';
+import { z } from 'zod';
+import { contactFormSchema, sanitizeContactData } from '@/lib/validations/contact';
 
 const SOCIAL = [
   {
@@ -19,8 +21,8 @@ const SOCIAL = [
   {
     icon: Mail,
     label: 'Email',
-    handle: 'edu.dariogeorge21@gmail.com',
-    href: 'mailto:edu.dariogeorge21@gmail.com',
+    handle: 'mail.dariogeorge@gmail.com',
+    href: 'mailto:mail.dariogeorge@gmail.com',
   },
 ];
 
@@ -36,20 +38,34 @@ export default function ContactPage() {
 
 const handleSubmit = async (e: React.FormEvent) => {
   e.preventDefault();
-  if (!form.name || !form.email || !form.message) return;
+  if (!form.name || !form.email || !form.message) {
+    setError('Please fill in all required fields.');
+    return;
+  }
 
   setLoading(true);
   setError('');
 
   try {
+    // Sanitize and validate inputs on the client side
+    const sanitizedData = sanitizeContactData(form);
+    const validationResult = contactFormSchema.safeParse(sanitizedData);
+
+    if (!validationResult.success) {
+      setError(validationResult.error.issues[0].message);
+      setLoading(false);
+      return;
+    }
+
     const response = await fetch('/api/contacts', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(form),
+      body: JSON.stringify(validationResult.data),
     });
 
     if (!response.ok) {
-      throw new Error('Failed to submit form');
+      const errorData = await response.json();
+      throw new Error(errorData.error || 'Failed to submit form');
     }
 
     setSubmitted(true);

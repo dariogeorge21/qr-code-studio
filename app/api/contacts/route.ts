@@ -1,19 +1,25 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { sharedDB } from '@/lib/sharedDB';
+import { z } from 'zod';
+import { contactFormSchema, sanitizeContactData } from '@/lib/validations/contact';
 
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { name, email, subject, message } = body;
 
-    // Validate required fields
-    if (!name || !email || !message) {
-      console.warn('Validation failed:', { name: !!name, email: !!email, message: !!message });
+    // Sanitize and validate inputs on the server side
+    const sanitizedData = sanitizeContactData(body);
+    const validationResult = contactFormSchema.safeParse(sanitizedData);
+    
+    if (!validationResult.success) {
+      console.warn('Validation failed:', validationResult.error.issues);
       return NextResponse.json(
-        { error: 'Missing required fields: name, email, message' },
+        { error: validationResult.error.issues[0].message },
         { status: 400 }
       );
     }
+
+    const { name, email, subject, message } = validationResult.data;
 
     console.log('Processing contact submission:', { name, email, hasSubject: !!subject });
 
