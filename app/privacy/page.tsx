@@ -1,6 +1,6 @@
 export default function PrivacyPage() {
   const EFFECTIVE = 'March 1, 2026';
-  const CONTACT_EMAIL = 'edu.dariogeorge21@gmail.com';
+  const CONTACT_EMAIL = 'mail.dariogeorge@gmail.com';
 
   return (
     <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 py-12 pb-20">
@@ -85,7 +85,7 @@ export default function PrivacyPage() {
 
         <Section title="4. Contact Form Data">
           <p>
-            If you choose to contact us via the contact form at <a href="/contact" className="text-[var(--color-secondary)] underline underline-offset-2 hover:opacity-80">/contact</a>,
+            If you choose to contact us via the contact form at <a href="/contact" className="text-[var(--color-secondary)] underline underline-offset-2 hover:opacity-80">Contact Page</a>,
             we collect:
           </p>
           <ul>
@@ -115,40 +115,18 @@ export default function PrivacyPage() {
 
         <Section title="6. Data Storage & Security">
           <p>
-            Anonymous usage metadata and contact form submissions are stored on{' '}
-            <strong>Neon</strong>, a PostgreSQL-based cloud database. Data is stored securely
-            and access is protected by Row Level Security (RLS) policies.
-          </p>
-          <p>
-            Neon&apos;s own{' '}
-            <a
-              href="https://neon.tech/privacy-policy"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-[var(--color-secondary)] underline underline-offset-2 hover:opacity-80"
-            >
-              Privacy Policy
-            </a>{' '}
-            governs data stored on their infrastructure.
+            Anonymous usage metadata and contact form submissions are stored with us. 
           </p>
         </Section>
 
-        <Section title="7. Third-Party Services">
-          <p>
-            Other than Neon, the Service uses no third-party analytics platforms (e.g., Google
-            Analytics, Mixpanel, Amplitude), no advertising networks, and no social media tracking
-            pixels.
-          </p>
-        </Section>
-
-        <Section title="8. Data Retention">
+        <Section title="7. Data Retention">
           <p>
             Anonymous usage events are retained indefinitely for aggregate analytics purposes.
             Contact form submissions are retained until you request deletion.
           </p>
         </Section>
 
-        <Section title="9. Your Rights">
+        <Section title="8. Your Rights">
           <p>Depending on your jurisdiction, you may have the right to:</p>
           <ul>
             <li>Access the personal data we hold about you (only contact form submissions).</li>

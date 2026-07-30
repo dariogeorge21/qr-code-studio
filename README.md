@@ -50,8 +50,10 @@ Create a `.env.local` file with:
 
 ```bash
 DATABASE_URL="postgresql://..."
-ADMIN_MASTER_PASSWORD_HASH="$2b$10$..."
+ADMIN_MASTER_PASSWORD_HASH_B64="<base64-of-bcrypt-hash>"
 ```
+
+Note: Next.js expands `$VARS` inside `.env` files. Since bcrypt hashes contain `$` (e.g. `$2b$10$...`), storing a raw bcrypt hash in `.env` often expands to an empty string unless you escape every `$` as `\$`. Using `ADMIN_MASTER_PASSWORD_HASH_B64` avoids this entirely.
 
 Apply the schema to Neon:
 
@@ -59,11 +61,15 @@ Apply the schema to Neon:
 psql "$DATABASE_URL" -f db/schema.sql
 ```
 
-Generate `ADMIN_MASTER_PASSWORD_HASH` (bcrypt) with:
+Generate `ADMIN_MASTER_PASSWORD_HASH_B64` (bcrypt, base64-encoded) with:
 
 ```bash
-node -e "const bcrypt=require('bcrypt'); bcrypt.hash(process.argv[1], 10).then(console.log)" "your-admin-password"
+node -e "const bcrypt=require('bcrypt'); bcrypt.hash(process.argv[1], 10).then((h)=>console.log(Buffer.from(h).toString('base64')))" "your-admin-password"
 ```
+
+The app accepts standard bcrypt hashes (`$2a$`, `$2b$`, `$2y$`) with any cost.
+
+If you really want to use `ADMIN_MASTER_PASSWORD_HASH` directly, you must escape each `$` in the `.env` value as `\$`.
 
 4. Run the development server:
 ```bash
