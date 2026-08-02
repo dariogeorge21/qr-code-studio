@@ -296,7 +296,7 @@ export default function FrameTab() {
           onClick={generateRandom}
           className="flex-1 flex items-center justify-center gap-2 py-3 rounded-2xl font-bold text-sm transition-all bg-gradient-to-r from-[var(--color-secondary)] to-purple-500 text-white hover:shadow-lg hover:shadow-[var(--color-secondary)]/30 hover:scale-[1.02] active:scale-[0.98]"
         >
-          <span className="text-lg">🎲</span> Generate Random Frame
+          <span className="text-lg"></span> Generate Random Frame
         </button>
         <button
           onClick={() => {
