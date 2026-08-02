@@ -27,14 +27,32 @@ export default function TextPage({ params }: { params: Promise<{ type: string }>
         {/* Right: Live Preview — shown first on mobile */}
         <div id="preview-container" className="flex-1 min-w-0 order-first lg:order-last">
           <div className="lg:sticky lg:top-24">
+            <div className="flex items-center gap-2 mb-3">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
+              </span>
+              <span className="text-xs font-semibold text-emerald-600 dark:text-emerald-400 uppercase tracking-wider">
+                Live Preview
+              </span>
+            </div>
             <QRPreviewCanvas />
           </div>
         </div>
 
         {/* Left: Text Options */}
         <div className="lg:w-[45%] shrink-0 order-last lg:order-first">
-          <div id="customisation-options" className="p-6 rounded-2xl border border-[var(--color-border)] bg-[var(--color-background)] shadow-sm">
-            <h2 className="text-lg font-bold text-[var(--color-text)] mb-5">Customise Text</h2>
+          <div
+            id="customisation-options"
+            className="gradient-border-top p-6 rounded-2xl border border-[var(--color-border)] bg-[var(--color-background)] shadow-sm"
+          >
+            <div className="flex items-center gap-2.5 mb-5">
+              <div className="w-7 h-7 rounded-lg flex items-center justify-center text-base"
+                style={{ background: 'linear-gradient(135deg, rgba(255,112,0,0.12), rgba(255,195,0,0.12))' }}>
+                T
+              </div>
+              <h2 className="text-lg font-bold text-[var(--color-text)]">Customise Text</h2>
+            </div>
             <TextTab />
           </div>
         </div>
