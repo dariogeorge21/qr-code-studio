@@ -26,15 +26,15 @@ export default function BackButton({ href, label }: BackButtonProps) {
     <button
       onClick={handleClick}
       disabled={loading}
-      className="inline-flex items-center gap-2 text-[var(--color-secondary)] dark:text-[var(--color-tertiary)] hover:opacity-70 transition-opacity mb-4 focus:outline-none focus:ring-2 focus:ring-[var(--color-secondary)] rounded-lg px-2 py-1 -ml-2 cursor-pointer disabled:opacity-50"
+      className="group inline-flex items-center gap-2 text-sm font-semibold text-gray-500 dark:text-gray-400 hover:text-[var(--color-secondary)] dark:hover:text-[var(--color-tertiary)] bg-transparent hover:bg-[var(--color-secondary)]/8 dark:hover:bg-[var(--color-tertiary)]/10 px-3 py-1.5 rounded-lg -ml-3 transition-all duration-200 mb-4 focus:outline-none focus:ring-2 focus:ring-[var(--color-secondary)] cursor-pointer disabled:opacity-50"
       aria-label={label || 'Go back'}
     >
       {loading ? (
-        <Loader2 className="w-5 h-5 animate-spin" />
+        <Loader2 className="w-4 h-4 animate-spin" />
       ) : (
-        <ArrowLeft className="w-5 h-5" />
+        <ArrowLeft className="w-4 h-4 group-hover:-translate-x-0.5 transition-transform duration-150" />
       )}
-      {label && <span className="text-sm font-medium">{label}</span>}
+      {label && <span>{label}</span>}
     </button>
   );
 }

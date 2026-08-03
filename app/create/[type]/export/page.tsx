@@ -370,116 +370,160 @@ export default function ExportPage({ params }: { params: Promise<{ type: string 
     }
   };
 
-  const formats: { key: ExportFormat; label: string }[] = [
-    { key: 'png', label: 'PNG' },
-    { key: 'svg', label: 'SVG' },
-    { key: 'jpeg', label: 'JPEG' },
-    { key: 'webp', label: 'WebP' },
+  const formats: { key: ExportFormat; label: string; description: string; icon: string }[] = [
+    { key: 'png',  label: 'PNG',  description: 'Best for most uses',  icon: '🖼️' },
+    { key: 'svg',  label: 'SVG',  description: 'Perfect for print',   icon: '⬡' },
+    { key: 'jpeg', label: 'JPEG', description: 'Smallest file size',  icon: '📷' },
+    { key: 'webp', label: 'WebP', description: 'Modern web format',   icon: '🌐' },
   ];
 
   const scales = [
-    { value: 1, label: '1×' },
-    { value: 2, label: '2×' },
-    { value: 3, label: '3×' },
-    { value: 4, label: '4×' },
+    { value: 1, label: '1×', description: 'Screen' },
+    { value: 2, label: '2×', description: 'Retina' },
+    { value: 3, label: '3×', description: 'Print'  },
+    { value: 4, label: '4×', description: 'HiDPI'  },
   ];
 
   return (
-    <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-8">
+    <div className="mx-auto max-w-2xl px-4 sm:px-6 lg:px-8 py-8">
       <BackButton href={`/create/${type}/logo`} label="Back" />
 
-      <div className="text-center mb-10">
-        <h1 className="text-3xl sm:text-4xl font-extrabold text-[var(--color-text)] mb-3">
-          Your QR Code is Ready to Download
+      {/* ── Success Hero ─────────────────────────────────── */}
+      <div className="text-center mb-10 animate-fade-in-up">
+        {/* Animated checkmark ring */}
+        <div className="relative inline-flex items-center justify-center mb-5">
+          {/* Outer pulse ring */}
+          <span className="absolute inline-flex w-20 h-20 rounded-full animate-pulse-ring"
+            style={{ background: 'radial-gradient(circle, rgba(255,112,0,0.18) 0%, transparent 70%)' }} />
+          {/* Icon circle */}
+          <div className="relative w-16 h-16 rounded-full flex items-center justify-center animate-scale-in shadow-lg"
+            style={{ background: 'linear-gradient(135deg, #FF7000, #FFC300)' }}>
+            <svg className="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+              <path className="animate-check" strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+            </svg>
+          </div>
+        </div>
+
+        <h1 className="text-3xl sm:text-4xl font-extrabold text-[var(--color-text)] mb-2 leading-tight">
+          Your QR Code is Ready!
         </h1>
-        <p className="text-gray-500 dark:text-gray-400">
-          Choose your preferred format and download your QR code.
+        <p className="text-gray-500 dark:text-gray-400 text-base max-w-sm mx-auto">
+          Choose a format and resolution, then hit download — it&apos;s free.
         </p>
       </div>
 
-      {/* QR Preview */}
-      <div className="max-w-sm mx-auto mb-10">
+      {/* ── QR Preview ───────────────────────────────────── */}
+      <div className="max-w-[260px] mx-auto mb-10 animate-fade-in-up" style={{ animationDelay: '80ms' }}>
         <QRPreviewCanvas />
       </div>
 
-      {/* Format Selector */}
-      <div className="mb-6">
-        <label className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-3 block text-center">
-          Format
-        </label>
-        <div className="flex justify-center gap-2">
-          {formats.map((f) => (
-            <button
-              key={f.key}
-              onClick={() => set({ exportFormat: f.key })}
-              className={`px-5 py-2.5 rounded-xl text-sm font-bold transition-all duration-200 cursor-pointer ${
-                exportFormat === f.key
-                  ? 'bg-[var(--color-secondary)] text-white shadow-md'
-                  : 'bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'
-              }`}
-            >
-              {f.label}
-            </button>
-          ))}
+      {/* ── Options card ─────────────────────────────────── */}
+      <div
+        className="gradient-border-top rounded-2xl border border-[var(--color-border)] bg-[var(--color-background)] shadow-sm p-6 mb-8 animate-fade-in-up"
+        style={{ animationDelay: '120ms' }}
+      >
+        {/* Format Selector */}
+        <div className="mb-6">
+          <p className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-widest mb-3">
+            Format
+          </p>
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+            {formats.map((f) => {
+              const active = exportFormat === f.key;
+              return (
+                <button
+                  key={f.key}
+                  onClick={() => set({ exportFormat: f.key })}
+                  className={`flex flex-col items-center gap-1 px-3 py-3 rounded-xl text-sm font-bold transition-all duration-200 cursor-pointer border-2 ${
+                    active
+                      ? 'border-[var(--color-secondary)] text-[var(--color-secondary)] bg-[var(--color-secondary)]/8 dark:bg-[var(--color-secondary)]/10 shadow-sm'
+                      : 'border-transparent text-gray-600 dark:text-gray-300 bg-gray-100 dark:bg-gray-800 hover:border-[var(--color-border)] hover:bg-gray-50 dark:hover:bg-gray-700'
+                  }`}
+                  aria-pressed={active}
+                >
+                  <span className="text-xl leading-none">{f.icon}</span>
+                  <span className="font-bold">{f.label}</span>
+                  <span className="text-[10px] font-medium text-gray-500 dark:text-gray-400 leading-tight text-center">{f.description}</span>
+                </button>
+              );
+            })}
+          </div>
         </div>
+
+        {/* Scale Selector */}
+        <div className="mb-6">
+          <p className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-widest mb-3">
+            Resolution
+          </p>
+          <div className="grid grid-cols-4 gap-2">
+            {scales.map((sc) => {
+              const active = exportScale === sc.value;
+              return (
+                <button
+                  key={sc.value}
+                  onClick={() => set({ exportScale: sc.value })}
+                  className={`flex flex-col items-center gap-0.5 py-2.5 rounded-xl text-sm font-bold transition-all duration-200 cursor-pointer border-2 ${
+                    active
+                      ? 'border-[var(--color-secondary)] text-[var(--color-secondary)] bg-[var(--color-secondary)]/8 dark:bg-[var(--color-secondary)]/10 shadow-sm'
+                      : 'border-transparent text-gray-600 dark:text-gray-300 bg-gray-100 dark:bg-gray-800 hover:border-[var(--color-border)] hover:bg-gray-50 dark:hover:bg-gray-700'
+                  }`}
+                  aria-pressed={active}
+                >
+                  <span className="font-bold">{sc.label}</span>
+                  <span className="text-[10px] font-medium text-gray-500 dark:text-gray-400">{sc.description}</span>
+                </button>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Transparent Background toggle */}
+        {(exportFormat === 'png' || exportFormat === 'webp') && (
+          <div className="flex items-center justify-between gap-3 py-3 px-4 rounded-xl bg-gray-50 dark:bg-gray-800/60 border border-[var(--color-border)]">
+            <div>
+              <p className="text-sm font-semibold text-[var(--color-text)]">Transparent Background</p>
+              <p className="text-xs text-gray-500 dark:text-gray-400">Remove the background color from the export</p>
+            </div>
+            <button
+              onClick={() => set({ transparentBg: !transparentBg })}
+              className={`relative shrink-0 w-12 h-6 rounded-full transition-colors duration-200 cursor-pointer focus:outline-none focus:ring-2 focus:ring-[var(--color-secondary)] ${
+                transparentBg ? 'bg-[var(--color-secondary)]' : 'bg-gray-300 dark:bg-gray-600'
+              }`}
+              role="switch"
+              aria-checked={transparentBg}
+            >
+              <span className={`absolute top-1 left-1 w-4 h-4 bg-white rounded-full shadow transition-transform duration-200 ${transparentBg ? 'translate-x-6' : 'translate-x-0'}`} />
+            </button>
+          </div>
+        )}
       </div>
 
-      {/* Scale Selector */}
-      <div className="mb-6">
-        <label className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-3 block text-center">
-          Resolution
-        </label>
-        <div className="flex justify-center gap-2">
-          {scales.map((sc) => (
-            <button
-              key={sc.value}
-              onClick={() => set({ exportScale: sc.value })}
-              className={`px-5 py-2.5 rounded-xl text-sm font-bold transition-all duration-200 cursor-pointer ${
-                exportScale === sc.value
-                  ? 'bg-[var(--color-secondary)] text-white shadow-md'
-                  : 'bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'
-              }`}
-            >
-              {sc.label}
-            </button>
-          ))}
-        </div>
-      </div>
-
-      {/* Transparent toggle */}
-      {(exportFormat === 'png' || exportFormat === 'webp') && (
-        <div className="flex items-center justify-center gap-3 mb-8">
-          <span className="text-sm font-medium text-[var(--color-text)]">Transparent Background</span>
-          <button
-            onClick={() => set({ transparentBg: !transparentBg })}
-            className={`relative w-12 h-6 rounded-full transition-colors duration-200 cursor-pointer ${
-              transparentBg ? 'bg-[var(--color-secondary)]' : 'bg-gray-200 dark:bg-gray-700'
-            }`}
-          >
-            <span className={`absolute top-1 left-1 w-4 h-4 bg-white rounded-full shadow-sm transition-transform duration-200 ${transparentBg ? 'translate-x-6' : 'translate-x-0'}`} />
-          </button>
-        </div>
-      )}
-
-      {/* Download Button */}
-      <div className="flex justify-center">
+      {/* ── Download CTA ─────────────────────────────────── */}
+      <div className="flex justify-center animate-fade-in-up" style={{ animationDelay: '180ms' }}>
         <button
           onClick={handleExport}
           disabled={!hasContent || exporting}
-          className={`inline-flex items-center justify-center gap-2 px-10 py-4 rounded-2xl text-lg font-bold transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] cursor-pointer focus:outline-none focus:ring-4 focus:ring-orange-500/30 ${
-            hasContent && !exporting
-              ? 'bg-orange-600 text-white dark:bg-yellow-400 dark:text-black'
-              : 'bg-gray-200 dark:bg-gray-800 text-gray-400 cursor-not-allowed'
-          }`}
+          className="group relative inline-flex items-center justify-center gap-3 px-12 py-4 rounded-2xl text-lg font-bold text-white transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl active:translate-y-0 active:scale-[0.98] cursor-pointer focus:outline-none focus:ring-4 focus:ring-orange-500/30 disabled:cursor-not-allowed disabled:opacity-60 overflow-hidden shimmer-btn"
+          style={hasContent && !exporting ? {
+            background: 'linear-gradient(135deg, #FF7000 0%, #FF9A3C 50%, #FF7000 100%)',
+            boxShadow: '0 8px 32px rgba(255,112,0,0.35)',
+          } : {
+            background: undefined,
+          }}
+          aria-label="Download your QR Code"
         >
+          {/* Inner glow on hover */}
+          <span className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+            style={{ background: 'linear-gradient(135deg, rgba(255,255,255,0.1), transparent)' }} />
+
           {exporting ? (
             <>
               <Loader2 className="w-5 h-5 animate-spin" />
-              Exporting...
+              Preparing download…
             </>
           ) : (
             <>
-              <Download className="w-5 h-5" />
+              <Download className="w-5 h-5 group-hover:animate-bounce" />
               Download QR Code
             </>
           )}
@@ -487,12 +531,17 @@ export default function ExportPage({ params }: { params: Promise<{ type: string 
       </div>
 
       {error && (
-        <p className="mt-4 text-sm text-red-500 text-center font-medium">{error}</p>
+        <div className="mt-5 flex items-center justify-center gap-2 text-sm text-red-500 font-medium">
+          <svg className="w-4 h-4 shrink-0" fill="currentColor" viewBox="0 0 20 20">
+            <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
+          </svg>
+          {error}
+        </div>
       )}
 
       {exportFormat === 'svg' && (
         <p className="mt-4 text-xs text-gray-500 dark:text-gray-400 text-center">
-          SVG exports QR code only (no text overlays or frame)
+          SVG exports QR code only — text overlays and frame are not included.
         </p>
       )}
     </div>

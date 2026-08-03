@@ -2,13 +2,13 @@
 
 import React, { memo, useCallback } from 'react';
 import { useQRStore } from '../../store/useQRStore';
-import { 
-  FONT_FAMILIES, 
-  FONT_WEIGHTS, 
-  TEXT_TRANSFORMS, 
-  TEXT_DECORATIONS, 
-  BLEND_MODES, 
-  TEXT_PRESETS 
+import {
+  FONT_FAMILIES,
+  FONT_WEIGHTS,
+  TEXT_TRANSFORMS,
+  TEXT_DECORATIONS,
+  BLEND_MODES,
+  TEXT_PRESETS
 } from '../../types/qr';
 import type { TextAlign, TextTransform, TextDecoration, BlendMode } from '../../types/qr';
 
@@ -23,20 +23,19 @@ const SectionHeader = memo(({ label, onRandom }: { label: string; onRandom?: () 
   <div className="flex items-center justify-between mb-5">
     <h4 className="text-[11px] font-black text-gray-400 uppercase tracking-[0.2em]">{label}</h4>
     {onRandom && (
-      <button 
-        onClick={onRandom} 
+      <button
+        onClick={onRandom}
         className="text-xs px-3 py-1.5 rounded-xl bg-[var(--color-secondary)]/10 text-[var(--color-secondary)] hover:bg-[var(--color-secondary)]/20 transition-all font-semibold flex items-center gap-1.5"
       >
-        🎲 Random
+        Random
       </button>
     )}
   </div>
 ));
 
 const ControlGroup = memo(({ children, active, title }: { children: React.ReactNode; active?: boolean; title?: string }) => (
-  <div className={`p-5 rounded-3xl border transition-all duration-300 ${
-    active ? 'bg-[var(--color-secondary)]/5 border-[var(--color-secondary)]/30' : 'bg-gray-50 dark:bg-white/5 border-[var(--color-border)]'
-  }`}>
+  <div className={`p-5 rounded-3xl border transition-all duration-300 ${active ? 'bg-[var(--color-secondary)]/5 border-[var(--color-secondary)]/30' : 'bg-gray-50 dark:bg-white/5 border-[var(--color-border)]'
+    }`}>
     {title && <h4 className="text-[11px] font-black text-gray-400 uppercase tracking-[0.2em] mb-5">{title}</h4>}
     <div className="space-y-6">{children}</div>
   </div>
@@ -48,9 +47,8 @@ const AlignToggle = memo(({ current, onChange }: { current: TextAlign; onChange:
       <button
         key={a}
         onClick={() => onChange(a)}
-        className={`flex-1 py-2 px-3 rounded-lg text-xs transition-all ${
-          current === a ? 'bg-[var(--color-secondary)] text-white shadow-lg' : 'opacity-50 hover:opacity-100'
-        }`}
+        className={`flex-1 py-2 px-3 rounded-lg text-xs transition-all ${current === a ? 'bg-[var(--color-secondary)] text-white shadow-lg' : 'opacity-50 hover:opacity-100'
+          }`}
       >
         {a === 'left' ? '⬅' : a === 'center' ? '⏺' : '➡'}
       </button>
@@ -58,19 +56,18 @@ const AlignToggle = memo(({ current, onChange }: { current: TextAlign; onChange:
   </div>
 ));
 
-const ToggleRow = memo(<T extends string>({ items, current, onChange }: { 
-  items: { value: T; label: string; icon: string }[]; 
-  current: T; 
-  onChange: (v: T) => void 
+const ToggleRow = memo(<T extends string>({ items, current, onChange }: {
+  items: { value: T; label: string; icon: string }[];
+  current: T;
+  onChange: (v: T) => void
 }) => (
   <div className="flex bg-white dark:bg-black/40 p-1 rounded-xl border border-[var(--color-border)] overflow-hidden">
     {items.map((item) => (
       <button
         key={item.value}
         onClick={() => onChange(item.value)}
-        className={`flex-1 py-2 px-1.5 rounded-lg text-[11px] font-bold transition-all whitespace-nowrap ${
-          current === item.value ? 'bg-[var(--color-secondary)] text-white shadow-lg' : 'opacity-50 hover:opacity-100'
-        }`}
+        className={`flex-1 py-2 px-1.5 rounded-lg text-[11px] font-bold transition-all whitespace-nowrap ${current === item.value ? 'bg-[var(--color-secondary)] text-white shadow-lg' : 'opacity-50 hover:opacity-100'
+          }`}
         title={item.label}
       >
         {item.icon}
@@ -79,18 +76,18 @@ const ToggleRow = memo(<T extends string>({ items, current, onChange }: {
   </div>
 ));
 
-const SliderControl = memo(({ label, value, min, max, step, onChange, unit }: { 
-  label: string; value: number; min: number; max: number; step?: number; onChange: (v: number) => void; unit?: string 
+const SliderControl = memo(({ label, value, min, max, step, onChange, unit }: {
+  label: string; value: number; min: number; max: number; step?: number; onChange: (v: number) => void; unit?: string
 }) => (
   <div className="space-y-1.5">
     <div className="flex items-center justify-between">
       <label className="text-[10px] font-bold uppercase opacity-50">{label}</label>
       <span className="text-[10px] font-mono opacity-40">{value}{unit || ''}</span>
     </div>
-    <input 
-      type="range" min={min} max={max} step={step || 1} value={value} 
-      onChange={(e) => onChange(Number(e.target.value))} 
-      className="w-full h-1.5 accent-[var(--color-secondary)] bg-gray-200 dark:bg-gray-700 rounded-lg appearance-none cursor-pointer" 
+    <input
+      type="range" min={min} max={max} step={step || 1} value={value}
+      onChange={(e) => onChange(Number(e.target.value))}
+      className="w-full h-1.5 accent-[var(--color-secondary)] bg-gray-200 dark:bg-gray-700 rounded-lg appearance-none cursor-pointer"
     />
   </div>
 ));
@@ -167,13 +164,13 @@ export default function TextTab() {
 
   return (
     <div className="space-y-8 pb-10 animate-in fade-in duration-500">
-      
+
       {/* Global Randomize */}
       <button
         onClick={() => { randomizeBgText(); randomizeTitle(); randomizeCaption(); }}
         className="w-full py-3.5 rounded-2xl bg-gradient-to-r from-[var(--color-secondary)] to-purple-500 text-white font-bold text-sm shadow-lg hover:shadow-xl hover:scale-[1.01] active:scale-[0.99] transition-all flex items-center justify-center gap-2"
       >
-        🎲 Randomize All Text
+        Randomize All Text
       </button>
 
       {/* Style Presets */}
@@ -197,7 +194,7 @@ export default function TextTab() {
       <ControlGroup active={!!store.bgText}>
         <SectionHeader label="Background Watermark" onRandom={randomizeBgText} />
         <input
-          type="text" value={store.bgText} 
+          type="text" value={store.bgText}
           onChange={(e) => set({ bgText: e.target.value })}
           placeholder="Hidden background message..."
           className="w-full px-4 py-3 rounded-2xl bg-white dark:bg-black/40 border border-[var(--color-border)] focus:ring-2 focus:ring-[var(--color-secondary)] outline-none text-sm transition-all"
