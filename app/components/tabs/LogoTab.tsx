@@ -112,14 +112,14 @@ export default function LogoTab() {
   const previewClip: React.CSSProperties = {
     borderRadius:
       logoShape === 'circle' ? '50%'
-      : logoShape === 'rounded' ? `${Math.max(logoRadius, 20)}px`
-      : logoShape === 'square' ? `${logoRadius}px`
-      : undefined,
+        : logoShape === 'rounded' ? `${Math.max(logoRadius, 20)}px`
+          : logoShape === 'square' ? `${logoRadius}px`
+            : undefined,
     clipPath:
       logoShape === 'hexagon' ? 'polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)'
-      : logoShape === 'shield' ? 'polygon(50% 0%, 100% 0%, 100% 65%, 50% 100%, 0% 65%, 0% 0%)'
-      : logoShape === 'diamond' ? 'polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)'
-      : undefined,
+        : logoShape === 'shield' ? 'polygon(50% 0%, 100% 0%, 100% 65%, 50% 100%, 0% 65%, 0% 0%)'
+          : logoShape === 'diamond' ? 'polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)'
+            : undefined,
     opacity: logoOpacity,
     transform: `rotate(${logoRotation}deg)`,
     filter: logoGrayscale ? 'grayscale(100%)' : undefined,
@@ -170,7 +170,7 @@ export default function LogoTab() {
                 onClick={randomizeLogo}
                 className="flex-1 flex items-center justify-center gap-2 py-2.5 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-xl text-xs font-bold hover:opacity-90 transition-all hover:scale-[1.02] active:scale-[0.98] shadow-lg shadow-purple-500/25"
               >
-                🎲 Randomize
+                Randomize
               </button>
               <button
                 onClick={resetLogoStyle}
@@ -188,11 +188,10 @@ export default function LogoTab() {
                   <button
                     key={s.key}
                     onClick={() => set({ logoShape: s.key })}
-                    className={`flex flex-col items-center gap-1 p-2.5 rounded-xl border-2 transition-all hover:scale-[1.03] ${
-                      logoShape === s.key
+                    className={`flex flex-col items-center gap-1 p-2.5 rounded-xl border-2 transition-all hover:scale-[1.03] ${logoShape === s.key
                         ? 'border-[var(--color-secondary)] bg-[var(--color-secondary)]/10 shadow-md'
                         : 'border-[var(--color-border)] hover:border-[var(--color-secondary)]/40'
-                    }`}
+                      }`}
                   >
                     <span className="text-lg">{s.icon}</span>
                     <span className="text-[9px] font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400">{s.label}</span>
