@@ -144,14 +144,14 @@ function LogoPresetMiniSVG({ preset }: { preset: LogoPreset }) {
     preset.logoShape === 'circle'
       ? 'rounded-full'
       : preset.logoShape === 'rounded'
-      ? 'rounded-lg'
-      : preset.logoShape === 'hexagon'
-      ? 'rounded-none [clip-path:polygon(50%_0%,100%_25%,100%_75%,50%_100%,0%_75%,0%_25%)]'
-      : preset.logoShape === 'shield'
-      ? 'rounded-none [clip-path:polygon(50%_0%,100%_0%,100%_65%,50%_100%,0%_65%,0%_0%)]'
-      : preset.logoShape === 'diamond'
-      ? 'rounded-none [clip-path:polygon(50%_0%,100%_50%,50%_100%,0%_50%)]'
-      : 'rounded-xs';
+        ? 'rounded-lg'
+        : preset.logoShape === 'hexagon'
+          ? 'rounded-none [clip-path:polygon(50%_0%,100%_25%,100%_75%,50%_100%,0%_75%,0%_25%)]'
+          : preset.logoShape === 'shield'
+            ? 'rounded-none [clip-path:polygon(50%_0%,100%_0%,100%_65%,50%_100%,0%_65%,0%_0%)]'
+            : preset.logoShape === 'diamond'
+              ? 'rounded-none [clip-path:polygon(50%_0%,100%_50%,50%_100%,0%_50%)]'
+              : 'rounded-xs';
 
   return (
     <div
@@ -673,18 +673,18 @@ export default function LogoTab() {
       logoShape === 'circle'
         ? '50%'
         : logoShape === 'rounded'
-        ? `${Math.max(logoRadius, 20)}px`
-        : logoShape === 'square'
-        ? `${logoRadius}px`
-        : undefined,
+          ? `${Math.max(logoRadius, 20)}px`
+          : logoShape === 'square'
+            ? `${logoRadius}px`
+            : undefined,
     clipPath:
       logoShape === 'hexagon'
         ? 'polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)'
         : logoShape === 'shield'
-        ? 'polygon(50% 0%, 100% 0%, 100% 65%, 50% 100%, 0% 65%, 0% 0%)'
-        : logoShape === 'diamond'
-        ? 'polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)'
-        : undefined,
+          ? 'polygon(50% 0%, 100% 0%, 100% 65%, 50% 100%, 0% 65%, 0% 0%)'
+          : logoShape === 'diamond'
+            ? 'polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)'
+            : undefined,
     opacity: logoOpacity,
     transform: `rotate(${logoRotation}deg)`,
     filter: logoGrayscale ? 'grayscale(100%)' : undefined,
@@ -808,11 +808,10 @@ export default function LogoTab() {
       <div className="flex p-1 bg-gray-100 dark:bg-white/5 rounded-2xl border border-[var(--color-border)] gap-1 overflow-x-auto scrollbar-none">
         <button
           onClick={() => setActiveSubTab('gallery')}
-          className={`flex-1 min-w-[70px] py-2 px-2 text-[11px] font-bold rounded-xl flex items-center justify-center gap-1.5 transition-all whitespace-nowrap active:scale-95 cursor-pointer ${
-            activeSubTab === 'gallery'
+          className={`flex-1 min-w-[70px] py-2 px-2 text-[11px] font-bold rounded-xl flex items-center justify-center gap-1.5 transition-all whitespace-nowrap active:scale-95 cursor-pointer ${activeSubTab === 'gallery'
               ? 'bg-white dark:bg-black text-[var(--color-text)] shadow-xs font-extrabold'
               : 'text-gray-500 dark:text-gray-400 hover:text-[var(--color-text)]'
-          }`}
+            }`}
         >
           <Layers className="w-3.5 h-3.5 text-blue-500" />
           Gallery
@@ -820,11 +819,10 @@ export default function LogoTab() {
 
         <button
           onClick={() => setActiveSubTab('upload')}
-          className={`flex-1 min-w-[70px] py-2 px-2 text-[11px] font-bold rounded-xl flex items-center justify-center gap-1.5 transition-all whitespace-nowrap active:scale-95 cursor-pointer ${
-            activeSubTab === 'upload'
+          className={`flex-1 min-w-[70px] py-2 px-2 text-[11px] font-bold rounded-xl flex items-center justify-center gap-1.5 transition-all whitespace-nowrap active:scale-95 cursor-pointer ${activeSubTab === 'upload'
               ? 'bg-white dark:bg-black text-[var(--color-text)] shadow-xs font-extrabold'
               : 'text-gray-500 dark:text-gray-400 hover:text-[var(--color-text)]'
-          }`}
+            }`}
         >
           <UploadCloud className="w-3.5 h-3.5 text-emerald-500" />
           Upload
@@ -832,11 +830,10 @@ export default function LogoTab() {
 
         <button
           onClick={() => setActiveSubTab('presets')}
-          className={`flex-1 min-w-[70px] py-2 px-2 text-[11px] font-bold rounded-xl flex items-center justify-center gap-1.5 transition-all whitespace-nowrap active:scale-95 cursor-pointer ${
-            activeSubTab === 'presets'
+          className={`flex-1 min-w-[70px] py-2 px-2 text-[11px] font-bold rounded-xl flex items-center justify-center gap-1.5 transition-all whitespace-nowrap active:scale-95 cursor-pointer ${activeSubTab === 'presets'
               ? 'bg-white dark:bg-black text-[var(--color-text)] shadow-xs font-extrabold'
               : 'text-gray-500 dark:text-gray-400 hover:text-[var(--color-text)]'
-          }`}
+            }`}
         >
           <Sparkles className="w-3.5 h-3.5 text-orange-500 dark:text-yellow-400" />
           Presets
@@ -844,11 +841,10 @@ export default function LogoTab() {
 
         <button
           onClick={() => setActiveSubTab('badge')}
-          className={`flex-1 min-w-[70px] py-2 px-2 text-[11px] font-bold rounded-xl flex items-center justify-center gap-1.5 transition-all whitespace-nowrap active:scale-95 cursor-pointer ${
-            activeSubTab === 'badge'
+          className={`flex-1 min-w-[70px] py-2 px-2 text-[11px] font-bold rounded-xl flex items-center justify-center gap-1.5 transition-all whitespace-nowrap active:scale-95 cursor-pointer ${activeSubTab === 'badge'
               ? 'bg-white dark:bg-black text-[var(--color-text)] shadow-xs font-extrabold'
               : 'text-gray-500 dark:text-gray-400 hover:text-[var(--color-text)]'
-          }`}
+            }`}
         >
           <Shield className="w-3.5 h-3.5 text-purple-500" />
           Badge
@@ -856,11 +852,10 @@ export default function LogoTab() {
 
         <button
           onClick={() => setActiveSubTab('transform')}
-          className={`flex-1 min-w-[70px] py-2 px-2 text-[11px] font-bold rounded-xl flex items-center justify-center gap-1.5 transition-all whitespace-nowrap active:scale-95 cursor-pointer ${
-            activeSubTab === 'transform'
+          className={`flex-1 min-w-[70px] py-2 px-2 text-[11px] font-bold rounded-xl flex items-center justify-center gap-1.5 transition-all whitespace-nowrap active:scale-95 cursor-pointer ${activeSubTab === 'transform'
               ? 'bg-white dark:bg-black text-[var(--color-text)] shadow-xs font-extrabold'
               : 'text-gray-500 dark:text-gray-400 hover:text-[var(--color-text)]'
-          }`}
+            }`}
         >
           <Sliders className="w-3.5 h-3.5 text-cyan-500" />
           Size & FX
@@ -868,11 +863,10 @@ export default function LogoTab() {
 
         <button
           onClick={() => setActiveSubTab('saved')}
-          className={`flex-1 min-w-[70px] py-2 px-2 text-[11px] font-bold rounded-xl flex items-center justify-center gap-1.5 transition-all whitespace-nowrap active:scale-95 cursor-pointer ${
-            activeSubTab === 'saved'
+          className={`flex-1 min-w-[70px] py-2 px-2 text-[11px] font-bold rounded-xl flex items-center justify-center gap-1.5 transition-all whitespace-nowrap active:scale-95 cursor-pointer ${activeSubTab === 'saved'
               ? 'bg-white dark:bg-black text-[var(--color-text)] shadow-xs font-extrabold'
               : 'text-gray-500 dark:text-gray-400 hover:text-[var(--color-text)]'
-          }`}
+            }`}
         >
           <Bookmark className="w-3.5 h-3.5 text-rose-500" />
           Saved
@@ -966,11 +960,10 @@ export default function LogoTab() {
                 <button
                   key={cat}
                   onClick={() => setIconCategory(cat)}
-                  className={`px-3 py-1 text-[10px] font-bold rounded-lg uppercase tracking-wider transition-all whitespace-nowrap cursor-pointer ${
-                    iconCategory === cat
+                  className={`px-3 py-1 text-[10px] font-bold rounded-lg uppercase tracking-wider transition-all whitespace-nowrap cursor-pointer ${iconCategory === cat
                       ? 'bg-[var(--color-secondary)] text-white shadow-xs'
                       : 'bg-gray-100 dark:bg-white/5 text-gray-500 hover:text-[var(--color-text)] hover:bg-gray-200 dark:hover:bg-white/10'
-                  }`}
+                    }`}
                 >
                   {cat}
                 </button>
@@ -990,31 +983,28 @@ export default function LogoTab() {
             <div className="grid grid-cols-3 gap-2">
               <button
                 onClick={() => updateTintColor('brand')}
-                className={`py-2 px-2 text-[11px] font-bold rounded-xl border transition-all cursor-pointer text-center ${
-                  tintMode === 'brand'
+                className={`py-2 px-2 text-[11px] font-bold rounded-xl border transition-all cursor-pointer text-center ${tintMode === 'brand'
                     ? 'border-[var(--color-secondary)] bg-[var(--color-secondary)]/10 text-[var(--color-secondary)]'
                     : 'border-[var(--color-border)] text-gray-600 dark:text-gray-400 hover:border-gray-300'
-                }`}
+                  }`}
               >
                 🌈 Official Color
               </button>
               <button
                 onClick={() => updateTintColor('qr_color')}
-                className={`py-2 px-2 text-[11px] font-bold rounded-xl border transition-all cursor-pointer text-center ${
-                  tintMode === 'qr_color'
+                className={`py-2 px-2 text-[11px] font-bold rounded-xl border transition-all cursor-pointer text-center ${tintMode === 'qr_color'
                     ? 'border-[var(--color-secondary)] bg-[var(--color-secondary)]/10 text-[var(--color-secondary)]'
                     : 'border-[var(--color-border)] text-gray-600 dark:text-gray-400 hover:border-gray-300'
-                }`}
+                  }`}
               >
                 ⬛ Match QR
               </button>
               <button
                 onClick={() => updateTintColor('custom')}
-                className={`py-2 px-2 text-[11px] font-bold rounded-xl border transition-all cursor-pointer text-center ${
-                  tintMode === 'custom'
+                className={`py-2 px-2 text-[11px] font-bold rounded-xl border transition-all cursor-pointer text-center ${tintMode === 'custom'
                     ? 'border-[var(--color-secondary)] bg-[var(--color-secondary)]/10 text-[var(--color-secondary)]'
                     : 'border-[var(--color-border)] text-gray-600 dark:text-gray-400 hover:border-gray-300'
-                }`}
+                  }`}
               >
                 🎨 Custom Tint
               </button>
@@ -1028,11 +1018,10 @@ export default function LogoTab() {
                     <button
                       key={c}
                       onClick={() => updateTintColor('custom', c)}
-                      className={`w-6 h-6 rounded-lg border-2 transition-transform cursor-pointer hover:scale-110 ${
-                        customTintColor === c
+                      className={`w-6 h-6 rounded-lg border-2 transition-transform cursor-pointer hover:scale-110 ${customTintColor === c
                           ? 'border-[var(--color-secondary)] scale-110 shadow-xs'
                           : 'border-transparent'
-                      }`}
+                        }`}
                       style={{ backgroundColor: c }}
                     />
                   ))}
@@ -1058,18 +1047,17 @@ export default function LogoTab() {
                 tintMode === 'brand'
                   ? icon.brandColor
                   : tintMode === 'qr_color'
-                  ? fgColor
-                  : customTintColor;
+                    ? fgColor
+                    : customTintColor;
 
               return (
                 <button
                   key={icon.id}
                   onClick={() => selectBrandIcon(icon)}
-                  className={`group relative flex flex-col items-center justify-center p-3 rounded-2xl border-2 transition-all hover:scale-[1.03] active:scale-[0.97] cursor-pointer ${
-                    isActive
+                  className={`group relative flex flex-col items-center justify-center p-3 rounded-2xl border-2 transition-all hover:scale-[1.03] active:scale-[0.97] cursor-pointer ${isActive
                       ? 'border-[var(--color-secondary)] bg-[var(--color-secondary)]/10 shadow-xs'
                       : 'border-[var(--color-border)] bg-white dark:bg-black/20 hover:border-gray-300 dark:hover:border-gray-600'
-                  }`}
+                    }`}
                 >
                   <div
                     className="w-8 h-8 flex items-center justify-center mb-2 transition-transform duration-200 group-hover:scale-110"
@@ -1104,11 +1092,10 @@ export default function LogoTab() {
             onDragLeave={handleDragLeave}
             onDrop={handleDrop}
             onClick={() => fileRef.current?.click()}
-            className={`flex flex-col items-center justify-center gap-3 p-8 border-2 border-dashed rounded-3xl cursor-pointer transition-all group ${
-              isDragging
+            className={`flex flex-col items-center justify-center gap-3 p-8 border-2 border-dashed rounded-3xl cursor-pointer transition-all group ${isDragging
                 ? 'border-[var(--color-secondary)] bg-[var(--color-secondary)]/10 scale-[1.01]'
                 : 'border-[var(--color-border)] hover:border-[var(--color-secondary)]/60 hover:bg-[var(--color-secondary)]/5'
-            }`}
+              }`}
           >
             <div className="w-14 h-14 bg-gray-100 dark:bg-white/5 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform">
               <UploadCloud className="w-7 h-7 text-[var(--color-secondary)]" />
@@ -1202,11 +1189,10 @@ export default function LogoTab() {
                 <button
                   key={cat}
                   onClick={() => setPresetCategory(cat)}
-                  className={`px-3 py-1 text-[10px] font-bold rounded-lg uppercase tracking-wider transition-all whitespace-nowrap cursor-pointer ${
-                    presetCategory === cat
+                  className={`px-3 py-1 text-[10px] font-bold rounded-lg uppercase tracking-wider transition-all whitespace-nowrap cursor-pointer ${presetCategory === cat
                       ? 'bg-[var(--color-secondary)] text-white shadow-xs'
                       : 'bg-gray-100 dark:bg-white/5 text-gray-500 hover:text-[var(--color-text)] hover:bg-gray-200 dark:hover:bg-white/10'
-                  }`}
+                    }`}
                 >
                   {cat}
                 </button>
@@ -1222,11 +1208,10 @@ export default function LogoTab() {
                 <button
                   key={p.name}
                   onClick={() => applyPreset(p)}
-                  className={`group relative flex flex-col p-3 rounded-2xl border-2 text-left transition-all hover:scale-[1.02] active:scale-[0.98] cursor-pointer ${
-                    isActive
+                  className={`group relative flex flex-col p-3 rounded-2xl border-2 text-left transition-all hover:scale-[1.02] active:scale-[0.98] cursor-pointer ${isActive
                       ? 'border-[var(--color-secondary)] bg-[var(--color-secondary)]/8 shadow-sm ring-2 ring-[var(--color-secondary)]/20'
                       : 'border-[var(--color-border)] bg-white dark:bg-black/20 hover:border-gray-300 dark:hover:border-gray-600'
-                  }`}
+                    }`}
                 >
                   <div className="flex items-center justify-between mb-2">
                     <LogoPresetMiniSVG preset={p} />
@@ -1267,11 +1252,10 @@ export default function LogoTab() {
                 <button
                   key={s.key}
                   onClick={() => set({ logoShape: s.key })}
-                  className={`flex flex-col items-center gap-1.5 p-3 rounded-2xl border-2 transition-all hover:scale-[1.03] cursor-pointer ${
-                    logoShape === s.key
+                  className={`flex flex-col items-center gap-1.5 p-3 rounded-2xl border-2 transition-all hover:scale-[1.03] cursor-pointer ${logoShape === s.key
                       ? 'border-[var(--color-secondary)] bg-[var(--color-secondary)]/10 shadow-xs'
                       : 'border-[var(--color-border)] hover:border-[var(--color-secondary)]/40'
-                  }`}
+                    }`}
                 >
                   <LogoShapeMiniSVG shape={s.key} />
                   <span className="text-[10px] font-bold uppercase tracking-wider text-gray-700 dark:text-gray-300">
@@ -1411,13 +1395,12 @@ export default function LogoTab() {
         <div className="space-y-5 animate-fade-in-up">
           {/* Scannability Health Card */}
           <div
-            className={`p-4 rounded-2xl border flex items-start gap-3 transition-all ${
-              scannabilityInfo.health === 'excellent'
+            className={`p-4 rounded-2xl border flex items-start gap-3 transition-all ${scannabilityInfo.health === 'excellent'
                 ? 'bg-emerald-500/10 border-emerald-500/30 text-emerald-700 dark:text-emerald-300'
                 : scannabilityInfo.health === 'good'
-                ? 'bg-amber-500/10 border-amber-500/30 text-amber-700 dark:text-amber-300'
-                : 'bg-red-500/10 border-red-500/30 text-red-700 dark:text-red-300'
-            }`}
+                  ? 'bg-amber-500/10 border-amber-500/30 text-amber-700 dark:text-amber-300'
+                  : 'bg-red-500/10 border-red-500/30 text-red-700 dark:text-red-300'
+              }`}
           >
             <ShieldCheck className="w-5 h-5 shrink-0 mt-0.5" />
             <div className="min-w-0 flex-1">
@@ -1517,11 +1500,10 @@ export default function LogoTab() {
                 <button
                   key={deg}
                   onClick={() => set({ logoRotation: deg })}
-                  className={`flex-1 py-1 text-[9px] font-bold rounded-lg border transition-all cursor-pointer ${
-                    logoRotation === deg
+                  className={`flex-1 py-1 text-[9px] font-bold rounded-lg border transition-all cursor-pointer ${logoRotation === deg
                       ? 'border-[var(--color-secondary)] bg-[var(--color-secondary)]/10 text-[var(--color-secondary)]'
                       : 'border-[var(--color-border)] text-gray-500 hover:border-gray-400'
-                  }`}
+                    }`}
                 >
                   {deg}°
                 </button>
