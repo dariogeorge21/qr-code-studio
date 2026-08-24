@@ -1,10 +1,11 @@
+import { ShieldCheck } from 'lucide-react';
+
 export default function PrivacyPage() {
-  const EFFECTIVE = 'March 1, 2026';
+  const EFFECTIVE = 'August 24, 2026';
   const CONTACT_EMAIL = 'mail.dariogeorge@gmail.com';
 
   return (
     <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 py-12 pb-20">
-      {/* Header */}
       <div className="mb-10">
         <span className="text-xs font-semibold text-[var(--color-secondary)] uppercase tracking-widest">
           Legal
@@ -17,27 +18,35 @@ export default function PrivacyPage() {
         </p>
       </div>
 
-      {/* Privacy-first badge */}
-      <div className="bg-emerald-50 dark:bg-emerald-900/20 border border-emerald-200 dark:border-emerald-800/40 rounded-2xl p-4 mb-10 flex gap-3">
-        <span className="text-2xl shrink-0">🔒</span>
+      <div className="rounded-2xl border border-emerald-200 dark:border-emerald-800/50 bg-emerald-50/70 dark:bg-emerald-950/30 p-5 mb-10 flex items-start sm:items-center gap-4 shadow-sm">
+        <div className="flex-shrink-0 w-10 h-10 rounded-xl bg-emerald-100 dark:bg-emerald-900/50 text-emerald-800 dark:text-emerald-300 flex items-center justify-center">
+          <ShieldCheck className="w-5 h-5" />
+        </div>
         <div>
-          <p className="text-sm font-semibold text-emerald-800 dark:text-emerald-300">
+          <h2 className="text-base font-bold text-black dark:text-emerald-200">
             Privacy-first by design
-          </p>
-          <p className="text-sm text-emerald-700 dark:text-emerald-400 mt-0.5">
+          </h2>
+          <p className="text-sm text-black dark:text-emerald-400 mt-0.5 leading-relaxed">
             We never store your QR code content, URLs, WiFi passwords, payment IDs, or any personal
             data you encode. All QR generation happens in your browser.
           </p>
         </div>
       </div>
 
-      {/* Body */}
       <article className="space-y-8 text-[var(--color-text)]">
 
         <Section title="1. Who We Are">
           <p>
-            QR Code Studio is a free QR code generator built and operated by Dario George. If you
-            have any privacy-related questions, contact us at{' '}
+            QR Code Studio is a free QR code generator built and operated by{' '}
+            <a
+              href="https://github.com/dariogeorge21"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[var(--color-secondary)] underline underline-offset-2 hover:opacity-80"
+            >
+              Dario George
+            </a>
+            . If you have any privacy-related questions, contact us at{' '}
             <a href={`mailto:${CONTACT_EMAIL}`} className="text-[var(--color-secondary)] underline underline-offset-2 hover:opacity-80">
               {CONTACT_EMAIL}
             </a>.
@@ -115,7 +124,7 @@ export default function PrivacyPage() {
 
         <Section title="6. Data Storage & Security">
           <p>
-            Anonymous usage metadata and contact form submissions are stored with us. 
+            Anonymous usage metadata and contact form submissions are stored with us.
           </p>
         </Section>
 
@@ -172,7 +181,6 @@ export default function PrivacyPage() {
         </Section>
       </article>
 
-      {/* Footer nav */}
       <div className="mt-12 pt-6 border-t border-[var(--color-border)] flex flex-wrap gap-4 text-sm">
         <a href="/terms" className="text-[var(--color-secondary)] hover:opacity-80 transition">
           Terms of Service →
