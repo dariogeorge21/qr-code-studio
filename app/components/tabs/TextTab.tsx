@@ -617,18 +617,14 @@ export default function TextTab() {
   const copyTypographyCSS = () => {
     const css = [
       title.trim()
-        ? `/* QR Title */\n.qr-title {\n  font-family: "${titleFontFamily}";\n  font-size: ${titleFontSize}px;\n  font-weight: ${titleFontWeight};\n  color: ${titleColor};\n  text-align: ${titleAlign};\n  letter-spacing: ${titleLetterSpacing}px;\n  margin-bottom: ${titleSpacing}px;\n${
-            titleTextTransform !== 'none' ? `  text-transform: ${titleTextTransform};\n` : ''
-          }${titleTextDecoration !== 'none' ? `  text-decoration: ${titleTextDecoration};\n` : ''}${
-            titleTextShadow ? `  text-shadow: 0 2px ${titleTextShadowBlur}px ${titleTextShadowColor};\n` : ''
-          }}`
+        ? `/* QR Title */\n.qr-title {\n  font-family: "${titleFontFamily}";\n  font-size: ${titleFontSize}px;\n  font-weight: ${titleFontWeight};\n  color: ${titleColor};\n  text-align: ${titleAlign};\n  letter-spacing: ${titleLetterSpacing}px;\n  margin-bottom: ${titleSpacing}px;\n${titleTextTransform !== 'none' ? `  text-transform: ${titleTextTransform};\n` : ''
+        }${titleTextDecoration !== 'none' ? `  text-decoration: ${titleTextDecoration};\n` : ''}${titleTextShadow ? `  text-shadow: 0 2px ${titleTextShadowBlur}px ${titleTextShadowColor};\n` : ''
+        }}`
         : null,
       caption.trim()
-        ? `/* QR Caption */\n.qr-caption {\n  font-family: "${captionFontFamily}";\n  font-size: ${captionFontSize}px;\n  font-weight: ${captionFontWeight};\n  color: ${captionColor};\n  text-align: ${captionAlign};\n  letter-spacing: ${captionLetterSpacing}px;\n  margin-top: ${captionSpacing}px;\n${
-            captionTextTransform !== 'none' ? `  text-transform: ${captionTextTransform};\n` : ''
-          }${captionTextDecoration !== 'none' ? `  text-decoration: ${captionTextDecoration};\n` : ''}${
-            captionTextShadow ? `  text-shadow: 0 2px ${captionTextShadowBlur}px ${captionTextShadowColor};\n` : ''
-          }}`
+        ? `/* QR Caption */\n.qr-caption {\n  font-family: "${captionFontFamily}";\n  font-size: ${captionFontSize}px;\n  font-weight: ${captionFontWeight};\n  color: ${captionColor};\n  text-align: ${captionAlign};\n  letter-spacing: ${captionLetterSpacing}px;\n  margin-top: ${captionSpacing}px;\n${captionTextTransform !== 'none' ? `  text-transform: ${captionTextTransform};\n` : ''
+        }${captionTextDecoration !== 'none' ? `  text-decoration: ${captionTextDecoration};\n` : ''}${captionTextShadow ? `  text-shadow: 0 2px ${captionTextShadowBlur}px ${captionTextShadowColor};\n` : ''
+        }}`
         : null,
     ]
       .filter(Boolean)
@@ -707,11 +703,10 @@ export default function TextTab() {
           key={item.id}
           type="button"
           onClick={() => onChange(item.id)}
-          className={`flex-1 py-1.5 px-2 rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer ${
-            current === item.id
-              ? 'bg-white dark:bg-black text-[var(--color-secondary)] shadow-xs'
-              : 'text-gray-500 dark:text-gray-400 hover:text-[var(--color-text)]'
-          }`}
+          className={`flex-1 py-1.5 px-2 rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer ${current === item.id
+            ? 'bg-white dark:bg-black text-[var(--color-secondary)] shadow-xs'
+            : 'text-gray-500 dark:text-gray-400 hover:text-[var(--color-text)]'
+            }`}
           title={item.label}
         >
           {item.icon}
@@ -729,11 +724,10 @@ export default function TextTab() {
           key={item.value}
           type="button"
           onClick={() => onChange(item.value)}
-          className={`flex-1 py-1.5 px-1.5 rounded-lg text-[11px] font-bold transition-all whitespace-nowrap cursor-pointer ${
-            current === item.value
-              ? 'bg-white dark:bg-black text-[var(--color-secondary)] shadow-xs'
-              : 'text-gray-500 dark:text-gray-400 hover:text-[var(--color-text)]'
-          }`}
+          className={`flex-1 py-1.5 px-1.5 rounded-lg text-[11px] font-bold transition-all whitespace-nowrap cursor-pointer ${current === item.value
+            ? 'bg-white dark:bg-black text-[var(--color-secondary)] shadow-xs'
+            : 'text-gray-500 dark:text-gray-400 hover:text-[var(--color-text)]'
+            }`}
           title={item.label}
         >
           {item.icon}
@@ -750,11 +744,10 @@ export default function TextTab() {
           key={item.value}
           type="button"
           onClick={() => onChange(item.value)}
-          className={`flex-1 py-1.5 px-1.5 rounded-lg text-[11px] font-bold transition-all whitespace-nowrap cursor-pointer ${
-            current === item.value
-              ? 'bg-white dark:bg-black text-[var(--color-secondary)] shadow-xs'
-              : 'text-gray-500 dark:text-gray-400 hover:text-[var(--color-text)]'
-          }`}
+          className={`flex-1 py-1.5 px-1.5 rounded-lg text-[11px] font-bold transition-all whitespace-nowrap cursor-pointer ${current === item.value
+            ? 'bg-white dark:bg-black text-[var(--color-secondary)] shadow-xs'
+            : 'text-gray-500 dark:text-gray-400 hover:text-[var(--color-text)]'
+            }`}
           title={item.label}
         >
           {item.icon}
@@ -851,11 +844,10 @@ export default function TextTab() {
         <button
           type="button"
           onClick={() => setActiveSubTab('presets')}
-          className={`flex-1 min-w-[70px] py-2 px-2 text-[11px] font-bold rounded-xl flex items-center justify-center gap-1.5 transition-all whitespace-nowrap active:scale-95 cursor-pointer ${
-            activeSubTab === 'presets'
-              ? 'bg-white dark:bg-black text-[var(--color-text)] shadow-xs font-extrabold'
-              : 'text-gray-500 dark:text-gray-400 hover:text-[var(--color-text)]'
-          }`}
+          className={`flex-1 min-w-[70px] py-2 px-2 text-[11px] font-bold rounded-xl flex items-center justify-center gap-1.5 transition-all whitespace-nowrap active:scale-95 cursor-pointer ${activeSubTab === 'presets'
+            ? 'bg-white dark:bg-black text-[var(--color-text)] shadow-xs font-extrabold'
+            : 'text-gray-500 dark:text-gray-400 hover:text-[var(--color-text)]'
+            }`}
         >
           <Sparkles className="w-3.5 h-3.5 text-orange-500 dark:text-yellow-400" />
           Presets
@@ -864,11 +856,10 @@ export default function TextTab() {
         <button
           type="button"
           onClick={() => setActiveSubTab('title')}
-          className={`flex-1 min-w-[70px] py-2 px-2 text-[11px] font-bold rounded-xl flex items-center justify-center gap-1.5 transition-all whitespace-nowrap active:scale-95 cursor-pointer ${
-            activeSubTab === 'title'
-              ? 'bg-white dark:bg-black text-[var(--color-text)] shadow-xs font-extrabold'
-              : 'text-gray-500 dark:text-gray-400 hover:text-[var(--color-text)]'
-          }`}
+          className={`flex-1 min-w-[70px] py-2 px-2 text-[11px] font-bold rounded-xl flex items-center justify-center gap-1.5 transition-all whitespace-nowrap active:scale-95 cursor-pointer ${activeSubTab === 'title'
+            ? 'bg-white dark:bg-black text-[var(--color-text)] shadow-xs font-extrabold'
+            : 'text-gray-500 dark:text-gray-400 hover:text-[var(--color-text)]'
+            }`}
         >
           <Type className="w-3.5 h-3.5" />
           Header
@@ -878,11 +869,10 @@ export default function TextTab() {
         <button
           type="button"
           onClick={() => setActiveSubTab('caption')}
-          className={`flex-1 min-w-[70px] py-2 px-2 text-[11px] font-bold rounded-xl flex items-center justify-center gap-1.5 transition-all whitespace-nowrap active:scale-95 cursor-pointer ${
-            activeSubTab === 'caption'
-              ? 'bg-white dark:bg-black text-[var(--color-text)] shadow-xs font-extrabold'
-              : 'text-gray-500 dark:text-gray-400 hover:text-[var(--color-text)]'
-          }`}
+          className={`flex-1 min-w-[70px] py-2 px-2 text-[11px] font-bold rounded-xl flex items-center justify-center gap-1.5 transition-all whitespace-nowrap active:scale-95 cursor-pointer ${activeSubTab === 'caption'
+            ? 'bg-white dark:bg-black text-[var(--color-text)] shadow-xs font-extrabold'
+            : 'text-gray-500 dark:text-gray-400 hover:text-[var(--color-text)]'
+            }`}
         >
           <Baseline className="w-3.5 h-3.5" />
           Caption
@@ -892,11 +882,10 @@ export default function TextTab() {
         <button
           type="button"
           onClick={() => setActiveSubTab('watermark')}
-          className={`flex-1 min-w-[70px] py-2 px-2 text-[11px] font-bold rounded-xl flex items-center justify-center gap-1.5 transition-all whitespace-nowrap active:scale-95 cursor-pointer ${
-            activeSubTab === 'watermark'
-              ? 'bg-white dark:bg-black text-[var(--color-text)] shadow-xs font-extrabold'
-              : 'text-gray-500 dark:text-gray-400 hover:text-[var(--color-text)]'
-          }`}
+          className={`flex-1 min-w-[70px] py-2 px-2 text-[11px] font-bold rounded-xl flex items-center justify-center gap-1.5 transition-all whitespace-nowrap active:scale-95 cursor-pointer ${activeSubTab === 'watermark'
+            ? 'bg-white dark:bg-black text-[var(--color-text)] shadow-xs font-extrabold'
+            : 'text-gray-500 dark:text-gray-400 hover:text-[var(--color-text)]'
+            }`}
         >
           <Layers className="w-3.5 h-3.5 text-blue-500" />
           Overlay
@@ -906,11 +895,10 @@ export default function TextTab() {
         <button
           type="button"
           onClick={() => setActiveSubTab('saved')}
-          className={`flex-1 min-w-[70px] py-2 px-2 text-[11px] font-bold rounded-xl flex items-center justify-center gap-1.5 transition-all whitespace-nowrap active:scale-95 cursor-pointer ${
-            activeSubTab === 'saved'
-              ? 'bg-white dark:bg-black text-[var(--color-text)] shadow-xs font-extrabold'
-              : 'text-gray-500 dark:text-gray-400 hover:text-[var(--color-text)]'
-          }`}
+          className={`flex-1 min-w-[70px] py-2 px-2 text-[11px] font-bold rounded-xl flex items-center justify-center gap-1.5 transition-all whitespace-nowrap active:scale-95 cursor-pointer ${activeSubTab === 'saved'
+            ? 'bg-white dark:bg-black text-[var(--color-text)] shadow-xs font-extrabold'
+            : 'text-gray-500 dark:text-gray-400 hover:text-[var(--color-text)]'
+            }`}
         >
           <Bookmark className="w-3.5 h-3.5" />
           Saved
@@ -1025,11 +1013,10 @@ export default function TextTab() {
                 key={cat}
                 type="button"
                 onClick={() => setPresetCategory(cat)}
-                className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all whitespace-nowrap cursor-pointer ${
-                  presetCategory === cat
-                    ? 'bg-[var(--color-secondary)] text-white shadow-xs'
-                    : 'bg-gray-100 dark:bg-white/5 text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-white/10'
-                }`}
+                className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all whitespace-nowrap cursor-pointer ${presetCategory === cat
+                  ? 'bg-[var(--color-secondary)] text-white shadow-xs'
+                  : 'bg-gray-100 dark:bg-white/5 text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-white/10'
+                  }`}
               >
                 {cat}
               </button>
@@ -1066,11 +1053,10 @@ export default function TextTab() {
                   key={p.name}
                   type="button"
                   onClick={() => applyPreset(p)}
-                  className={`p-3.5 rounded-2xl border text-left transition-all duration-200 flex flex-col justify-between gap-3 group relative cursor-pointer active:scale-98 ${
-                    isSelected
-                      ? 'border-[var(--color-secondary)] bg-[var(--color-secondary)]/5 shadow-sm'
-                      : 'border-[var(--color-border)] bg-white dark:bg-white/5 hover:border-[var(--color-secondary)]/40 hover:bg-gray-50 dark:hover:bg-white/10'
-                  }`}
+                  className={`p-3.5 rounded-2xl border text-left transition-all duration-200 flex flex-col justify-between gap-3 group relative cursor-pointer active:scale-98 ${isSelected
+                    ? 'border-[var(--color-secondary)] bg-[var(--color-secondary)]/5 shadow-sm'
+                    : 'border-[var(--color-border)] bg-white dark:bg-white/5 hover:border-[var(--color-secondary)]/40 hover:bg-gray-50 dark:hover:bg-white/10'
+                    }`}
                 >
                   <div className="flex items-center justify-between w-full">
                     <div className="flex items-center gap-2">
@@ -1168,11 +1154,10 @@ export default function TextTab() {
                     key={lib.name}
                     type="button"
                     onClick={() => setSelectedPhraseCat(lib.name)}
-                    className={`px-2 py-0.5 text-[10px] font-bold rounded-lg transition-all cursor-pointer whitespace-nowrap ${
-                      selectedPhraseCat === lib.name
-                        ? 'bg-[var(--color-secondary)] text-white'
-                        : 'bg-gray-100 dark:bg-white/10 text-gray-500 hover:text-[var(--color-text)]'
-                    }`}
+                    className={`px-2 py-0.5 text-[10px] font-bold rounded-lg transition-all cursor-pointer whitespace-nowrap ${selectedPhraseCat === lib.name
+                      ? 'bg-[var(--color-secondary)] text-white'
+                      : 'bg-gray-100 dark:bg-white/10 text-gray-500 hover:text-[var(--color-text)]'
+                      }`}
                   >
                     {lib.icon} {lib.name}
                   </button>
@@ -1357,11 +1342,10 @@ export default function TextTab() {
                     key={lib.name}
                     type="button"
                     onClick={() => setSelectedPhraseCat(lib.name)}
-                    className={`px-2 py-0.5 text-[10px] font-bold rounded-lg transition-all cursor-pointer whitespace-nowrap ${
-                      selectedPhraseCat === lib.name
-                        ? 'bg-[var(--color-secondary)] text-white'
-                        : 'bg-gray-100 dark:bg-white/10 text-gray-500 hover:text-[var(--color-text)]'
-                    }`}
+                    className={`px-2 py-0.5 text-[10px] font-bold rounded-lg transition-all cursor-pointer whitespace-nowrap ${selectedPhraseCat === lib.name
+                      ? 'bg-[var(--color-secondary)] text-white'
+                      : 'bg-gray-100 dark:bg-white/10 text-gray-500 hover:text-[var(--color-text)]'
+                      }`}
                   >
                     {lib.icon} {lib.name}
                   </button>
@@ -1591,11 +1575,10 @@ export default function TextTab() {
                       key={angle}
                       type="button"
                       onClick={() => set({ bgTextRotation: angle })}
-                      className={`flex-1 py-1.5 text-xs font-mono font-bold rounded-lg border transition-all cursor-pointer ${
-                        bgTextRotation === angle
-                          ? 'border-[var(--color-secondary)] bg-[var(--color-secondary)]/10 text-[var(--color-secondary)]'
-                          : 'border-[var(--color-border)] bg-white dark:bg-black/40 hover:bg-gray-100 dark:hover:bg-white/10'
-                      }`}
+                      className={`flex-1 py-1.5 text-xs font-mono font-bold rounded-lg border transition-all cursor-pointer ${bgTextRotation === angle
+                        ? 'border-[var(--color-secondary)] bg-[var(--color-secondary)]/10 text-[var(--color-secondary)]'
+                        : 'border-[var(--color-border)] bg-white dark:bg-black/40 hover:bg-gray-100 dark:hover:bg-white/10'
+                        }`}
                     >
                       {angle}°
                     </button>
