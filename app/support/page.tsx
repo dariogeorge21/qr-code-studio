@@ -22,8 +22,6 @@ const WHY_ITEMS = [
 	},
 ];
 
-const UPI_ID = 'dario.george@federal'; // 🔁 replace with your real UPI ID
-
 export default function SupportPage() {
 	const [copied, setCopied] = useState(false);
 	const siteUrl = 'https://qr.dariogeorge.in';
@@ -157,7 +155,7 @@ export default function SupportPage() {
 					Spread the word
 				</h2>
 				<p className="text-sm text-gray-500 dark:text-gray-400 mb-5">
-					Can&apos;t donate right now? Sharing QR Code Studio with someone who could use it is just as valuable. 🙌
+					Can&apos;t donate right now? Sharing QR Code Studio with someone who could use it is just as valuable. 
 				</p>
 				<div className="flex flex-wrap gap-3">
 					{shareLinks.map((s) => (
