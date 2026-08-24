@@ -1,5 +1,6 @@
 import { QrCode, Zap, Palette, Download, Shield, Globe } from 'lucide-react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 const FEATURES = [
   {
@@ -68,8 +69,14 @@ export default function AboutPage() {
           </p>
         </div>
         <div className="mt-6 flex items-center gap-4">
-          <div className="w-12 h-12 rounded-full bg-orange-100 dark:bg-orange-900/30 flex items-center justify-center text-xl font-extrabold text-orange-600 dark:text-yellow-400">
-            D
+          <div className="w-12 h-12 rounded-full overflow-hidden bg-orange-100 dark:bg-orange-900/30">
+            <Image
+              src="/Dario.jpeg"
+              alt="Dario George"
+              width={48}
+              height={48}
+              className="w-full h-full object-cover"
+            />
           </div>
           <div>
             <p className="font-bold text-[var(--color-text)]">Dario George</p>
