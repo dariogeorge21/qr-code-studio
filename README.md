@@ -41,37 +41,7 @@ yarn install
 # or
 pnpm install
 ```
-
-3. Configure the database (Neon)
-
-This app uses a shared Postgres connection module named `sharedDB` and expects a Neon Postgres URL.
-
-Create a `.env.local` file with:
-
-```bash
-DATABASE_URL="postgresql://..."
-ADMIN_MASTER_PASSWORD_HASH_B64="<base64-of-bcrypt-hash>"
-```
-
-Note: Next.js expands `$VARS` inside `.env` files. Since bcrypt hashes contain `$` (e.g. `$2b$10$...`), storing a raw bcrypt hash in `.env` often expands to an empty string unless you escape every `$` as `\$`. Using `ADMIN_MASTER_PASSWORD_HASH_B64` avoids this entirely.
-
-Apply the schema to Neon:
-
-```bash
-psql "$DATABASE_URL" -f db/schema.sql
-```
-
-Generate `ADMIN_MASTER_PASSWORD_HASH_B64` (bcrypt, base64-encoded) with:
-
-```bash
-node -e "const bcrypt=require('bcrypt'); bcrypt.hash(process.argv[1], 10).then((h)=>console.log(Buffer.from(h).toString('base64')))" "your-admin-password"
-```
-
-The app accepts standard bcrypt hashes (`$2a$`, `$2b$`, `$2y$`) with any cost.
-
-If you really want to use `ADMIN_MASTER_PASSWORD_HASH` directly, you must escape each `$` in the `.env` value as `\$`.
-
-4. Run the development server:
+3. Run the development server:
 ```bash
 npm run dev
 # or
@@ -80,7 +50,7 @@ yarn dev
 pnpm dev
 ```
 
-4. Open [http://localhost:3000](http://localhost:3000) in your browser to see the application.
+5. Open [http://localhost:3000](http://localhost:3000) in your browser to see the application.
 
 ## 📦 Build for Production
 
@@ -180,62 +150,6 @@ The interface adapts seamlessly to:
 - Tablets (768px - 1024px)
 - Mobile devices (320px - 767px)
 
-## 📁 Project Structure
-
-```
-qr-code-generator/
-├── app/
-│   ├── globals.css          # Global styles and Tailwind imports
-│   ├── layout.tsx            # Root layout with metadata
-│   └── page.tsx              # Main QR code generator component
-├── public/                   # Static assets
-├── package.json              # Dependencies and scripts
-├── tsconfig.json             # TypeScript configuration
-├── tailwind.config.ts        # Tailwind CSS configuration
-└── README.md                 # This file
-```
-
-## 🔧 Configuration
-
-### Customizing QR Code Appearance
-
-You can modify the QR code appearance in `app/page.tsx`:
-
-```typescript
-// PNG generation options
-await toCanvas(canvas, inputValue, {
-  width: 512,        // Image size
-  margin: 2,         // Border margin
-  color: {
-    dark: '#000000', // QR code color
-    light: '#FFFFFF', // Background color
-  },
-});
-
-// SVG display options
-<QRCode
-  value={inputValue}
-  size={256}         // Display size
-  fgColor="#000000"  // QR code color
-  bgColor="#FFFFFF"  // Background color
-/>
-```
-
-### UPI Payment URL Format
-
-The application generates UPI payment URLs in the standard format:
-```
-upi://pay?pa=<UPI_ID>&pn=<PAYEE_NAME>&am=<AMOUNT>&cu=INR&tn=<TRANSACTION_NOTE>
-```
-
-- `pa`: Payment address (UPI ID) - Required
-- `pn`: Payee name - Optional
-- `am`: Amount in rupees - Optional (if omitted, allows any amount)
-- `cu`: Currency (always INR) - Added when amount is specified
-- `tn`: Transaction note - Optional
-
-The amount is formatted to 2 decimal places (e.g., `10000` becomes `10000.00`) to ensure compatibility with UPI payment systems.
-
 ## 🐛 Troubleshooting
 
 ### Build Errors
@@ -248,12 +162,6 @@ npm run build
 
 ### Download Not Working
 Ensure your browser allows downloads and pop-ups are not blocked.
-
-### UPI QR Code Not Working
-- Ensure you've entered a valid UPI ID in the correct format (e.g., `yourname@paytm`)
-- Verify the amount is entered correctly (supports values like 10000, 100000, etc.)
-- Test the QR code with a UPI app to ensure it scans correctly
-- Make sure all required fields (UPI ID) are filled before generating
 
 ## 📝 License
 
