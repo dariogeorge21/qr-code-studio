@@ -65,22 +65,22 @@ export default function ConsentBanner() {
           : 'opacity-100 translate-y-0 scale-100'
       }`}
     >
-      <div className="relative overflow-hidden rounded-2xl border border-[var(--color-border)] bg-[var(--color-background)]/95 dark:bg-[#121212]/95 backdrop-blur-xl p-5 shadow-2xl shadow-black/10 dark:shadow-black/50">
+      <div className="relative overflow-hidden rounded-2xl border border-[var(--color-border)] bg-[var(--color-background)]/95 backdrop-blur-xl p-5 shadow-2xl shadow-black/10 dark:shadow-black/60 transition-colors duration-300">
         {/* Accent top gradient line */}
-        <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-orange-500 via-amber-400 to-orange-600" />
+        <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[var(--color-secondary)] via-[var(--color-tertiary)] to-[var(--color-secondary)]" />
 
         {/* Close icon button */}
         <button
           type="button"
           onClick={handleDecline}
           aria-label="Dismiss consent notification"
-          className="absolute top-3.5 right-3.5 p-1.5 rounded-lg text-gray-400 hover:text-[var(--color-text)] hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+          className="absolute top-3.5 right-3.5 p-1.5 rounded-lg text-gray-400 dark:text-gray-500 hover:text-[var(--color-text)] hover:bg-gray-100 dark:hover:bg-neutral-800 transition-colors cursor-pointer"
         >
           <X className="w-4 h-4" />
         </button>
 
         <div className="flex items-start gap-3.5 pr-6">
-          <div className="flex-shrink-0 w-9 h-9 rounded-xl bg-orange-100 dark:bg-orange-950/60 text-orange-600 dark:text-amber-400 flex items-center justify-center border border-orange-200/50 dark:border-orange-800/40">
+          <div className="flex-shrink-0 w-9 h-9 rounded-xl bg-[var(--color-secondary)]/10 dark:bg-[var(--color-tertiary)]/10 text-[var(--color-secondary)] dark:text-[var(--color-tertiary)] flex items-center justify-center border border-[var(--color-secondary)]/20 dark:border-[var(--color-tertiary)]/20 transition-colors">
             <ShieldCheck className="w-5 h-5" />
           </div>
 
@@ -92,14 +92,14 @@ export default function ConsentBanner() {
               We use cookies and local storage to deliver our services. Your QR codes are generated directly in your browser and we never store your personal QR content. By continuing, you agree to our{' '}
               <Link
                 href="/terms"
-                className="font-semibold text-orange-600 dark:text-amber-400 hover:underline underline-offset-2"
+                className="font-semibold text-[var(--color-secondary)] dark:text-[var(--color-tertiary)] hover:underline underline-offset-2 transition-colors"
               >
                 Terms of Service
               </Link>{' '}
               and{' '}
               <Link
                 href="/privacy"
-                className="font-semibold text-orange-600 dark:text-amber-400 hover:underline underline-offset-2"
+                className="font-semibold text-[var(--color-secondary)] dark:text-[var(--color-tertiary)] hover:underline underline-offset-2 transition-colors"
               >
                 Privacy Policy
               </Link>
@@ -113,14 +113,14 @@ export default function ConsentBanner() {
           <button
             type="button"
             onClick={handleDecline}
-            className="px-3.5 py-2 rounded-xl text-xs font-semibold text-gray-500 dark:text-gray-400 hover:text-[var(--color-text)] hover:bg-gray-100 dark:hover:bg-gray-800/80 transition-colors"
+            className="px-3.5 py-2 rounded-xl text-xs font-semibold text-gray-500 dark:text-gray-400 hover:text-[var(--color-text)] hover:bg-gray-100 dark:hover:bg-neutral-800 transition-colors cursor-pointer"
           >
             Decline
           </button>
           <button
             type="button"
             onClick={handleAccept}
-            className="px-5 py-2 rounded-xl text-xs font-bold bg-orange-600 hover:bg-orange-700 text-white dark:bg-yellow-400 dark:hover:bg-yellow-500 dark:text-black shadow-md hover:shadow-lg active:scale-[0.98] transition-all"
+            className="px-5 py-2 rounded-xl text-xs font-bold bg-[var(--color-secondary)] hover:opacity-90 text-white dark:bg-[var(--color-tertiary)] dark:text-black shadow-md hover:shadow-lg active:scale-[0.98] transition-all cursor-pointer"
           >
             Accept All
           </button>
