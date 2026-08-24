@@ -2,7 +2,8 @@
 
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-import { CheckCircle, MessageCircle, Twitter, Link2, Mail, QrCode, BanknoteX, Loader2 } from 'lucide-react';
+import Link from 'next/link';
+import { CheckCircle, MessageCircle, Twitter, Link2, Mail, QrCode, BanknoteX, Loader2, Github } from 'lucide-react';
 
 export default function ThankYouPage() {
   const router = useRouter();
@@ -83,16 +84,27 @@ export default function ThankYouPage() {
 
       {/* Support Section */}
       <div className="text-center mb-10 p-6 rounded-2xl border border-[var(--color-border)] bg-[var(--color-background)] shadow-sm">
-        <p className="text-sm text-gray-500 dark:text-gray-400 mb-3">
-          Love this tool? Support the project
+        <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">
+          Love this tool? Support the project or follow along
         </p>
-        <a
-          href="/support"
-          className="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-bold bg-[var(--color-tertiary)] text-black hover:opacity-90 transition-all shadow-sm"
-        >
-          <BanknoteX className="w-4 h-4" />
-          Support Us
-        </a>
+        <div className="flex flex-wrap items-center justify-center gap-3">
+          <Link
+            href="/support"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-bold bg-[var(--color-tertiary)] text-black hover:opacity-90 transition-all shadow-sm active:scale-[0.98]"
+          >
+            <BanknoteX className="w-4 h-4" />
+            Support Us
+          </Link>
+          <a
+            href="https://github.com/dariogeorge21"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-bold border border-[var(--color-border)] text-[var(--color-text)] bg-gray-50 dark:bg-gray-800/60 hover:border-orange-600 dark:hover:border-yellow-400 hover:text-orange-600 dark:hover:text-yellow-400 transition-all shadow-sm active:scale-[0.98]"
+          >
+            <Github className="w-4 h-4" />
+            Follow on GitHub
+          </a>
+        </div>
       </div>
 
       {/* Create Another */}
