@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Dosis } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "./components/shared/ThemeProvider";
+import ConsentBanner from "./components/shared/ConsentBanner";
 import { Analytics } from "@vercel/analytics/next";
 
 const dosis = Dosis({
@@ -39,6 +40,7 @@ export default function RootLayout({
       <body className={`${dosis.variable} font-sans antialiased min-h-screen flex flex-col`}>
         <ThemeProvider>
           {children}
+          <ConsentBanner />
         </ThemeProvider>
         <Analytics />
       </body>
