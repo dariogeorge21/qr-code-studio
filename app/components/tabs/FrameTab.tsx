@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useMemo, useCallback, useEffect } from 'react';
+import { useState, useMemo, useCallback, useEffect, useRef } from 'react';
 import { useQRStore } from '../../store/useQRStore';
 import {
   FRAME_PRESETS,
@@ -343,9 +343,11 @@ export default function FrameTab() {
   }, []);
 
   // Toast feedback trigger
+  const toastTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const showToast = (msg: string) => {
+    if (toastTimeoutRef.current) clearTimeout(toastTimeoutRef.current);
     setToastMessage(msg);
-    setTimeout(() => setToastMessage(null), 2200);
+    toastTimeoutRef.current = setTimeout(() => setToastMessage(null), 2200);
   };
 
   /* ── Filtered presets ── */
@@ -791,13 +793,15 @@ export default function FrameTab() {
         </button>
       </div>
 
-      {/* ── Toast Notification ── */}
-      {toastMessage && (
-        <div className="flex items-center justify-center gap-1.5 py-1 px-3 mx-auto w-fit bg-black dark:bg-white text-white dark:text-black text-[11px] font-bold rounded-full shadow-lg animate-fade-in-up">
-          <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 dark:text-emerald-600" />
-          <span>{toastMessage}</span>
-        </div>
-      )}
+      {/* ── Toast notification feedback (Space preserved) ── */}
+      <div className="h-6 flex items-center justify-center pointer-events-none -my-1">
+        {toastMessage && (
+          <div className="flex items-center justify-center gap-1.5 py-1 px-3.5 mx-auto w-fit bg-black dark:bg-white text-white dark:text-black text-[11px] font-bold rounded-full shadow-lg animate-fade-in-up pointer-events-auto">
+            <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 dark:text-emerald-600 shrink-0" />
+            <span>{toastMessage}</span>
+          </div>
+        )}
+      </div>
 
       {/* ────────────────── SUB-TAB 1: PRESETS ────────────────── */}
       {activeSubTab === 'presets' && (
