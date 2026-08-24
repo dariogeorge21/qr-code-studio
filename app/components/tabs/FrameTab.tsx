@@ -688,14 +688,12 @@ export default function FrameTab() {
     return (
       <button
         onClick={onToggle}
-        className={`${w} rounded-full transition-all cursor-pointer ${
-          enabled ? 'bg-[var(--color-secondary)]' : 'bg-gray-300 dark:bg-gray-700'
-        } relative shrink-0`}
+        className={`${w} rounded-full transition-all cursor-pointer ${enabled ? 'bg-[var(--color-secondary)]' : 'bg-gray-300 dark:bg-gray-700'
+          } relative shrink-0`}
       >
         <div
-          className={`absolute top-1 ${dot} bg-white rounded-full transition-all ${
-            enabled ? on : 'left-1'
-          }`}
+          className={`absolute top-1 ${dot} bg-white rounded-full transition-all ${enabled ? on : 'left-1'
+            }`}
         />
       </button>
     );
@@ -739,11 +737,10 @@ export default function FrameTab() {
       <div className="flex p-1 bg-gray-100 dark:bg-white/5 rounded-2xl border border-[var(--color-border)] gap-1 overflow-x-auto scrollbar-none">
         <button
           onClick={() => setActiveSubTab('presets')}
-          className={`flex-1 min-w-[72px] py-2 px-2 text-[11px] font-bold rounded-xl flex items-center justify-center gap-1.5 transition-all whitespace-nowrap active:scale-95 cursor-pointer ${
-            activeSubTab === 'presets'
-              ? 'bg-white dark:bg-black text-[var(--color-text)] shadow-xs font-extrabold'
-              : 'text-gray-500 dark:text-gray-400 hover:text-[var(--color-text)]'
-          }`}
+          className={`flex-1 min-w-[72px] py-2 px-2 text-[11px] font-bold rounded-xl flex items-center justify-center gap-1.5 transition-all whitespace-nowrap active:scale-95 cursor-pointer ${activeSubTab === 'presets'
+            ? 'bg-white dark:bg-black text-[var(--color-text)] shadow-xs font-extrabold'
+            : 'text-gray-500 dark:text-gray-400 hover:text-[var(--color-text)]'
+            }`}
         >
           <Sparkles className="w-3.5 h-3.5 text-orange-500 dark:text-yellow-400" />
           Presets
@@ -751,11 +748,10 @@ export default function FrameTab() {
 
         <button
           onClick={() => setActiveSubTab('border')}
-          className={`flex-1 min-w-[72px] py-2 px-2 text-[11px] font-bold rounded-xl flex items-center justify-center gap-1.5 transition-all whitespace-nowrap active:scale-95 cursor-pointer ${
-            activeSubTab === 'border'
-              ? 'bg-white dark:bg-black text-[var(--color-text)] shadow-xs font-extrabold'
-              : 'text-gray-500 dark:text-gray-400 hover:text-[var(--color-text)]'
-          }`}
+          className={`flex-1 min-w-[72px] py-2 px-2 text-[11px] font-bold rounded-xl flex items-center justify-center gap-1.5 transition-all whitespace-nowrap active:scale-95 cursor-pointer ${activeSubTab === 'border'
+            ? 'bg-white dark:bg-black text-[var(--color-text)] shadow-xs font-extrabold'
+            : 'text-gray-500 dark:text-gray-400 hover:text-[var(--color-text)]'
+            }`}
         >
           <Square className="w-3.5 h-3.5" />
           Border
@@ -763,11 +759,10 @@ export default function FrameTab() {
 
         <button
           onClick={() => setActiveSubTab('shadow')}
-          className={`flex-1 min-w-[72px] py-2 px-2 text-[11px] font-bold rounded-xl flex items-center justify-center gap-1.5 transition-all whitespace-nowrap active:scale-95 cursor-pointer ${
-            activeSubTab === 'shadow'
-              ? 'bg-white dark:bg-black text-[var(--color-text)] shadow-xs font-extrabold'
-              : 'text-gray-500 dark:text-gray-400 hover:text-[var(--color-text)]'
-          }`}
+          className={`flex-1 min-w-[72px] py-2 px-2 text-[11px] font-bold rounded-xl flex items-center justify-center gap-1.5 transition-all whitespace-nowrap active:scale-95 cursor-pointer ${activeSubTab === 'shadow'
+            ? 'bg-white dark:bg-black text-[var(--color-text)] shadow-xs font-extrabold'
+            : 'text-gray-500 dark:text-gray-400 hover:text-[var(--color-text)]'
+            }`}
         >
           <Sun className="w-3.5 h-3.5 text-amber-500" />
           Shadow
@@ -775,11 +770,10 @@ export default function FrameTab() {
 
         <button
           onClick={() => setActiveSubTab('spacing')}
-          className={`flex-1 min-w-[72px] py-2 px-2 text-[11px] font-bold rounded-xl flex items-center justify-center gap-1.5 transition-all whitespace-nowrap active:scale-95 cursor-pointer ${
-            activeSubTab === 'spacing'
-              ? 'bg-white dark:bg-black text-[var(--color-text)] shadow-xs font-extrabold'
-              : 'text-gray-500 dark:text-gray-400 hover:text-[var(--color-text)]'
-          }`}
+          className={`flex-1 min-w-[72px] py-2 px-2 text-[11px] font-bold rounded-xl flex items-center justify-center gap-1.5 transition-all whitespace-nowrap active:scale-95 cursor-pointer ${activeSubTab === 'spacing'
+            ? 'bg-white dark:bg-black text-[var(--color-text)] shadow-xs font-extrabold'
+            : 'text-gray-500 dark:text-gray-400 hover:text-[var(--color-text)]'
+            }`}
         >
           <Maximize2 className="w-3.5 h-3.5" />
           Padding
@@ -787,11 +781,10 @@ export default function FrameTab() {
 
         <button
           onClick={() => setActiveSubTab('saved')}
-          className={`flex-1 min-w-[72px] py-2 px-2 text-[11px] font-bold rounded-xl flex items-center justify-center gap-1.5 transition-all whitespace-nowrap active:scale-95 cursor-pointer ${
-            activeSubTab === 'saved'
-              ? 'bg-white dark:bg-black text-[var(--color-text)] shadow-xs font-extrabold'
-              : 'text-gray-500 dark:text-gray-400 hover:text-[var(--color-text)]'
-          }`}
+          className={`flex-1 min-w-[72px] py-2 px-2 text-[11px] font-bold rounded-xl flex items-center justify-center gap-1.5 transition-all whitespace-nowrap active:scale-95 cursor-pointer ${activeSubTab === 'saved'
+            ? 'bg-white dark:bg-black text-[var(--color-text)] shadow-xs font-extrabold'
+            : 'text-gray-500 dark:text-gray-400 hover:text-[var(--color-text)]'
+            }`}
         >
           <Bookmark className="w-3.5 h-3.5" />
           Saved
@@ -853,11 +846,10 @@ export default function FrameTab() {
                 <button
                   key={cat}
                   onClick={() => setPresetCategory(cat)}
-                  className={`px-3 py-1 text-[10px] font-bold rounded-lg uppercase tracking-wider transition-all whitespace-nowrap cursor-pointer ${
-                    presetCategory === cat
-                      ? 'bg-[var(--color-secondary)] text-white shadow-xs'
-                      : 'bg-gray-100 dark:bg-white/5 text-gray-500 hover:text-[var(--color-text)] hover:bg-gray-200 dark:hover:bg-white/10'
-                  }`}
+                  className={`px-3 py-1 text-[10px] font-bold rounded-lg uppercase tracking-wider transition-all whitespace-nowrap cursor-pointer ${presetCategory === cat
+                    ? 'bg-[var(--color-secondary)] text-white shadow-xs'
+                    : 'bg-gray-100 dark:bg-white/5 text-gray-500 hover:text-[var(--color-text)] hover:bg-gray-200 dark:hover:bg-white/10'
+                    }`}
                 >
                   {cat}
                 </button>
@@ -873,11 +865,10 @@ export default function FrameTab() {
                 <button
                   key={p.name}
                   onClick={() => applyPreset(p)}
-                  className={`group relative flex flex-col p-3 rounded-2xl border-2 text-left transition-all hover:scale-[1.02] active:scale-[0.98] cursor-pointer ${
-                    isActive
-                      ? 'border-[var(--color-secondary)] bg-[var(--color-secondary)]/8 shadow-sm ring-2 ring-[var(--color-secondary)]/20'
-                      : 'border-[var(--color-border)] bg-white dark:bg-black/20 hover:border-gray-300 dark:hover:border-gray-600'
-                  }`}
+                  className={`group relative flex flex-col p-3 rounded-2xl border-2 text-left transition-all hover:scale-[1.02] active:scale-[0.98] cursor-pointer ${isActive
+                    ? 'border-[var(--color-secondary)] bg-[var(--color-secondary)]/8 shadow-sm ring-2 ring-[var(--color-secondary)]/20'
+                    : 'border-[var(--color-border)] bg-white dark:bg-black/20 hover:border-gray-300 dark:hover:border-gray-600'
+                    }`}
                 >
                   <div className="flex items-center justify-between mb-2">
                     <span className="text-xl">{p.emoji}</span>
@@ -946,11 +937,10 @@ export default function FrameTab() {
                         set({ borderType: bt.key });
                         setActivePreset(null);
                       }}
-                      className={`flex flex-col items-center justify-center gap-1.5 p-2.5 rounded-xl border-2 transition-all cursor-pointer ${
-                        borderType === bt.key
-                          ? 'border-[var(--color-secondary)] bg-[var(--color-secondary)]/10 text-[var(--color-secondary)] shadow-xs scale-[1.02]'
-                          : 'border-[var(--color-border)] bg-white dark:bg-black/20 text-gray-600 dark:text-gray-400 hover:border-gray-400'
-                      }`}
+                      className={`flex flex-col items-center justify-center gap-1.5 p-2.5 rounded-xl border-2 transition-all cursor-pointer ${borderType === bt.key
+                        ? 'border-[var(--color-secondary)] bg-[var(--color-secondary)]/10 text-[var(--color-secondary)] shadow-xs scale-[1.02]'
+                        : 'border-[var(--color-border)] bg-white dark:bg-black/20 text-gray-600 dark:text-gray-400 hover:border-gray-400'
+                        }`}
                     >
                       <BorderIconSVG type={bt.key} />
                       <span className="text-[10px] font-bold tracking-tight">{bt.label}</span>
@@ -1034,11 +1024,10 @@ export default function FrameTab() {
                         setActivePreset(null);
                       }}
                       style={{ backgroundColor: c }}
-                      className={`w-6 h-6 rounded-lg border-2 transition-all hover:scale-110 cursor-pointer ${
-                        borderColor.toUpperCase() === c.toUpperCase()
-                          ? 'border-[var(--color-secondary)] scale-110 shadow-xs'
-                          : 'border-black/10 dark:border-white/20'
-                      }`}
+                      className={`w-6 h-6 rounded-lg border-2 transition-all hover:scale-110 cursor-pointer ${borderColor.toUpperCase() === c.toUpperCase()
+                        ? 'border-[var(--color-secondary)] scale-110 shadow-xs'
+                        : 'border-black/10 dark:border-white/20'
+                        }`}
                       title={c}
                     />
                   ))}
@@ -1060,11 +1049,10 @@ export default function FrameTab() {
                             set({ borderWidth: w });
                             setActivePreset(null);
                           }}
-                          className={`px-1.5 py-0.5 text-[9px] font-bold rounded-md transition-all cursor-pointer ${
-                            borderWidth === w
-                              ? 'bg-[var(--color-secondary)] text-white'
-                              : 'bg-gray-200 dark:bg-white/10 text-gray-600 dark:text-gray-300 hover:bg-gray-300'
-                          }`}
+                          className={`px-1.5 py-0.5 text-[9px] font-bold rounded-md transition-all cursor-pointer ${borderWidth === w
+                            ? 'bg-[var(--color-secondary)] text-white'
+                            : 'bg-gray-200 dark:bg-white/10 text-gray-600 dark:text-gray-300 hover:bg-gray-300'
+                            }`}
                         >
                           {w}px
                         </button>
@@ -1230,11 +1218,10 @@ export default function FrameTab() {
                     set({ shadowInset: false });
                     setActivePreset(null);
                   }}
-                  className={`flex-1 py-2 text-xs font-bold rounded-lg uppercase tracking-wider transition-all cursor-pointer ${
-                    !shadowInset
-                      ? 'bg-white dark:bg-black text-[var(--color-text)] shadow-xs'
-                      : 'text-gray-500 hover:text-[var(--color-text)]'
-                  }`}
+                  className={`flex-1 py-2 text-xs font-bold rounded-lg uppercase tracking-wider transition-all cursor-pointer ${!shadowInset
+                    ? 'bg-white dark:bg-black text-[var(--color-text)] shadow-xs'
+                    : 'text-gray-500 hover:text-[var(--color-text)]'
+                    }`}
                 >
                   Outer Drop Shadow
                 </button>
@@ -1243,11 +1230,10 @@ export default function FrameTab() {
                     set({ shadowInset: true });
                     setActivePreset(null);
                   }}
-                  className={`flex-1 py-2 text-xs font-bold rounded-lg uppercase tracking-wider transition-all cursor-pointer ${
-                    shadowInset
-                      ? 'bg-white dark:bg-black text-[var(--color-text)] shadow-xs'
-                      : 'text-gray-500 hover:text-[var(--color-text)]'
-                  }`}
+                  className={`flex-1 py-2 text-xs font-bold rounded-lg uppercase tracking-wider transition-all cursor-pointer ${shadowInset
+                    ? 'bg-white dark:bg-black text-[var(--color-text)] shadow-xs'
+                    : 'text-gray-500 hover:text-[var(--color-text)]'
+                    }`}
                 >
                   Inner Inset Shadow
                 </button>
@@ -1285,11 +1271,10 @@ export default function FrameTab() {
                         key={d.dir}
                         onClick={() => applyLightDirection(d.dir)}
                         title={d.title}
-                        className={`w-9 h-9 flex items-center justify-center rounded-xl font-bold text-sm transition-all cursor-pointer ${
-                          activeLightDir === d.dir
-                            ? 'bg-[var(--color-secondary)] text-white shadow-xs scale-105'
-                            : 'bg-gray-100 dark:bg-white/5 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-white/10'
-                        }`}
+                        className={`w-9 h-9 flex items-center justify-center rounded-xl font-bold text-sm transition-all cursor-pointer ${activeLightDir === d.dir
+                          ? 'bg-[var(--color-secondary)] text-white shadow-xs scale-105'
+                          : 'bg-gray-100 dark:bg-white/5 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-white/10'
+                          }`}
                       >
                         {d.label}
                       </button>
@@ -1436,11 +1421,10 @@ export default function FrameTab() {
                     set({ padding: pp.value });
                     setActivePreset(null);
                   }}
-                  className={`p-2 flex flex-col items-center gap-0.5 rounded-xl border transition-all cursor-pointer ${
-                    padding === pp.value
-                      ? 'border-[var(--color-secondary)] bg-[var(--color-secondary)]/10 text-[var(--color-secondary)] font-bold'
-                      : 'border-[var(--color-border)] bg-white dark:bg-black/20 text-gray-600 dark:text-gray-400 hover:border-gray-400'
-                  }`}
+                  className={`p-2 flex flex-col items-center gap-0.5 rounded-xl border transition-all cursor-pointer ${padding === pp.value
+                    ? 'border-[var(--color-secondary)] bg-[var(--color-secondary)]/10 text-[var(--color-secondary)] font-bold'
+                    : 'border-[var(--color-border)] bg-white dark:bg-black/20 text-gray-600 dark:text-gray-400 hover:border-gray-400'
+                    }`}
                 >
                   <span className="text-xs">{pp.value}px</span>
                   <span className="text-[9px] opacity-75">{pp.label}</span>
@@ -1542,11 +1526,10 @@ export default function FrameTab() {
                         setActivePreset(null);
                       }}
                       style={{ backgroundColor: c }}
-                      className={`w-7 h-7 rounded-lg border-2 transition-all hover:scale-110 cursor-pointer ${
-                        frameBgColor.toUpperCase() === c.toUpperCase()
-                          ? 'border-[var(--color-secondary)] scale-110 shadow-xs'
-                          : 'border-black/10 dark:border-white/20'
-                      }`}
+                      className={`w-7 h-7 rounded-lg border-2 transition-all hover:scale-110 cursor-pointer ${frameBgColor.toUpperCase() === c.toUpperCase()
+                        ? 'border-[var(--color-secondary)] scale-110 shadow-xs'
+                        : 'border-black/10 dark:border-white/20'
+                        }`}
                       title={c}
                     />
                   ))}
