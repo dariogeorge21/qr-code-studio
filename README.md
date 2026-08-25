@@ -1,4 +1,4 @@
-# QR Code Generator
+# QR Code Studio
 
 A modern, responsive web application for generating QR codes from text, URLs, numbers, or UPI payments. Built with Next.js, TypeScript, and Tailwind CSS.
 
